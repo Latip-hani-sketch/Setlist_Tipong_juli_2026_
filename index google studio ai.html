@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Setlist Lagu 🎸</title>
+    <!-- Font Modern dari Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --bg-gradient: linear-gradient(135deg, #f0f3ff 0%, #f8fafc 50%, #eef2ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-bg: #f8fafc;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #0284c7;
+            --success: #10b981;
+            --radius: 16px;
+        }
+
+        /* DARK MODE MEWAH (DEEP MIDNIGHT VIOLET) */
+        body.dark-mode {
+            --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(15, 23, 42, 0.6);
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            margin: 0;
+            padding: 12px 10px 160px 10px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
+            transition: background 0.3s ease, color 0.3s ease;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Proteksi Anti Copy-Paste untuk Non-Admin */
+        body.protected-content * {
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+        }
+
+        /* Lapisan Pelindung Anti Screenshot */
+        #screenshotShield {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #090d16;
+            color: white;
+            z-index: 99999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+
+        .container { 
+            max-width: 500px; 
+            margin: auto; 
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            padding: 16px 14px 70px 14px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Watermark Footer */
+        .watermark-footer {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            opacity: 0.75;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            gap: 8px;
+        }
+
+        h2.header-title {
+            text-align: center;
+            font-weight: 700;
+            margin: 0;
+            font-size: 17px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex: 1;
+            letter-spacing: -0.3px;
+        }
+
+        .mode-badge {
+            font-size: 11px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .mode-viewer { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+        .mode-admin { background: #d1fae5; color: #047857; border-color: #a7f3d0; }
+
+        body.dark-mode .mode-viewer { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
+        body.dark-mode .mode-admin { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
+
+        .btn-theme-toggle {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+        .btn-theme-toggle:active { transform: scale(0.9); }
+
+        /* Badge NEW Merah Glowing */
+        .badge-new {
+            background: linear-gradient(135deg, #ef4444, #f43f5e);
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+            margin-left: 4px;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+            animation: pulseNew 1.5s infinite;
+        }
+
+        @keyframes pulseNew {
+            0% { opacity: 1; }
+            50% { opacity: 0.65; }
+            100% { opacity: 1; }
+        }
+
+        /* BADGE KUNING IKON SIMPEL (WEB CHORD KOSONG) */
+        .badge-incomplete {
+            background-color: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 1px 5px;
+            border-radius: 6px;
+            margin-left: 4px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        body.dark-mode .badge-incomplete {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.4);
+        }
+
+        /* Group Tombol Atas */
+        .action-btn-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action-main {
+            flex: 1;
+            min-width: 100px;
+            border: none;
+            padding: 10px 10px;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .btn-action-main:active { transform: scale(0.97); }
+
+        .btn-add-theme { background: var(--text-main); color: var(--card-bg); width: 100%; }
+        .btn-import-theme { background: var(--success); color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
+        .btn-paste-theme { background: #8b5cf6; color: white; width: 100%; margin-top: -2px; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25); }
+        .btn-backup-theme { background: var(--info); color: white; width: 100%; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+
+        .admin-controls { display: none !important; }
+        .admin-controls.active { display: flex !important; }
+        
+        .tipong-only-controls { display: none !important; }
+        .tipong-only-controls.active { display: flex !important; }
+
+        /* Main Folder Button */
+        .main-btn {
+            color: white;
+            padding: 13px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 14px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            background: var(--primary-gradient);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            text-align: center;
+        }
+        .main-btn:active { transform: scale(0.98); }
+
+        .main-btn span.title-text { flex: 1; text-align: center; }
+        .main-btn span.arrow-icon { position: absolute; right: 16px; font-size: 12px; opacity: 0.8; }
+
+        .playlist-container {
+            display: block;
+            padding-bottom: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Search Input */
+        .search-box { position: relative; margin-bottom: 12px; }
+        .search-box input {
+            width: 100%;
+            padding: 10px 12px 10px 38px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.25s ease;
+            box-sizing: border-box;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Grid Folders Kategori Utama */
+        .folders-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .sub-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            text-align: center;
+            height: 42px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .sub-btn:active { transform: scale(0.96); background: rgba(99, 102, 241, 0.08); }
+        
+        .btn-pop-indo:hover { border-color: var(--primary); }
+        .btn-pop-inggris { color: #0891b2; }
+        .btn-ambyar { color: #be185d; }
+        .btn-lawas { color: #b45309; }
+
+        body.dark-mode .btn-pop-inggris { color: #38bdf8; }
+        body.dark-mode .btn-ambyar { color: #f43f5e; }
+        body.dark-mode .btn-lawas { color: #fbbf24; }
+
+        /* Tampilan Dalam Folder */
+        .sub-content {
+            display: none;
+            background: var(--input-bg);
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+            animation: fadeIn 0.25s ease;
+        }
+
+        .category-header {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-folder {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            transition: all 0.2s;
+        }
+        .close-folder:active { transform: scale(0.92); }
+
+        /* List Lagu */
+        ul { list-style: none; padding: 0; margin: 0; }
+        .song-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .song-item:active { transform: scale(0.985); }
+
+        /* Garis Kuning di Kiri untuk lagu yang web chordnya belum ada */
+        .song-item.incomplete-card {
+            border-left: 4px solid var(--warning);
+            box-shadow: -2px 0 10px rgba(245, 158, 11, 0.12);
+        }
+        
+        .song-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            gap: 8px;
+        }
+        
+        .song-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .song-badge-detail {
+            font-size: 10px;
+            background: var(--input-bg);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 2px;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .music-icon { opacity: 0.4; font-size: 11px; flex-shrink: 0; }
+
+        /* Detail Lagu */
+        .song-details {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            animation: fadeIn 0.25s ease;
+        }
+        
+        .info-box {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 6px;
+            align-items: flex-start;
+        }
+        .info-row:last-child { margin-bottom: 0; }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 95px;
+            flex-shrink: 0;
+            padding-top: 1px;
+        }
+
+        .info-value { color: var(--text-main); font-weight: 600; flex: 1; padding-top: 1px; }
+        
+        .info-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(99, 102, 241, 0.12);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        .info-link.empty { background: var(--border-color); color: var(--text-muted); pointer-events: none; opacity: 0.6; }
+
+        .action-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .move-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--input-bg);
+            padding: 6px 10px;
+            border-radius: 10px;
+            gap: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+        }
+        
+        select.custom-select {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        .btn-mini {
+            flex: 1;
+            padding: 7px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .btn-edit { background: var(--warning); }
+        .btn-delete { background: var(--danger); }
+
+        /* Styling Khusus Sesi Manggung */
+        .session-title-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            margin: 14px 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .session-item-actions {
+            display: flex;
+            gap: 4px;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+        .btn-sesi-mini {
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            padding: 4px 6px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .btn-sesi-mini:active { transform: scale(0.9); }
+
+        /* Floating Auto Scroll Button */
+        .btn-autoscroll-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Tab Pilihan di Modal Paste */
+        .tab-menu-group {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: var(--input-bg);
+            color: var(--text-muted);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            background: #8b5cf6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Modal Overlay & Custom Dialog Melayang di Tengah */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            color: var(--text-main);
+            width: 100%;
+            max-width: 360px;
+            border-radius: 20px;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 0.25s ease;
+        }
+        .modal-content h3 { margin-top: 0; color: var(--text-main); font-size: 15px; margin-bottom: 12px; font-weight: 700; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 3px; color: var(--text-muted); }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px 10px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+        .modal-actions { display: flex; gap: 8px; margin-top: 15px; }
+        .modal-actions button {
+            flex: 1; padding: 10px; border: none; border-radius: 10px;
+            font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; font-size: 12px;
+        }
+        .btn-cancel { background: var(--border-color); color: var(--text-main); }
+        .btn-save { background: var(--primary-gradient); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+
+        /* Custom Center Dialog */
+        #customDialogOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .dialog-box {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border-radius: 22px;
+            padding: 22px;
+            width: 100%;
+            max-width: 310px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+            animation: fadeIn 0.2s ease;
+        }
+        .dialog-icon { font-size: 32px; margin-bottom: 8px; }
+        .dialog-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+        .dialog-message { font-size: 11px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4; max-height: 180px; overflow-y: auto; text-align: left; }
+        .dialog-actions { display: flex; gap: 8px; justify-content: center; }
+        .dialog-btn {
+            flex: 1; padding: 10px; border: none; border-radius: 10px;
+            font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; cursor: pointer;
+        }
+        .dialog-btn-primary { background: var(--primary-gradient); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+        .dialog-btn-danger { background: var(--danger); color: white; }
+        .dialog-btn-cancel { background: var(--border-color); color: var(--text-main); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="protected-content">
+
+<!-- Pelindung Layar Anti Screenshot -->
+<div id="screenshotShield">
+    <div style="font-size: 45px; margin-bottom: 12px;">🚫</div>
+    <div>Sory tidak bisa di SC hehehe</div>
+</div>
+
+<!-- Tombol Auto-Scroll Melayang -->
+<button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()">📜 Auto Scroll: OFF</button>
+
+<div class="container" id="mainContainer">
+    <div class="top-bar">
+        <button class="btn-theme-toggle" onclick="toggleDarkMode()" title="Ganti Mode Gelap/Terang">🌙</button>
+        <h2 class="header-title">🎧 Setlist Lagu</h2>
+        <button id="modeBtn" class="mode-badge mode-viewer" onclick="toggleAdminMode()">👁️ Penonton</button>
+    </div>
+    
+    <!-- Group Tombol Atas -->
+    <div class="action-btn-group">
+        <!-- Tombol Tambah Lagu HANYA MUNCUL DI MODE ADMIN -->
+        <button class="btn-action-main btn-add-theme admin-controls" onclick="openModal()">➕ Tambah Lagu</button>
+        <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup & Gabung Data</button>
+        <button class="btn-action-main btn-import-theme admin-controls" onclick="openImportModal()">📄 Import .txt</button>
+        <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
+        <!-- Tombol EKSKLUSIF Hanya untuk Tipong (tipong123) -->
+        <button class="btn-action-main btn-generate-theme tipong-only-controls" onclick="generateUpdatedIndexHtml()">⚙️ Generate index.html</button>
+    </div>
+
+    <!-- ==================== MAIN PLAYLIST ==================== -->
+    <div class="main-btn" onclick="togglePlaylist()">
+        <span class="title-text">🎵 Playlist Lagu Tipong</span>
+        <span id="icon-Playlist" class="arrow-icon">▲</span>
+    </div>
+    
+    <div id="container-Playlist" class="playlist-container">
+        <!-- PENCARIAN UTAMA -->
+        <div class="search-box" id="global-search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-Global" oninput="searchGlobal(this.value)" placeholder="Cari lagu di semua folder...">
+        </div>
+        
+        <!-- 4 Kotak Kategori Utama (dengan hitungan lagu otomatis) -->
+        <div class="folders-grid" id="folders-grid">
+            <div class="sub-btn btn-pop-indo" onclick="openFolder('PopIndo')">
+                <span>Pop Indo <small id="count-PopIndo">(0)</small></span>
+            </div>
+            <div class="sub-btn btn-pop-inggris" onclick="openFolder('PopInggris')">
+                <span>Pop Inggris <small id="count-PopInggris">(0)</small></span>
+            </div>
+            <div class="sub-btn btn-ambyar" onclick="openFolder('Ambyar')">
+                <span>Ambyar <small id="count-Ambyar">(0)</small></span>
+            </div>
+            <div class="sub-btn btn-lawas" onclick="openFolder('Lawas')">
+                <span>Lawas <small id="count-Lawas">(0)</small></span>
+            </div>
+        </div>
+
+        <!-- AREA FOLDER HASIL PASTE SESI MANGGUNG -->
+        <div id="content-SesiManggung" class="sub-content">
+            <div class="category-header" style="color:#8b5cf6;">
+                <span>📋 SETLIST MANGGUNG (SESI)</span>
+                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
+            </div>
+            
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+                <button class="btn-action-main" style="background:#25D366; color:white; padding:8px; font-size:11px;" onclick="shareToWhatsApp()">📲 Kirim via WA</button>
+                <button class="btn-action-main" style="background:#8b5cf6; color:white; padding:8px; font-size:11px;" onclick="copySessionText()">📋 Salin Teks</button>
+            </div>
+
+            <div id="list-SesiManggung"></div>
+        </div>
+
+        <!-- AREA HALAMAN FOLDER STANDARD -->
+        <div id="content-PopIndo" class="sub-content">
+            <div class="category-header">
+                <span>🎵 POP INDO</span>
+                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-PopIndo" oninput="filterCategory('PopIndo', this.value)" placeholder="Cari lagu Pop Indo...">
+            </div>
+            <ul id="list-PopIndo"></ul>
+        </div>
+
+        <div id="content-PopInggris" class="sub-content">
+            <div class="category-header" style="color: #0891b2;">
+                <span>🎧 POP INGGRIS</span>
+                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-PopInggris" oninput="filterCategory('PopInggris', this.value)" placeholder="Cari lagu Pop Inggris...">
+            </div>
+            <ul id="list-PopInggris"></ul>
+        </div>
+
+        <div id="content-Ambyar" class="sub-content">
+            <div class="category-header" style="color: #be185d;">
+                <span>💔 AMBYAR</span>
+                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-Ambyar" oninput="filterCategory('Ambyar', this.value)" placeholder="Cari lagu Ambyar...">
+            </div>
+            <ul id="list-Ambyar"></ul>
+        </div>
+
+        <div id="content-Lawas" class="sub-content">
+            <div class="category-header" style="color: #b45309;">
+                <span>📻 LAWAS</span>
+                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-Lawas" oninput="filterCategory('Lawas', this.value)" placeholder="Cari lagu Lawas...">
+            </div>
+            <ul id="list-Lawas"></ul>
+        </div>
+    </div>
+</div>
+
+<!-- Watermark Footer Buatan Tipong -->
+<div class="watermark-footer">
+    Buatan Tipong © 2026
+</div>
+
+<!-- Modal Form Tambah/Edit Lagu Utama -->
+<div id="songModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3 id="modalTitle">Tambah Lagu Baru</h3>
+        <form id="songForm" onsubmit="saveSong(event)">
+            <input type="hidden" id="editIndex" value="-1">
+            
+            <div class="form-group">
+                <label>Kategori Genre</label>
+                <select id="inputCategory" required>
+                    <option value="PopIndo">Pop Indo</option>
+                    <option value="PopInggris">Pop Inggris</option>
+                    <option value="Ambyar">Ambyar</option>
+                    <option value="Lawas">Lawas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Judul Lagu</label>
+                <input type="text" id="inputTitle" placeholder="Contoh: Mahalini - Bohongi Hati" required>
+            </div>
+            <div class="form-group">
+                <label>🎸 Chord Asli (Original)</label>
+                <input type="text" id="inputChordAsli" placeholder="Contoh: D#">
+            </div>
+            <div class="form-group">
+                <label>🧑 Chord Cowok</label>
+                <input type="text" id="inputChordCowok" placeholder="Contoh: E">
+            </div>
+            <div class="form-group">
+                <label>👩 Chord Cewek</label>
+                <input type="text" id="inputChordCewek" placeholder="Contoh: A">
+            </div>
+            <div class="form-group">
+                <label>📝 Catatan / Modulasi (Opsional)</label>
+                <input type="text" id="inputCatatan" placeholder="Contoh: Overtune ke F di akhir">
+            </div>
+            <div class="form-group">
+                <label>🔗 Link Situs Chord (Opsional)</label>
+                <input type="url" id="inputLinkChord" placeholder="https://chordindonesia.com/...">
+            </div>
+            <div class="form-group">
+                <label>▶️ Link YouTube (Opsional)</label>
+                <input type="url" id="inputLinkYoutube" placeholder="https://youtube.com/...">
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                <button type="submit" class="btn-save">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL FORM EDIT KHUSUS SESI MANGGUNG -->
+<div id="editSessionModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>✏️ Edit Lagu & Chord Sesi</h3>
+        <form onsubmit="saveSessionSongEdit(event)">
+            <div class="form-group">
+                <label>Judul Lagu</label>
+                <input type="text" id="editSesiTitle" required>
+            </div>
+            <div class="form-group">
+                <label>🎸 Chord Asli (Original)</label>
+                <input type="text" id="editSesiChordAsli" placeholder="Contoh: D#">
+            </div>
+            <div class="form-group">
+                <label>🧑 Chord Cowok</label>
+                <input type="text" id="editSesiChordCowok" placeholder="Contoh: E">
+            </div>
+            <div class="form-group">
+                <label>👩 Chord Cewek</label>
+                <input type="text" id="editSesiChordCewek" placeholder="Contoh: A">
+            </div>
+            <div class="form-group">
+                <label>📝 Catatan / Modulasi</label>
+                <input type="text" id="editSesiCatatan" placeholder="Contoh: Intro Fm">
+            </div>
+            <div class="form-group">
+                <label>🔗 Link Situs Chord</label>
+                <input type="url" id="editSesiLinkChord" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>▶️ Link YouTube</label>
+                <input type="url" id="editSesiLinkYoutube" placeholder="https://...">
+            </div>
+
+            <div class="form-group" style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:600; color:var(--primary);">
+                    <input type="checkbox" id="editSesiSaveToDb" onchange="toggleCategorySelectInSesiEdit(this.checked)">
+                    💾 Simpan sekalian ke Playlist Utama Tipong
+                </label>
+            </div>
+            <div class="form-group" id="groupSesiCategory" style="display:none;">
+                <label>Pilih Kategori Playlist Utama</label>
+                <select id="editSesiCategory">
+                    <option value="PopIndo">Pop Indo</option>
+                    <option value="PopInggris">Pop Inggris</option>
+                    <option value="Ambyar">Ambyar</option>
+                    <option value="Lawas">Lawas</option>
+                </select>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeEditSessionModal()">Batal</button>
+                <button type="submit" class="btn-save" style="background:#8b5cf6">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL IMPORT FILE .TXT -->
+<div id="importModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>📄 Import Lagu dari File .txt</h3>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">
+            Pilih file .txt buatan Notepad / HP. Sistem akan otomatis merapikan judul, mendeteksi chord, dan menambahkan lagu baru ke setlist!
+        </p>
+        
+        <div class="form-group">
+            <label>Pilih File .txt</label>
+            <input type="file" id="txtFileInput" accept=".txt" style="padding:6px;">
+        </div>
+
+        <div class="form-group">
+            <label>Default Kategori (Jika Tak Terdeteksi)</label>
+            <select id="importDefaultCategory">
+                <option value="PopIndo">Pop Indo</option>
+                <option value="PopInggris">Pop Inggris</option>
+                <option value="Ambyar">Ambyar</option>
+                <option value="Lawas">Lawas</option>
+            </select>
+        </div>
+        
+        <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="closeImportModal()">Batal</button>
+            <button type="button" class="btn-save" style="background:var(--success)" onclick="processTxtImport()">🚀 Tambah Lagu</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL BACKUP & GABUNG DATA -->
+<div id="backupModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>💾 Backup & Gabung Data</h3>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:14px;">
+            Download file backup (.json) untuk dikirim ke Tipong, atau masukkan file kiriman teman untuk menggabungkan lagu baru secara otomatis tanpa menghapus lagu lama!
+        </p>
+        
+        <div class="form-group">
+            <label>1. Download File Backup (.json)</label>
+            <button type="button" class="btn-action-main btn-backup-theme" style="width:100%;" onclick="exportBackupData()">📥 Download File Backup (.json)</button>
+        </div>
+
+        <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color);">
+            <label>2. Gabungkan Data dari File Teman (Merge)</label>
+            <input type="file" id="jsonFileInput" accept=".json" style="padding:6px; margin-bottom:6px; width:100%; box-sizing:border-box;">
+            <button type="button" class="btn-action-main btn-import-theme" style="width:100%; background:#8b5cf6;" onclick="mergeBackupData()">🔀 Gabungkan Lagu (Merge)</button>
+        </div>
+
+        <!-- HANYA MUNCUL DI TIPONG (tipong123) -->
+        <div class="tipong-only-controls" style="display:none; flex-direction:column; width:100%;">
+            <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color); width:100%;">
+                <button type="button" class="btn-action-main" style="background:var(--danger); color:white; width:100%;" onclick="resetDatabaseToDefault()">🔄 Reset Data ke Awal (Default)</button>
+            </div>
+        </div>
+        
+        <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="closeBackupModal()">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PASTE / TEMPLATE TABEL SESI MANGGUNG -->
+<div id="pasteModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>📋 Setlist Manggung (Sesi)</h3>
+        
+        <div class="tab-menu-group">
+            <button id="btnTab1" class="tab-btn active" onclick="switchPasteTab(1)">1. Paste Teks Acak</button>
+            <button id="btnTab2" class="tab-btn" onclick="switchPasteTab(2)">2. Template Tabel Kosong</button>
+        </div>
+        
+        <div id="tabContent1">
+            <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">
+                Tempelkan salinan ketikan dari WA/Notepad. Otomatis dirapikan & dicocokkan ke database chord!
+            </p>
+            <div class="form-group">
+                <textarea id="pasteTextArea" rows="7" placeholder="Contoh:&#10;Sesi 1 :&#10;Kau Curi Lagi (jrock)&#10;Without You (Mariah Carey)&#10;&#10;Sesi 2 :&#10;Sahabat sejati (SO7)&#10;Rungkad"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button>
+                <button type="button" class="btn-save" style="background:#8b5cf6" onclick="processPasteSetlist()">✨ Rapikan Setlist</button>
+            </div>
+        </div>
+
+        <div id="tabContent2" style="display:none;">
+            <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">
+                Buat struktur Sesi 1, Sesi 2, dan Optional secara instan dengan tabel yang siap diisi.
+            </p>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button>
+                <button type="button" class="btn-save" style="background:#8b5cf6" onclick="generateEmptyTemplateSesi()">🚀 Buat Tabel Sesi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL LOGIN ADMIN -->
+<div id="adminLoginModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:300px; text-align:center;">
+        <h3>🔑 Login Admin</h3>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Masukkan password untuk membuka fitur Admin.</p>
+        <div class="form-group">
+            <input type="password" id="adminPasswordInput" placeholder="Password Admin" style="text-align:center;">
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="closeAdminLoginModal()">Batal</button>
+            <button type="button" class="btn-save" onclick="submitAdminPassword()">Login</button>
+        </div>
+    </div>
+</div>
+
+<!-- CUSTOM CENTER DIALOG OVERLAY -->
+<div id="customDialogOverlay">
+    <div class="dialog-box">
+        <div id="dialogIcon" class="dialog-icon">ℹ️</div>
+        <div id="dialogTitle" class="dialog-title">Informasi</div>
+        <div id="dialogMessage" class="dialog-message">Pesan notifikasi di sini...</div>
+        <div id="dialogActions" class="dialog-actions"></div>
+    </div>
+</div>
+
+<script>
+    const defaultData = [
+        // ================= POP INDO =================
+        { title: "Ada Titik Titik", chordAsli: "Bb", chordCowok: "", chordCewek: "", catatan: "Main di G", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Ade Govinda (feat. Fadly) - Hal Hebat", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Aura Kasih - Mari Bercinta", chordAsli: "Cm", chordCowok: "", chordCewek: "", catatan: "Intro: Fm", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "BCL - Medley", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "Sesuai aransemen", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Blackout - Selalu Ada", chordAsli: "E", chordCowok: "", chordCewek: "G", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Diskoria, Laleilmanino, Eva Celia - C.H.R.I.S.Y.E", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "d'Masiv - Diam Tanpa Kata", chordAsli: "Bm", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "d'Masiv - Merindukanmu", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Dygta - Tapi Tahukah Kamu", chordAsli: "C#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Element - Cinta Tak Bersyarat", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Element - Maaf Dari Surga", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Ernie Zakri & Ade Govinda - Masing-Masing", chordAsli: "D#", chordCowok: "", chordCewek: "E", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Fatin Shidqia - Aku Memilih Setia", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Geisha - Cinta Dan Benci", chordAsli: "F#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Geisha - Takkan Pernah Ada", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Glenn Fredly - Januari", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "Naik 1.5", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Jangan Paksa Rindu", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Juicy Luicy - Terlalu Tinggi", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Kerispatih - Bila Rasaku Ini Rasamu", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Kerispatih - Tak Lekang Oleh Waktu", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Lyodra - Teganya Kau", chordAsli: "F#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Mahalini - Bohongi Hati", chordAsli: "D#", chordCowok: "", chordCewek: "E", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Mario G. Klau - Semata Karenamu", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Nadhif Basalamah - Kota Ini Tak Sama Tanpamu", chordAsli: "A#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Perunggu - 33x", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Rossa - Hey Ladies", chordAsli: "Fm", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Rossa - Pudar", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "Int: Gm, Em", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Rossa - Terlalu Cinta", chordAsli: "G#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Sesi Potret", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Shaggydog - Kembali Berdansa", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Sherina - Cinta Pertama Dan Terakhir", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Souljah - Tak Selalu", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Steven & Coconut Treez - Welcome To My Paradise", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Terbuang Dalam Waktu", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "The Lantis - Bunga Maaf", chordAsli: "A", chordCowok: "", chordCewek: "D", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Utopia - Baby Doll", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Utopia - Hujan", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Wijaya80 - Terakhir Kali", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Yovie & Nuno - Merindu Lagi", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Yovie & Nuno - Tanpa Cinta", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+        { title: "Yovie & Nuno - Tanpa Cinta (Versi G)", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
+
+        // ================= POP INGGRIS =================
+        { title: "ABBA - Dancing Queen", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Adele - Don't You Remember", chordAsli: "D#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Bon Jovi - Always", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Bon Jovi - Thank You For Loving Me", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Bruno Mars - It Will Rain", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Bruno Mars - Risk It All", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Bruno Mars - Talking To The Moon", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Bruno Mars - The Lazy Song", chordAsli: "B", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Coldplay / Maroon 5 - Fix You", chordAsli: "D#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Coldplay - Yellow", chordAsli: "B", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Daniel Caesar feat. H.E.R. - Best Part", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Jessie J - Flashlight", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Jessie J - Price Tag", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Justin Bieber - Favorite Girl", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Keane - Everybody's Changing", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Lady Gaga - Remember Us This Way", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Lady Gaga & Bruno Mars - Die With A Smile", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+        { title: "Sam Smith - I'm Not The Only One", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
+
+        // ================= LAWAS =================
+        { title: "Chrisye - Kala Cinta Menggoda", chordAsli: "Cm", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+        { title: "Dewa 19 - Aku Milikmu", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+        { title: "Dewa 19 - Tak Kan Ada Cinta Yang Lain", chordAsli: "Am", chordCowok: "", chordCewek: "C#m", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+        { title: "Dian Piesesha - Tak Ingin Sendiri", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+        { title: "M.E - Inikah Cinta", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+        { title: "Ruth Sahanaya - Kaulah Segalanya", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+        { title: "Utha Likumahuwa - Sesaat Kau Hadir", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
+
+        // ================= AMBYAR =================
+        { title: "Duda Araban", chordAsli: "G#m", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Ambyar" },
+        { title: "Rungkad", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Ambyar" }
+    ];
+
+    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas'];
+    let isAdmin = false;
+    let loggedInPassword = "";
+    let autoScrollTimer = null;
+
+    const RESTRICTED_FRIEND_PASSWORDS = ["temen123", "band123", "bro2026"];
+
+    let myDeviceId = localStorage.getItem('mySetlistDeviceId');
+    if (!myDeviceId) {
+        myDeviceId = 'DEV_' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+        localStorage.setItem('mySetlistDeviceId', myDeviceId);
+    }
+
+    let currentVerNum = parseInt(localStorage.getItem('setlistVerNumVal')) || 54;
+    let daftarLagu = JSON.parse(localStorage.getItem('setlistTiponkData_v' + currentVerNum));
+    if (!daftarLagu || daftarLagu.length === 0) { 
+        daftarLagu = defaultData;
+    }
+
+    // ================= FUNGSI CEK KEMIRIPAN JUDUL (SMART ANTI-DUPLIKAT) =================
+    function isSimilarTitle(titleA, titleB) {
+        if (!titleA || !titleB) return false;
+
+        let normA = titleA.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
+        let normB = titleB.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
+
+        if (normA === normB) return true;
+
+        let diff = Math.abs(normA.length - normB.length);
+        if (diff <= 2 && (normA.startsWith(normB) || normB.startsWith(normA))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // ================= DETEKSI SCREENSHOT / REKAM LAYAR =================
+    document.addEventListener("keyup", function (e) {
+        if (!isAdmin && (e.key === "PrintScreen" || e.keyCode === 44)) {
+            triggerScreenshotShield();
+        }
+    });
+
+    window.addEventListener("blur", function() {
+        if (!isAdmin) {
+            triggerScreenshotShield();
+        }
+    });
+
+    function triggerScreenshotShield() {
+        const shield = document.getElementById('screenshotShield');
+        shield.style.display = 'flex';
+        setTimeout(function() {
+            shield.style.display = 'none';
+        }, 2500);
+    }
+
+    // ================= DARK MODE SYSTEM =================
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('setlistDarkMode', isDark ? 'enabled' : 'disabled');
+        document.querySelector('.btn-theme-toggle').innerText = isDark ? '☀️' : '🌙';
+    }
+
+    if (localStorage.getItem('setlistDarkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+        document.querySelector('.btn-theme-toggle').innerText = '☀️';
+    }
+
+    // ================= AUTO-SCROLL UNTUK PANGGUNG =================
+    function toggleAutoScroll() {
+        const btn = document.getElementById('btnAutoScroll');
+        if (autoScrollTimer) {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = null;
+            btn.innerText = '📜 Auto Scroll: OFF';
+            btn.style.background = 'var(--primary-gradient)';
+        } else {
+            autoScrollTimer = setInterval(function() {
+                window.scrollBy({ top: 1, behavior: 'smooth' });
+            }, 35);
+            btn.innerText = '⏸️ Stop Scroll';
+            btn.style.background = 'var(--danger)';
+        }
+    }
+
+    // ================= CUSTOM CENTER DIALOG SYSTEM =================
+    function showCustomAlert(title, message, icon) {
+        if (!icon) icon = "ℹ️";
+        document.getElementById('dialogIcon').innerText = icon;
+        document.getElementById('dialogTitle').innerText = title;
+        document.getElementById('dialogMessage').innerHTML = message;
+        
+        const actionsDiv = document.getElementById('dialogActions');
+        actionsDiv.innerHTML = '<button class="dialog-btn dialog-btn-primary" id="dialogOkBtn" onclick="closeCustomDialog()">Oke</button>';
+        
+        document.getElementById('customDialogOverlay').style.display = 'flex';
+        setTimeout(function() {
+            const okBtn = document.getElementById('dialogOkBtn');
+            if(okBtn) okBtn.focus();
+        }, 100);
+    }
+
+    function showCustomConfirm(title, message, onConfirm, icon, confirmText, cancelText) {
+        if (!icon) icon = "⚠️";
+        if (!confirmText) confirmText = "Ya, Lanjutkan";
+        if (!cancelText) cancelText = "Batal";
+
+        document.getElementById('dialogIcon').innerText = icon;
+        document.getElementById('dialogTitle').innerText = title;
+        document.getElementById('dialogMessage').innerHTML = message;
+        
+        const actionsDiv = document.getElementById('dialogActions');
+        actionsDiv.innerHTML = `
+            <button class="dialog-btn dialog-btn-cancel" onclick="closeCustomDialog()">${cancelText}</button>
+            <button class="dialog-btn dialog-btn-primary" id="btnConfirmAction">${confirmText}</button>
+        `;
+        
+        document.getElementById('btnConfirmAction').onclick = function() {
+            closeCustomDialog();
+            onConfirm();
+        };
+
+        document.getElementById('customDialogOverlay').style.display = 'flex';
+    }
+
+    function closeCustomDialog() {
+        document.getElementById('customDialogOverlay').style.display = 'none';
+    }
+
+    // Global Keydown untuk Enter pada Dialog Custom & Modal Login
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            const dialogOverlay = document.getElementById('customDialogOverlay');
+            if (dialogOverlay.style.display === "flex") {
+                event.preventDefault();
+                closeCustomDialog();
+                return;
+            }
+
+            const loginModal = document.getElementById('adminLoginModal');
+            if (loginModal.style.display === "flex") {
+                event.preventDefault();
+                submitAdminPassword();
+                return;
+            }
+        }
+    });
+
+    // Admin Toggle System
+    function toggleAdminMode() {
+        if (!isAdmin) {
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('adminLoginModal').style.display = 'flex';
+            setTimeout(function() {
+                document.getElementById('adminPasswordInput').focus();
+            }, 100);
+        } else {
+            isAdmin = false;
+            loggedInPassword = "";
+            document.body.classList.add('protected-content');
+            showCustomAlert("Mode Penonton", "Kamu telah keluar dari Mode Admin.", "👁️");
+            updateAdminUI();
+        }
+    }
+
+    function closeAdminLoginModal() {
+        document.getElementById('adminLoginModal').style.display = 'none';
+    }
+
+    function submitAdminPassword() {
+        const pass = document.getElementById('adminPasswordInput').value.trim();
+
+        if (pass === "tipong123") {
+            isAdmin = true;
+            loggedInPassword = "tipong123";
+            document.body.classList.remove('protected-content');
+            closeAdminLoginModal();
+            showCustomAlert("Berhasil Login!", "Selamat datang Admin Utama (Tipong)!", "👑");
+            updateAdminUI();
+            return;
+        }
+
+        if (RESTRICTED_FRIEND_PASSWORDS.includes(pass)) {
+            let lockKey = 'pass_lock_' + pass;
+            let lockedDeviceId = localStorage.getItem(lockKey);
+
+            if (!lockedDeviceId) {
+                localStorage.setItem(lockKey, myDeviceId);
+                isAdmin = true;
+                loggedInPassword = pass;
+                document.body.classList.remove('protected-content');
+                closeAdminLoginModal();
+                showCustomAlert("Login Berhasil!", "Password khusus berhasil terikat di HP ini.", "🔑");
+                updateAdminUI();
+            } else if (lockedDeviceId === myDeviceId) {
+                isAdmin = true;
+                loggedInPassword = pass;
+                document.body.classList.remove('protected-content');
+                closeAdminLoginModal();
+                showCustomAlert("Berhasil Login!", "Kamu masuk sebagai Admin.", "👑");
+                updateAdminUI();
+            } else {
+                showCustomAlert("Akses Ditolak", "Password khusus ini sudah terikat di HP milik temanmu yang lain!", "🔒");
+            }
+            return;
+        }
+
+        showCustomAlert("Password Salah!", "Kata sandi Admin yang dimasukkan tidak sesuai.", "❌");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const passwordInput = document.getElementById('adminPasswordInput');
+        if (passwordInput) {
+            passwordInput.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    submitAdminPassword();
+                }
+            });
+        }
+        renderSongs();
+    });
+
+    function updateAdminUI() {
+        const modeBtn = document.getElementById('modeBtn');
+        const adminControls = document.querySelectorAll('.admin-controls');
+        const tipongOnlyControls = document.querySelectorAll('.tipong-only-controls');
+
+        if (isAdmin) {
+            modeBtn.innerText = "👑 Admin";
+            modeBtn.className = "mode-badge mode-admin";
+            adminControls.forEach(function(el) { el.classList.add('active'); });
+
+            if (loggedInPassword === "tipong123") {
+                tipongOnlyControls.forEach(function(el) { el.classList.add('active'); });
+            } else {
+                tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); });
+            }
+        } else {
+            modeBtn.innerText = "👁️ Penonton";
+            modeBtn.className = "mode-badge mode-viewer";
+            adminControls.forEach(function(el) { el.classList.remove('active'); });
+            tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); });
+        }
+        renderSongs();
+    }
+
+    function togglePlaylist() {
+        const container = document.getElementById('container-Playlist');
+        const icon = document.getElementById('icon-Playlist');
+        
+        if (container.style.display === "none" || container.style.display === "") {
+            container.style.display = "block";
+            icon.innerText = "▲";
+        } else {
+            container.style.display = "none";
+            icon.innerText = "▼";
+            closeAllFolders();
+            document.getElementById('search-Global').value = "";
+            searchGlobal("");
+        }
+    }
+
+    function openFolder(targetCategory) {
+        document.getElementById('folders-grid').style.display = 'none';
+        document.getElementById('global-search-box').style.display = 'none';
+        
+        const btnAutoScroll = document.getElementById('btnAutoScroll');
+        if(targetCategory === 'SesiManggung') {
+            btnAutoScroll.style.display = 'flex';
+        } else {
+            btnAutoScroll.style.display = 'none';
+            if(autoScrollTimer) toggleAutoScroll();
+        }
+
+        const allCategories = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'SesiManggung'];
+        allCategories.forEach(function(cat) {
+            const el = document.getElementById('content-' + cat);
+            if(el) {
+                el.style.display = (cat === targetCategory) ? 'block' : 'none';
+            }
+            const searchInput = document.getElementById('search-' + cat);
+            if(searchInput) {
+                searchInput.value = "";
+                filterCategory(cat, "");
+            }
+        });
+    }
+
+    function closeAllFolders() {
+        document.getElementById('folders-grid').style.display = 'grid';
+        document.getElementById('global-search-box').style.display = 'block';
+        document.getElementById('btnAutoScroll').style.display = 'none';
+        if(autoScrollTimer) toggleAutoScroll();
+
+        const allCategories = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'SesiManggung'];
+        allCategories.forEach(function(cat) {
+            const el = document.getElementById('content-' + cat);
+            if(el) el.style.display = 'none';
+        });
+    }
+
+    function renderSongs() {
+        folderKeys.forEach(function(cat) {
+            document.getElementById('list-' + cat).innerHTML = '';
+        });
+
+        let counts = { PopIndo: 0, PopInggris: 0, Ambyar: 0, Lawas: 0 };
+
+        daftarLagu.forEach(function(lagu, index) {
+            if (counts[lagu.category] !== undefined) counts[lagu.category]++;
+
+            const li = document.createElement('li');
+            li.className = 'song-item';
+            li.setAttribute('data-category', lagu.category);
+            
+            const hasWebChord = lagu.linkChord && lagu.linkChord.trim() !== "";
+
+            if (!hasWebChord) {
+                li.classList.add('incomplete-card');
+            }
+
+            const btnChordClass = lagu.linkChord ? "info-link" : "info-link empty";
+            const btnChordText = lagu.linkChord ? "Buka Web 🔗" : "Kosong";
+            
+            const btnYtClass = lagu.linkYoutube ? "info-link" : "info-link empty";
+            const btnYtText = lagu.linkYoutube ? "Tonton ▶️" : "Kosong";
+
+            let newBadgeHtml = lagu.isNew ? '<span class="badge-new">NEW</span>' : '';
+            let incompleteBadgeHtml = !hasWebChord ? '<span class="badge-incomplete" title="Web Chord Kosong">🌐</span>' : '';
+
+            let adminActionHtml = '';
+            if (isAdmin) {
+                adminActionHtml = `
+                    <div class="action-group">
+                        <button class="btn-mini btn-edit" onclick="openModal(${index})">✏️ Edit</button>
+                        <button class="btn-mini btn-delete" onclick="hapusLagu(${index})">🗑️ Hapus</button>
+                    </div>
+
+                    <div class="move-action">
+                        <span>Pindah Folder:</span>
+                        <select class="custom-select" onchange="pindahKategori(${index}, this.value)">
+                            <option value="PopIndo" ${lagu.category === 'PopIndo' ? 'selected' : ''}>Pop Indo</option>
+                            <option value="PopInggris" ${lagu.category === 'PopInggris' ? 'selected' : ''}>Pop Inggris</option>
+                            <option value="Ambyar" ${lagu.category === 'Ambyar' ? 'selected' : ''}>Ambyar</option>
+                            <option value="Lawas" ${lagu.category === 'Lawas' ? 'selected' : ''}>Lawas</option>
+                        </select>
+                    </div>
+                `;
+            }
+
+            li.innerHTML = `
+                <div class="song-title-row" onclick="toggleDetails(this, ${index})">
+                    <span class="song-title">${lagu.title} ${newBadgeHtml} ${incompleteBadgeHtml}</span>
+                    <span class="song-badge-detail">Detail 📌</span>
+                    <span class="music-icon">🎵</span>
+                </div>
+                
+                <div class="song-details">
+                    <div class="info-box">
+                        <div class="info-row">
+                            <span class="info-label">🎸 Chord Asli</span>
+                            <span class="info-value">: ${lagu.chordAsli || "-"}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">🧑 Chord Cowok</span>
+                            <span class="info-value">: ${lagu.chordCowok || "-"}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">👩 Chord Cewek</span>
+                            <span class="info-value">: ${lagu.chordCewek || "-"}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">📝 Catatan</span>
+                            <span class="info-value">: ${lagu.catatan || "-"}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">🌐 Web Chord</span>
+                            <span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">📺 YouTube</span>
+                            <span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span>
+                        </div>
+                    </div>
+                    
+                    ${adminActionHtml}
+                </div>
+            `;
+            
+            const targetList = document.getElementById('list-' + lagu.category);
+            if(targetList) { targetList.appendChild(li); }
+        });
+
+        folderKeys.forEach(function(cat) {
+            const countEl = document.getElementById('count-' + cat);
+            if(countEl) countEl.innerText = `(${counts[cat]})`;
+        });
+        
+        localStorage.setItem('setlistVerNumVal', currentVerNum);
+        localStorage.setItem('setlistTiponkData_v' + currentVerNum, JSON.stringify(daftarLagu));
+    }
+
+    function toggleDetails(element, index) {
+        const details = element.nextElementSibling;
+        details.style.display = (details.style.display === 'block') ? 'none' : 'block';
+
+        if (typeof index !== 'undefined' && daftarLagu[index] && daftarLagu[index].isNew) {
+            daftarLagu[index].isNew = false;
+            localStorage.setItem('setlistTiponkData_v' + currentVerNum, JSON.stringify(daftarLagu));
+            const newBadge = element.querySelector('.badge-new');
+            if (newBadge) {
+                newBadge.remove();
+            }
+        }
+    }
+
+    function pindahKategori(index, newCategory) {
+        if (!isAdmin) return;
+        const currentCategory = daftarLagu[index].category;
+        
+        daftarLagu[index].category = newCategory;
+        renderSongs();
+        openFolder(currentCategory);
+    }
+
+    function searchGlobal(filter) {
+        filter = filter.toLowerCase();
+        const items = document.getElementsByClassName('song-item');
+        const foldersGrid = document.getElementById('folders-grid');
+
+        let foundCategories = {
+            PopIndo: false,
+            PopInggris: false,
+            Ambyar: false,
+            Lawas: false
+        };
+
+        for (let i = 0; i < items.length; i++) {
+            let title = items[i].querySelector('.song-title').innerText.toLowerCase();
+            let category = items[i].getAttribute('data-category');
+            
+            if (title.includes(filter)) {
+                items[i].style.display = "";
+                if(foundCategories[category] !== undefined) {
+                    foundCategories[category] = true;
+                }
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+
+        if (filter.length > 0) {
+            foldersGrid.style.display = 'none';
+            folderKeys.forEach(function(cat) {
+                document.getElementById('content-' + cat).style.display = foundCategories[cat] ? 'block' : 'none';
+            });
+        } else {
+            closeAllFolders();
+        }
+    }
+
+    function filterCategory(categoryKey, filter) {
+        filter = filter.toLowerCase();
+        const targetList = document.getElementById('list-' + categoryKey);
+        if(!targetList) return;
+
+        const items = targetList.getElementsByClassName('song-item');
+        for (let i = 0; i < items.length; i++) {
+            let title = items[i].querySelector('.song-title').innerText.toLowerCase();
+            if (title.includes(filter)) {
+                items[i].style.display = "";
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+    }
+
+    function openModal(index) {
+        if (typeof index === 'undefined') index = -1;
+        if (!isAdmin) {
+            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu sebagai Admin untuk menambahkan lagu baru.", "🔒");
+            return;
+        }
+        document.getElementById('songModal').style.display = 'flex';
+        const isEdit = index >= 0;
+        
+        document.getElementById('modalTitle').innerText = isEdit ? "Edit Lagu" : "Tambah Lagu Baru";
+        document.getElementById('editIndex').value = index;
+
+        if(isEdit) {
+            const lagu = daftarLagu[index];
+            document.getElementById('inputCategory').value = lagu.category;
+            document.getElementById('inputTitle').value = lagu.title;
+            document.getElementById('inputChordAsli').value = lagu.chordAsli || "";
+            document.getElementById('inputChordCowok').value = lagu.chordCowok || "";
+            document.getElementById('inputChordCewek').value = lagu.chordCewek || "";
+            document.getElementById('inputCatatan').value = lagu.catatan || "";
+            document.getElementById('inputLinkChord').value = lagu.linkChord || "";
+            document.getElementById('inputLinkYoutube').value = lagu.linkYoutube || "";
+        } else {
+            document.getElementById('songForm').reset();
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('songModal').style.display = 'none';
+    }
+
+    function saveSong(event) {
+        event.preventDefault(); 
+        if (!isAdmin) return;
+        
+        const index = parseInt(document.getElementById('editIndex').value);
+        const category = document.getElementById('inputCategory').value;
+        const title = document.getElementById('inputTitle').value.trim();
+        const chordAsli = document.getElementById('inputChordAsli').value;
+        const chordCowok = document.getElementById('inputChordCowok').value;
+        const chordCewek = document.getElementById('inputChordCewek').value;
+        const catatan = document.getElementById('inputCatatan').value;
+        const linkChord = document.getElementById('inputLinkChord').value;
+        const linkYoutube = document.getElementById('inputLinkYoutube').value;
+
+        const existingIndex = daftarLagu.findIndex(function(lagu, idx) {
+            return idx !== index && isSimilarTitle(lagu.title, title);
+        });
+
+        if (existingIndex !== -1 && index === -1) {
+            let matchedTitle = daftarLagu[existingIndex].title;
+            showCustomAlert(
+                "Lagu Terdeteksi Duplikat! 🛑", 
+                `Judul <b>"${title}"</b> sangat mirip dengan lagu yang sudah ada di database:<br><br>👉 <b>"${matchedTitle}"</b><br><br>Sistem menolak penambahan lagu duplikat ini!`, 
+                "❌"
+            );
+            return;
+        }
+
+        if (index >= 0) {
+            daftarLagu[index] = { title: title, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek, catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube, category: category, isNew: true };
+            showCustomAlert("Berhasil Disimpan", `Lagu "${title}" berhasil diperbarui!`, "✅");
+        } else {
+            daftarLagu.push({ title: title, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek, catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube, category: category, isNew: true });
+            showCustomAlert("Lagu Baru Ditambahkan! 🎵", `<b>${title}</b> berhasil masuk ke kategori <b>${category}</b>!`, "🎉");
+        }
+
+        renderSongs();
+        closeModal();
+        
+        document.getElementById('container-Playlist').style.display = 'block';
+        document.getElementById('icon-Playlist').innerText = "▲";
+        openFolder(category);
+    }
+
+    function hapusLagu(index) {
+        if (!isAdmin) return;
+        showCustomConfirm("Hapus Lagu", `Apakah kamu yakin ingin menghapus "${daftarLagu[index].title}" dari setlist?`, function() {
+            daftarLagu.splice(index, 1);
+            renderSongs();
+            showCustomAlert("Terhapus", "Lagu berhasil dihapus.", "🗑️");
+        }, "⚠️", "Ya, Lanjutkan", "Batal");
+    }
+
+    function openImportModal() {
+        if (!isAdmin) {
+            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu sebagai Admin untuk meng-import lagu.", "🔒");
+            return;
+        }
+        document.getElementById('importModal').style.display = 'flex';
+        document.getElementById('txtFileInput').value = '';
+    }
+
+    function closeImportModal() {
+        document.getElementById('importModal').style.display = 'none';
+    }
+
+    function processTxtImport() {
+        if (!isAdmin) return;
+        const fileInput = document.getElementById('txtFileInput');
+        const defaultCategory = document.getElementById('importDefaultCategory').value;
+
+        if (!fileInput.files || fileInput.files.length === 0) {
+            showCustomAlert("Pilih File", "Silakan pilih file .txt terlebih dahulu!", "📄");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const lines = content.split(/\r?\n/);
+            
+            let addedSongsList = [];
+            let countSkipped = 0;
+
+            lines.forEach(function(line) {
+                let trimmedLine = line.trim();
+                trimmedLine = trimmedLine.replace(/^[\d+[\.\)\-]\s*/, '');
+
+                if (trimmedLine.length < 2) return;
+
+                let chordAsli = "";
+                const chordMatch = trimmedLine.match(/(?:chord|key|nada|kunci|ori|original)[:\s]*([A-G][#b]?m?)/i);
+                if (chordMatch) {
+                    chordAsli = chordMatch[1].toUpperCase();
+                    trimmedLine = trimmedLine.replace(/(?:chord|key|nada|kunci|ori|original)[:\s]*[A-G][#b]?m?/gi, '').trim();
+                }
+
+                trimmedLine = trimmedLine.replace(/[\(\)\-\:\,]+$/g, '').trim();
+
+                let cleanTitle = trimmedLine.split(' ').map(function(word) {
+                    if (word.length === 0) return '';
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+
+                const isExist = daftarLagu.some(function(l) { return isSimilarTitle(l.title, cleanTitle); });
+
+                if (!isExist) {
+                    daftarLagu.push({
+                        title: cleanTitle,
+                        chordAsli: chordAsli,
+                        chordCowok: "",
+                        chordCewek: "",
+                        catatan: "",
+                        linkChord: "",
+                        linkYoutube: "",
+                        category: defaultCategory,
+                        isNew: true
+                    });
+                    addedSongsList.push(cleanTitle);
+                } else {
+                    countSkipped++;
+                }
+            });
+
+            renderSongs();
+            closeImportModal();
+
+            let alertMsg = `<b>✅ Berhasil Menambahkan ${addedSongsList.length} Lagu Baru dengan tanda <span class='badge-new' style='font-size:10px;'>NEW</span>:</b><br>`;
+            if(addedSongsList.length > 0) {
+                alertMsg += "<ul style='margin: 5px 0 10px 15px; padding-left: 0; font-size: 11px;'>";
+                addedSongsList.forEach(function(songName) {
+                    alertMsg += `<li>• ${songName}</li>`;
+                });
+                alertMsg += "</ul>";
+            } else {
+                alertMsg += "<i>(Tidak ada lagu baru yang ditambahkan)</i><br>";
+            }
+            if(countSkipped > 0) {
+                alertMsg += `<br><span style='color:var(--warning);'>⚠️ ${countSkipped} lagu dilewati karena mirip/duplikat.</span>`;
+            }
+
+            showCustomAlert("Hasil Import .txt 🚀", alertMsg, "📋");
+        };
+
+        reader.readAsText(file);
+    }
+
+    // ================= FITUR GENERATE INDEX.HTML (KHUSUS TIPONG) =================
+    function generateUpdatedIndexHtml() {
+        if (!isAdmin || loggedInPassword !== "tipong123") {
+            showCustomAlert("Akses Terkunci", "Fitur ini hanya bisa diakses oleh Admin Utama (Tipong)!", "🔒");
+            return;
+        }
+
+        let nextVerNum = currentVerNum + 1;
+        let htmlSource = document.documentElement.outerHTML;
+
+        let formattedData = "const defaultData = " + JSON.stringify(daftarLagu, null, 8) + ";";
+        htmlSource = htmlSource.replace(/const defaultData = \[[\s\S]*?\];/m, formattedData);
+        htmlSource = htmlSource.replace(/let currentVerNum = parseInt\(localStorage\.getItem\('setlistVerNumVal'\)\) \|\| \d+;/g, "let currentVerNum = parseInt(localStorage.getItem('setlistVerNumVal')) || " + nextVerNum + ";");
+
+        let fullCode = "<!DOCTYPE html>\n<html lang=\"id\">\n" + htmlSource.substring(htmlSource.indexOf('<head>'));
+
+        const blob = new Blob([fullCode], { type: "text/html;charset=utf-8" });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "index.html";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        showCustomAlert("Generate Berhasil!", `File index.html versi v${nextVerNum} berhasil didownload! Silakan upload ke GitHub.`, "⚙️");
+    }
+
+    // ================= FITUR BACKUP & GABUNG DATA (MERGE) JSON =================
+    function openBackupModal() {
+        if (!isAdmin) {
+            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu sebagai Admin untuk Backup/Restore.", "🔒");
+            return;
+        }
+        document.getElementById('backupModal').style.display = 'flex';
+    }
+
+    function closeBackupModal() {
+        document.getElementById('backupModal').style.display = 'none';
+    }
+
+    function exportBackupData() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(daftarLagu, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `Backup_Setlist_Tipong_${new Date().toISOString().slice(0,10)}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        showCustomAlert("Backup Berhasil", "File cadangan (.json) berhasil di-download! Silakan kirim file ini ke Tipong.", "💾");
+    }
+
+    function mergeBackupData() {
+        const fileInput = document.getElementById('jsonFileInput');
+        if (!fileInput.files || fileInput.files.length === 0) {
+            showCustomAlert("Pilih File", "Silakan pilih file cadangan (.json) dari temanmu terlebih dahulu!", "⚠️");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            try {
+                const importedData = JSON.parse(e.target.result);
+                if (Array.isArray(importedData)) {
+                    showCustomConfirm("Gabung Data (Merge)", "Apakah kamu ingin menggabungkan lagu baru dari file ini ke setlist kamu? (Lagu lama yang sudah ada akan tetap aman).", function() {
+                        let addedSongsList = [];
+                        let countSkipped = 0;
+
+                        importedData.forEach(function(importedSong) {
+                            let isExist = daftarLagu.some(function(existingSong) {
+                                return isSimilarTitle(existingSong.title, importedSong.title);
+                            });
+
+                            if (!isExist) {
+                                importedSong.isNew = true;
+                                daftarLagu.push(importedSong);
+                                addedSongsList.push(importedSong.title);
+                            } else {
+                                countSkipped++;
+                            }
+                        });
+
+                        renderSongs();
+                        closeBackupModal();
+
+                        let alertMsg = `<b>✅ Berhasil Menggabungkan ${addedSongsList.length} Lagu Baru dengan tanda <span class='badge-new' style='font-size:10px;'>NEW</span>:</b><br>`;
+                        if(addedSongsList.length > 0) {
+                            alertMsg += "<ul style='margin: 5px 0 10px 15px; padding-left: 0; font-size: 11px;'>";
+                            addedSongsList.forEach(function(songName) {
+                                alertMsg += `<li>• ${songName}</li>`;
+                            });
+                            alertMsg += "</ul>";
+                        } else {
+                            alertMsg += "<i>(Tidak ada lagu baru, semua sudah ada di database)</i><br>";
+                        }
+                        if(countSkipped > 0) {
+                            alertMsg += `<br><span style='color:var(--warning);'>⚠️ ${countSkipped} lagu dilewati karena sudah ada sebelumnya.</span>`;
+                        }
+
+                        showCustomAlert("Penggabungan Selesai! 🔀", alertMsg, "✨");
+                    }, "⚠️", "Ya, Gabungkan", "Batal");
+                } else {
+                    showCustomAlert("Format Salah", "File cadangan tidak valid!", "❌");
+                }
+            } catch (err) {
+                showCustomAlert("Error", "Gagal membaca file backup JSON.", "❌");
+            }
+        };
+
+        reader.readAsText(file);
+    }
+
+    function resetDatabaseToDefault() {
+        if (loggedInPassword !== "tipong123") {
+            showCustomAlert("Akses Terkunci", "Fitur Reset hanya dapat dilakukan oleh Admin Utama (Tipong)!", "🔒");
+            return;
+        }
+
+        showCustomConfirm("Reset Data", "Apakah kamu yakin ingin mengembalikan data ke daftar bawaan awal?", function() {
+            daftarLagu = defaultData;
+            renderSongs();
+            closeBackupModal();
+            showCustomAlert("Reset Berhasil", "Data telah dikembalikan ke awal.", "🔄");
+        }, "⚠️", "Ya, Lanjutkan", "Batal");
+    }
+
+    // ================= FITUR PASTE SESI MANGGUNG =================
+    function openPasteModal() {
+        document.getElementById('pasteModal').style.display = 'flex';
+        document.getElementById('pasteTextArea').value = '';
+        switchPasteTab(1);
+    }
+
+    function closePasteModal() {
+        document.getElementById('pasteModal').style.display = 'none';
+    }
+
+    function switchPasteTab(tabNum) {
+        const t1 = document.getElementById('tabContent1');
+        const t2 = document.getElementById('tabContent2');
+        const b1 = document.getElementById('btnTab1');
+        const b2 = document.getElementById('btnTab2');
+
+        if(tabNum === 1) {
+            t1.style.display = 'block';
+            t2.style.display = 'none';
+            b1.className = 'tab-btn active';
+            b2.className = 'tab-btn';
+        } else {
+            t1.style.display = 'none';
+            t2.style.display = 'block';
+            b1.className = 'tab-btn';
+            b2.className = 'tab-btn active';
+        }
+    }
+
+    function moveSessionItem(btnEl, direction) {
+        const li = btnEl.closest('li.song-item');
+        if (direction === -1 && li.previousElementSibling) {
+            li.parentNode.insertBefore(li, li.previousElementSibling);
+        } else if (direction === 1 && li.nextElementSibling) {
+            li.parentNode.insertBefore(li.nextElementSibling, li);
+        }
+    }
+
+    function buildSessionSongItem(rawLine, foundSong, customDetails) {
+        if (typeof foundSong === 'undefined') foundSong = null;
+        if (typeof customDetails === 'undefined') customDetails = null;
+
+        const li = document.createElement('li');
+        li.className = 'song-item';
+
+        const chordAsli = customDetails ? customDetails.chordAsli : (foundSong ? foundSong.chordAsli : "");
+        const chordCowok = customDetails ? customDetails.chordCowok : (foundSong ? foundSong.chordCowok : "");
+        const chordCewek = customDetails ? customDetails.chordCewek : (foundSong ? foundSong.chordCewek : "");
+        const catatan = customDetails ? customDetails.catatan : (foundSong ? foundSong.catatan : "");
+        const linkChord = customDetails ? customDetails.linkChord : (foundSong ? foundSong.linkChord : "");
+        const linkYoutube = customDetails ? customDetails.linkYoutube : (foundSong ? foundSong.linkYoutube : "");
+
+        const btnChordClass = linkChord ? "info-link" : "info-link empty";
+        const btnChordText = linkChord ? "Buka Web 🔗" : "Kosong";
+        const btnYtClass = linkYoutube ? "info-link" : "info-link empty";
+        const btnYtText = linkYoutube ? "Tonton ▶️" : "Kosong";
+
+        let dbBadge = foundSong ? '<small style="color:var(--success); font-weight:600;">(Ada di DB)</small>' : '';
+
+        li.innerHTML = `
+            <div class="song-title-row">
+                <span class="song-title" onclick="toggleDetails(this)">📌 ${rawLine} ${dbBadge}</span>
+                <div class="session-item-actions">
+                    <button class="btn-sesi-mini" onclick="moveSessionItem(this, -1)" title="Naikkan Urutan">⬆️</button>
+                    <button class="btn-sesi-mini" onclick="moveSessionItem(this, 1)" title="Turunkan Urutan">⬇️</button>
+                    <button class="btn-sesi-mini" onclick="openEditSessionModal(this)" title="Edit">✏️</button>
+                    <button class="btn-sesi-mini" style="color:var(--danger);" onclick="deleteSessionItem(this)" title="Hapus">🗑️</button>
+                </div>
+            </div>
+            <div class="song-details">
+                <div class="info-box">
+                    <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-chord-asli">: ${chordAsli || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-chord-cowok">: ${chordCowok || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-chord-cewek">: ${chordCewek || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan">: ${catatan || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">🌐 Web Chord</span><span class="info-value val-link-chord">: <a href="${linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
+                    <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value val-link-yt">: <a href="${linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div>
+                </div>
+            </div>
+        `;
+        return li;
+    }
+
+    function processPasteSetlist() {
+        const text = document.getElementById('pasteTextArea').value.trim();
+        if(!text) {
+            showCustomAlert("Teks Kosong", "Silakan tempel (paste) teks setlist terlebih dahulu!", "⚠️");
+            return;
+        }
+
+        const lines = text.split(/\r?\n/);
+        const listContainer = document.getElementById('list-SesiManggung');
+        listContainer.innerHTML = '';
+
+        let currentUl = document.createElement('ul');
+
+        lines.forEach(function(line) {
+            let rawLine = line.trim();
+            if(!rawLine || rawLine === '-') return;
+
+            if(rawLine.toLowerCase().includes('sesi') || rawLine.toLowerCase().includes('optional') || rawLine.toLowerCase().includes('set')) {
+                const sessionHeader = document.createElement('div');
+                sessionHeader.className = 'session-title-header';
+                sessionHeader.innerHTML = `
+                    <span>${rawLine}</span>
+                    <button class="btn-sesi-mini" onclick="addEmptySlotToUl(this)">➕ Tambah Kolom</button>
+                `;
+                listContainer.appendChild(sessionHeader);
+
+                currentUl = document.createElement('ul');
+                listContainer.appendChild(currentUl);
+                return;
+            }
+
+            let searchKey = rawLine.toLowerCase()
+                .replace(/^[\d+[\.\)\-]\s*/, '')
+                .replace(/\(.*?\)/g, '')
+                .replace(/[-]/g, ' ')
+                .trim();
+
+            let foundSong = daftarLagu.find(function(l) {
+                return isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey);
+            });
+
+            const li = buildSessionSongItem(rawLine, foundSong);
+
+            if(!currentUl.parentNode) {
+                listContainer.appendChild(currentUl);
+            }
+            currentUl.appendChild(li);
+        });
+
+        closePasteModal();
+        openFolder('SesiManggung');
+    }
+
+    function generateEmptyTemplateSesi() {
+        const listContainer = document.getElementById('list-SesiManggung');
+        listContainer.innerHTML = '';
+
+        const defaultSessions = ["SESI 1", "SESI 2", "OPTIONAL"];
+
+        defaultSessions.forEach(function(sessionName) {
+            const sessionHeader = document.createElement('div');
+            sessionHeader.className = 'session-title-header';
+            sessionHeader.innerHTML = `
+                <span>${sessionName}</span>
+                <button class="btn-sesi-mini" onclick="addEmptySlotToUl(this)">➕ Tambah Kolom</button>
+            `;
+            listContainer.appendChild(sessionHeader);
+
+            const ul = document.createElement('ul');
+            const li = buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)");
+            ul.appendChild(li);
+            listContainer.appendChild(ul);
+        });
+
+        closePasteModal();
+        openFolder('SesiManggung');
+    }
+
+    function addEmptySlotToUl(btnEl) {
+        const headerDiv = btnEl.parentNode;
+        let ul = headerDiv.nextElementSibling;
+        
+        if(!ul || ul.tagName !== 'UL') {
+            ul = document.createElement('ul');
+            headerDiv.after(ul);
+        }
+
+        const li = buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)");
+        ul.appendChild(li);
+    }
+
+    // Edit Form Khusus Sesi
+    let currentEditingLi = null;
+
+    function openEditSessionModal(btnEl) {
+        currentEditingLi = btnEl.closest('li.song-item');
+        
+        const titleSpan = currentEditingLi.querySelector('.song-title');
+        let oldTitle = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)/g, '').trim();
+
+        const valChordAsli = currentEditingLi.querySelector('.val-chord-asli').innerText.replace(':', '').trim();
+        const valChordCowok = currentEditingLi.querySelector('.val-chord-cowok').innerText.replace(':', '').trim();
+        const valChordCewek = currentEditingLi.querySelector('.val-chord-cewek').innerText.replace(':', '').trim();
+        const valCatatan = currentEditingLi.querySelector('.val-catatan').innerText.replace(':', '').trim();
+        
+        const chordAnchor = currentEditingLi.querySelector('.val-link-chord a');
+        const valLinkChord = (chordAnchor && chordAnchor.getAttribute('href') !== '#') ? chordAnchor.getAttribute('href') : '';
+
+        const ytAnchor = currentEditingLi.querySelector('.val-link-yt a');
+        const valLinkYt = (ytAnchor && ytAnchor.getAttribute('href') !== '#') ? ytAnchor.getAttribute('href') : '';
+
+        document.getElementById('editSesiTitle').value = oldTitle;
+        document.getElementById('editSesiChordAsli').value = valChordAsli === '-' ? '' : valChordAsli;
+        document.getElementById('editSesiChordCowok').value = valChordCowok === '-' ? '' : valChordCowok;
+        document.getElementById('editSesiChordCewek').value = valChordCewek === '-' ? '' : valChordCewek;
+        document.getElementById('editSesiCatatan').value = valCatatan === '-' ? '' : valCatatan;
+        document.getElementById('editSesiLinkChord').value = valLinkChord;
+        document.getElementById('editSesiLinkYoutube').value = valLinkYt;
+
+        document.getElementById('editSesiSaveToDb').checked = false;
+        document.getElementById('groupSesiCategory').style.display = 'none';
+
+        document.getElementById('editSessionModal').style.display = 'flex';
+    }
+
+    function toggleCategorySelectInSesiEdit(isChecked) {
+        document.getElementById('groupSesiCategory').style.display = isChecked ? 'block' : 'none';
+    }
+
+    function closeEditSessionModal() {
+        document.getElementById('editSessionModal').style.display = 'none';
+        currentEditingLi = null;
+    }
+
+    function saveSessionSongEdit(event) {
+        event.preventDefault();
+        if(!currentEditingLi) return;
+
+        const title = document.getElementById('editSesiTitle').value.trim();
+        const chordAsli = document.getElementById('editSesiChordAsli').value.trim();
+        const chordCowok = document.getElementById('editSesiChordCowok').value.trim();
+        const chordCewek = document.getElementById('editSesiChordCewek').value.trim();
+        const catatan = document.getElementById('editSesiCatatan').value.trim();
+        const linkChord = document.getElementById('editSesiLinkChord').value.trim();
+        const linkYoutube = document.getElementById('editSesiLinkYoutube').value.trim();
+
+        const saveToDb = document.getElementById('editSesiSaveToDb').checked;
+        const dbCategory = document.getElementById('editSesiCategory').value;
+
+        if (saveToDb && title.length > 1) {
+            const isExist = daftarLagu.some(function(l) { return isSimilarTitle(l.title, title); });
+            if (!isExist) {
+                daftarLagu.push({
+                    title: title,
+                    chordAsli: chordAsli,
+                    chordCowok: chordCowok,
+                    chordCewek: chordCewek,
+                    catatan: catatan,
+                    linkChord: linkChord,
+                    linkYoutube: linkYoutube,
+                    category: dbCategory,
+                    isNew: true
+                });
+                renderSongs();
+                showCustomAlert("Tersimpan!", `Lagu "${title}" berhasil dimasukkan ke Playlist Utama (${dbCategory})!`, "✅");
+            } else {
+                showCustomAlert("Sudah Ada / Mirip 🛑", `Lagu yang mirip dengan "${title}" sudah ada di Playlist Utama.`, "ℹ️");
+            }
+        }
+
+        let searchKey = title.toLowerCase().replace(/\(.*?\)/g, '').trim();
+        let foundSong = daftarLagu.find(function(l) { return isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey); });
+
+        const customDetails = { chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek, catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube };
+        const newLi = buildSessionSongItem(title, (searchKey.length > 2 ? foundSong : null), customDetails);
+
+        currentEditingLi.replaceWith(newLi);
+        closeEditSessionModal();
+    }
+
+    function deleteSessionItem(btnEl) {
+        const li = btnEl.closest('li.song-item');
+        showCustomConfirm("Hapus Baris Sesi", "Apakah kamu yakin ingin menghapus lagu ini dari list sesi?", function() {
+            li.remove();
+            showCustomAlert("Terhapus", "Lagu telah dihapus dari sesi.", "🗑️");
+        }, "⚠️", "Ya, Lanjutkan", "Batal");
+    }
+
+    // ================= FITUR EXPORT / KIRIM TEKS SESI MANGGUNG VIA WA =================
+    function getFormattedSessionText() {
+        const listContainer = document.getElementById('list-SesiManggung');
+        if (!listContainer || listContainer.children.length === 0) return "";
+
+        let result = "SETLIST MANGGUNG\n\n";
+        let children = Array.from(listContainer.children);
+        let songIndex = 1;
+
+        children.forEach(function(child) {
+            if (child.classList.contains('session-title-header')) {
+                let sessionName = child.querySelector('span') ? child.querySelector('span').innerText.trim() : child.innerText.trim();
+                result += `*${sessionName.toUpperCase()}*\n`;
+                songIndex = 1;
+            } else if (child.tagName === 'UL') {
+                const items = child.querySelectorAll('li.song-item');
+                items.forEach(function(li) {
+                    const titleSpan = li.querySelector('.song-title');
+                    if (!titleSpan) return;
+
+                    let titleText = titleSpan.innerText
+                        .replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)|NEW|🌐/g, '')
+                        .trim();
+
+                    if (!titleText || titleText === "(Lagu Kosong)") return;
+
+                    let chordAsli = li.querySelector('.val-chord-asli') ? li.querySelector('.val-chord-asli').innerText.replace(':', '').trim() : '';
+                    let chordCowok = li.querySelector('.val-chord-cowok') ? li.querySelector('.val-chord-cowok').innerText.replace(':', '').trim() : '';
+                    let chordCewek = li.querySelector('.val-chord-cewek') ? li.querySelector('.val-chord-cewek').innerText.replace(':', '').trim() : '';
+                    let catatan = li.querySelector('.val-catatan') ? li.querySelector('.val-catatan').innerText.replace(':', '').trim() : '';
+
+                    let extraInfo = [];
+                    if (chordAsli && chordAsli !== '-') extraInfo.push(`Chord: ${chordAsli}`);
+                    if (chordCowok && chordCowok !== '-') extraInfo.push(`Cwk: ${chordCowok}`);
+                    if (chordCewek && chordCewek !== '-') extraInfo.push(`Cew: ${chordCewek}`);
+                    if (catatan && catatan !== '-') extraInfo.push(`Note: ${catatan}`);
+
+                    let infoStr = extraInfo.length > 0 ? ` _(${extraInfo.join(' | ')})_` : '';
+                    result += `${songIndex}. ${titleText}${infoStr}\n`;
+                    songIndex++;
+                });
+                result += "\n";
+            }
+        });
+
+        return result.trim();
+    }
+
+    function copySessionText() {
+        const text = getFormattedSessionText();
+        if (!text) {
+            showCustomAlert("Sesi Kosong", "Belum ada daftar lagu di sesi manggung!", "⚠️");
+            return;
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(function() {
+                showCustomAlert("Teks Disalin", "Setlist berhasil disalin! Siap ditempel (paste) di WhatsApp.", "📋");
+            }).catch(function() {
+                fallbackCopyText(text);
+            });
+        } else {
+            fallbackCopyText(text);
+        }
+    }
+
+    function fallbackCopyText(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCustomAlert("Teks Disalin", "Setlist berhasil disalin! Siap ditempel (paste) di WhatsApp.", "📋");
+        } catch (err) {
+            showCustomAlert("Gagal Menyalin", "Gagal menyalin teks secara otomatis.", "❌");
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function shareToWhatsApp() {
+        const text = getFormattedSessionText();
+        if (!text) {
+            showCustomAlert("Sesi Kosong", "Belum ada daftar lagu di sesi manggung!", "⚠️");
+            return;
+        }
+        const encodedText = encodeURIComponent(text);
+        const waUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+        window.open(waUrl, '_blank');
+    }
+
+    renderSongs();
+</script>
+
+</body>
+</html>
