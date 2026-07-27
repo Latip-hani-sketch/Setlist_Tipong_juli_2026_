@@ -732,18 +732,18 @@
     <div class="top-bar">
         <button class="btn-theme-toggle" onclick="toggleDarkMode()" title="Ganti Mode Gelap/Terang">☀️</button>
         <h2 class="header-title">🎧 Setlist Lagu</h2>
-        <button id="modeBtn" class="mode-badge mode-admin" onclick="toggleAdminMode()">👑 Admin</button>
+        <button id="modeBtn" class="mode-badge mode-viewer" onclick="toggleAdminMode()">👁️ Penonton</button>
     </div>
     
     <!-- Group Tombol Atas -->
     <div class="action-btn-group">
         <!-- Tombol Tambah Lagu HANYA MUNCUL DI MODE ADMIN -->
-        <button class="btn-action-main btn-add-theme admin-controls active" onclick="openModal()">➕ Tambah Lagu</button>
-        <button class="btn-action-main btn-backup-theme admin-controls active" onclick="openBackupModal()">💾 Backup &amp; Gabung Data</button>
-        <button class="btn-action-main btn-import-theme admin-controls active" onclick="openImportModal()">📄 Import .txt</button>
-        <button class="btn-action-main btn-paste-theme admin-controls active" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
+        <button class="btn-action-main btn-add-theme admin-controls" onclick="openModal()">➕ Tambah Lagu</button>
+        <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup &amp; Gabung Data</button>
+        <button class="btn-action-main btn-import-theme admin-controls" onclick="openImportModal()">📄 Import .txt</button>
+        <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
         <!-- Tombol EKSKLUSIF Hanya untuk Tipong (tipong123) -->
-        <button class="btn-action-main btn-generate-theme tipong-only-controls active" onclick="generateUpdatedIndexHtml()">⚙️ Generate index.html</button>
+        <button class="btn-action-main btn-generate-theme tipong-only-controls" onclick="generateUpdatedIndexHtml()">⚙️ Generate index.html</button>
     </div>
 
     <!-- ==================== MAIN PLAYLIST ==================== -->
@@ -1007,7 +1007,7 @@
         </div>
 
         <!-- HANYA MUNCUL DI TIPONG (tipong123) -->
-        <div class="tipong-only-controls active" style="display:none; flex-direction:column; width:100%;">
+        <div class="tipong-only-controls" style="display:none; flex-direction:column; width:100%;">
             <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color); width:100%;">
                 <button type="button" class="btn-action-main" style="background:var(--danger); color:white; width:100%;" onclick="resetDatabaseToDefault()">🔄 Reset Data ke Awal (Default)</button>
             </div>
@@ -1064,10 +1064,10 @@ Rungkad"></textarea>
 <!-- MODAL LOGIN ADMIN -->
 <div id="adminLoginModal" class="modal-overlay" style="display: none;">
     <div class="modal-content" style="max-width:300px; text-align:center;">
-        <h3>🔑 Login Admin</h3>
-        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Masukkan password untuk membuka fitur Admin.</p>
+        <h3>🔑 Login Akses</h3>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Masukkan password untuk membuka fitur edit.</p>
         <div class="form-group">
-            <input type="password" id="adminPasswordInput" placeholder="Password Admin" style="text-align:center;">
+            <input type="password" id="adminPasswordInput" placeholder="Password..." style="text-align:center;">
         </div>
         <div class="modal-actions">
             <button type="button" class="btn-cancel" onclick="closeAdminLoginModal()">Batal</button>
@@ -1079,10 +1079,10 @@ Rungkad"></textarea>
 <!-- CUSTOM CENTER DIALOG OVERLAY -->
 <div id="customDialogOverlay" style="display: none;">
     <div class="dialog-box">
-        <div id="dialogIcon" class="dialog-icon">👑</div>
-        <div id="dialogTitle" class="dialog-title">Berhasil Login!</div>
-        <div id="dialogMessage" class="dialog-message">Selamat datang Admin Utama (Tipong)!</div>
-        <div id="dialogActions" class="dialog-actions"><button class="dialog-btn dialog-btn-primary" id="dialogOkBtn" onclick="closeCustomDialog()">Oke</button></div>
+        <div id="dialogIcon" class="dialog-icon">ℹ️</div>
+        <div id="dialogTitle" class="dialog-title">Informasi</div>
+        <div id="dialogMessage" class="dialog-message">Pesan notifikasi di sini...</div>
+        <div id="dialogActions" class="dialog-actions"></div>
     </div>
 </div>
 
@@ -1799,7 +1799,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Westlife - My Love C",
@@ -1810,7 +1810,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Ed Sheeran - Perfect G#",
@@ -1821,7 +1821,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Ed Sheeran – Thinking Out Loud D",
@@ -1832,7 +1832,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Diana Ross & Lionel Richie - Endless Love Bb",
@@ -1843,7 +1843,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Shania Twain - You're Still The One D#",
@@ -1854,7 +1854,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Marry You - Bruno Mars F",
@@ -1865,7 +1865,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Marry You - Just The Way You Are F",
@@ -1876,7 +1876,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "John Legend - All Of Me Fm",
@@ -1887,7 +1887,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Calum Scott - You Are The Reason Bb",
@@ -1898,7 +1898,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Brian McKnight - Marry Your Daughter B",
@@ -1909,7 +1909,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Bee Gees - How Deep Is Your Love D#",
@@ -1920,7 +1920,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "George Benson - Nothing's Gonna Change My Love For You C#",
@@ -1931,7 +1931,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Eric Clapton - Wonderful Tonight G",
@@ -1942,7 +1942,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Rod Stewart - I Don't Want To Talk About It Bb",
@@ -1953,7 +1953,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Elvis Presley - Can't Help Falling In Love D",
@@ -1964,7 +1964,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Frankie Valli - Can't Take My Eyes Off You E",
@@ -1975,7 +1975,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Michael Bublé - Sway Dm",
@@ -1986,7 +1986,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Christian Bautista - The Way You Look At Me C#",
@@ -1997,7 +1997,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Westlife With Diana Ross - When You Tell Me That You Love Me D#",
@@ -2008,7 +2008,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Diana Ross – When You Tell Me That You Love Me G#",
@@ -2019,7 +2019,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Frank Sinatra - L.O.V.E. G Naik G#",
@@ -2030,7 +2030,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Michael Bublé - Everything D Naik E",
@@ -2041,7 +2041,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Frank Sinatra - Fly Me To The Moon Am",
@@ -2052,7 +2052,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Michael Bolton - To Love Somebody B",
@@ -2063,7 +2063,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Firehouse - I Live My Life For You C#",
@@ -2074,7 +2074,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Bryan Adams - I Do It For You C#",
@@ -2085,7 +2085,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Nikka Costa - First Love G",
@@ -2096,7 +2096,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "CHRISYE - Aku Cinta Dia",
@@ -2118,7 +2118,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2015/01/anak-sekolah-purpose-cover-chrisye.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=lBomGw7FA3Q&list=RDlBomGw7FA3Q&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Badai Pasti Berlalu ( BCL ) G ( G ) Intro (E) Song (G",
@@ -2151,7 +2151,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/mulan-jameela/cinta-mati-2-chords-1722729",
                 "linkYoutube": "https://www.youtube.com/watch?v=UIkr3gvMouY&list=RDUIkr3gvMouY&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Dahulu ( The Groove ) D ( D",
@@ -2162,7 +2162,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "BCL - Diskoria",
@@ -2173,7 +2173,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "USAI ( TIARA ANDINI",
@@ -2184,7 +2184,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "TERLANJUR MENCINTA ( TIARA ANDINI",
@@ -2195,7 +2195,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "TEGA ( TIARA ANDINI",
@@ -2206,7 +2206,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "MENJADI DIA ( TIARA ANDINI",
@@ -2217,7 +2217,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "JANJI SETIA ( TIARA ANDINI",
@@ -2228,7 +2228,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "BAHAYA ( TIARA ANDINI",
@@ -2239,7 +2239,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "MERASA INDAH ( TIARA ANDINI",
@@ -2250,7 +2250,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "65 ( TIARA ANDINI",
@@ -2261,7 +2261,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "HADAPI BERDUA ( TIARA ANDINI",
@@ -2272,7 +2272,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "MEMILIH AKU ( TIARA ANDINI",
@@ -2283,7 +2283,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "RINDU DALAM HATI ( TIARA ANDINI",
@@ -2294,7 +2294,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Gemintang ( TIARA ANDINI ) C ( C ) INTRO (C) REFF (E",
@@ -2316,7 +2316,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Kau () ( T FIVE ) Dm",
@@ -2327,7 +2327,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Lama Lama Aku Bosan ( AUDY ) D",
@@ -2338,7 +2338,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Surat Cinta ( VINA PANDUWINTA ) E",
@@ -2349,7 +2349,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Trauma ( AAN STORY FEAT ELSYA ) E",
@@ -2360,7 +2360,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Trough The Fire ( Cakka Khan ) G#",
@@ -2371,7 +2371,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Versace On The Floor ( BRUNO MARS ) D",
@@ -2382,7 +2382,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Runtuh - Feby Putri feat. Fiersa Besari",
@@ -2437,7 +2437,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Tersiksa Lagi ( Utha Likumahuwa ) G Cm . . . F . . . Reff (Bb) Balik Song Am . . . D11",
@@ -2448,7 +2448,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Lumpuhkanlah Ingatanku ( Geisha ) D ( D",
@@ -2459,7 +2459,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "To The Bone ( Pamungkas ) D# ( F",
@@ -2470,7 +2470,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Its You ( Sezairi ) G# ( G# ) G",
@@ -2481,7 +2481,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Rasa Ini ( Vierra ) D ( D ) Intro Di (G)..Song Di (G) Reff Di (D",
@@ -2492,7 +2492,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Aku Wanita ( Reza ) D Into (G) Song (G) Reff (D",
@@ -2503,7 +2503,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Kasih ( Ermy Kulit ) Am",
@@ -2514,7 +2514,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Logika ( Vina Pandu ) D Intro (G) Song (D",
@@ -2525,7 +2525,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Budi Doremi - Melukis Senja",
@@ -2536,7 +2536,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2020/06/budi-doremi-melukis-senja.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=qZIQAk-BUEc&list=RDqZIQAk-BUEc&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Budi Doremi - Mesin Waktu",
@@ -2547,7 +2547,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2021/04/budi-doremi-mesin-waktu-ost-aku-dan-mesin-waktu.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=ksUTuZLU1hI&list=RDksUTuZLU1hI&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Selalu Ada ( Blackout ) E ( G",
@@ -2558,7 +2558,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Serpihan Hati ( Utopia ) Dm ( Dm ) (song Dm) Reff (F",
@@ -2569,7 +2569,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Almost Us Never Enough ( Ariana ) D ( D",
@@ -2580,7 +2580,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Just The Two Of Us ( Bill Withers & Grover Washington Jr ) C# ( F",
@@ -2602,7 +2602,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Pertama ( Reza ) D ( D ) Intro (G) Reff (D",
@@ -2613,7 +2613,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "VIina Panduwinata - Biru",
@@ -2624,7 +2624,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/vina-panduwinata/biru-chords-2887856",
                 "linkYoutube": "https://www.youtube.com/watch?v=ruvt8R28w1Q&list=RDruvt8R28w1Q&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Pesan Terakhir ( Lyodra ) D ( D",
@@ -2635,7 +2635,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Judika - Putus Atau Terus",
@@ -2646,7 +2646,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2020/09/judika-putus-atau-terus.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=6b2Tv7d9z7A&list=RD6b2Tv7d9z7A&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Tak Segampang Itu ( Anggi Marito ) F ( F",
@@ -2657,7 +2657,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Pasto - Tanya Hati",
@@ -2668,7 +2668,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2019/12/tanya-hati-pasto-chintya-gabriella-cover.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=6WdypmA91I0&list=RD6WdypmA91I0&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Flashlight ( Jessi J ) F ( F ) (Intro 4) Song (4",
@@ -2679,7 +2679,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "So Sick ( Ne Yo ) Dm",
@@ -2690,7 +2690,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Stefani Feat Ziva - Falling In Love Alone",
@@ -2701,7 +2701,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "https://www.youtube.com/watch?v=Aw1eOFJiDtE&list=RDAw1eOFJiDtE&start_radio=1",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "J-Rocks feat. Prisa - Kau Curi Lagi",
@@ -2712,7 +2712,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/j-rocks/kau-curi-lagi-chords-591113",
                 "linkYoutube": "https://www.youtube.com/watch?v=pTll5RY820U&list=RDpTll5RY820U&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Wonder Woman ( MULAN JAMEELA ) E ( E",
@@ -2723,7 +2723,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "She - Jomblowati",
@@ -2734,7 +2734,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/she-indonesia/jomblowati-chords-998903",
                 "linkYoutube": "https://www.youtube.com/watch?v=DAAvhKUeCso&list=RDDAAvhKUeCso&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Jessie J - Domino",
@@ -2745,7 +2745,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/jessie-j/domino-chords-1085341",
                 "linkYoutube": "https://www.youtube.com/watch?v=UJtB55MaoD0&list=RDUJtB55MaoD0&start_radio=1",
                 "category": "PopInggris",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Mus Mujiono - Tanda - Tandanya",
@@ -2756,7 +2756,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/mus-mujiono/tanda-tanda-chords-6187004",
                 "linkYoutube": "https://www.youtube.com/watch?v=Q1ARo64e_FA&list=RDQ1ARo64e_FA&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Glend Fredly - Kasih Putih",
@@ -2767,7 +2767,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "https://www.youtube.com/watch?v=G-vVY5EW_7A&list=RDG-vVY5EW_7A&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Dia ( Reza ) D ( D",
@@ -2778,7 +2778,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Pilihlah Aku ( Krisdayanti ) F",
@@ -2789,7 +2789,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Listen ( Beyonce ) B ( A ) Song (B) Bridge (D) Reff (B",
@@ -2800,7 +2800,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Payung Fantasi ( Ismail Marzuki ) C#",
@@ -2811,7 +2811,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Noah - Kupu-kupu Malam",
@@ -2822,7 +2822,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/noah-indonesia/kupu-kupu-malam-chords-1851973",
                 "linkYoutube": "https://www.youtube.com/watch?v=Qa1mZA8dTvk&list=RDQa1mZA8dTvk&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Adelle - When We Were Young (  ) D#m ( C#m",
@@ -2833,7 +2833,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/adele/when-we-were-young-chords-1782038",
                 "linkYoutube": "https://www.youtube.com/watch?v=dOIkbsXihfc&list=RDdOIkbsXihfc&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Butiran Debu ( Rumor ) A ( D",
@@ -2844,7 +2844,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Vierra  - Jadi Apa Yang Kau Inginkan",
@@ -2855,7 +2855,7 @@ Rungkad"></textarea>
                 "linkChord": "https://tabs.ultimate-guitar.com/tab/vierra/jadi-yang-kuinginkan-chords-998094",
                 "linkYoutube": "https://www.youtube.com/watch?v=cnqBJ4K70iI&list=RDcnqBJ4K70iI&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Mahalini - Sial",
@@ -2866,7 +2866,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2023/02/mahalini-sial.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=QSWYyoF79oE&list=RDQSWYyoF79oE&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Sisa Rasa ( Mahalini ) F# ( F#",
@@ -2877,7 +2877,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "MELAWAN RESTU ( Mahalini ) G ( G ) Intro (4) Song (1",
@@ -2888,7 +2888,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "KISAH SEMPURNA ( Mahalini ) B ( B ) Intro (6m) Song (B",
@@ -2899,7 +2899,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "AKU YANG SALAH ( Mahalini",
@@ -2910,7 +2910,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Tertawan Hati ( Awdela ) A ( A ) Intro (6) Song (1) Klik Disini",
@@ -2921,7 +2921,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Tak Dianggap ( Lyodra ) D Klik Disini",
@@ -2932,7 +2932,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Cinta Dalam Hati ( Ungu ) D ( G",
@@ -2943,7 +2943,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Komang ( Raim Loade ) G ( C",
@@ -2954,7 +2954,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Hampa ( Ari Laso ) D ( G ) D Intro (6m) Song (1",
@@ -2965,7 +2965,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Hal Hebat ( Govinda ) B ( E",
@@ -2976,7 +2976,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Puisi ( Jikustik ) E ( A",
@@ -2987,7 +2987,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Sekali Ini Saja ( Glend Fredly ) C ( C ) Intro (1) Song (2#(d#)) Reff (1) Naik Stengah,Terus Naik Lagi Setengah",
@@ -2998,7 +2998,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Terserah ( Glend Fredly ) F",
@@ -3009,7 +3009,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Akhir Cerita Cinta ( Glend Fredly ) G Song (1) Reff (2) Naik 1 Reff (3",
@@ -3020,7 +3020,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Sedih Tak Berujung ( Glend Fredly ) (G=do) Intro (4) Song (4) Reff (4) Lead (4_C=do) Naik 1 Reff (5",
@@ -3031,7 +3031,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "It Will Rain ( Bruno Mars ) D",
@@ -3042,7 +3042,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Talking To The Moon ( Bruno Mars ) E",
@@ -3053,7 +3053,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "I'm Not The Only One ( Sam Smith ) F",
@@ -3064,7 +3064,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Just The Way You Are ( Bruno Mars ) F ( G",
@@ -3075,7 +3075,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Terlalu Cinta ( Rossa ) G# ( G ) - Intro : B Modul Ke : G#",
@@ -3086,7 +3086,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Jika Cinta Dia ( Geisha ) B ( B",
@@ -3097,7 +3097,7 @@ Rungkad"></textarea>
                 "linkChord": "",
                 "linkYoutube": "",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Pamungkas - Berapa Kali Kita Akan Saling Memaafkan",
@@ -3108,7 +3108,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2026/05/pamungkas-berapa-kali-kita-akan-saling-memaafkan.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=xI1nKck7tzg&list=RDxI1nKck7tzg&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Tiara Andini – Kupu - Kupu",
@@ -3119,7 +3119,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2024/05/tiara-andini-kupu-kupu.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=SxQEiq4NZqk&list=RDSxQEiq4NZqk&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         },
         {
                 "title": "Yovie & Nuno - Menjaga Hati",
@@ -3130,7 +3130,7 @@ Rungkad"></textarea>
                 "linkChord": "https://www.chordtela.com/2014/11/menjaga-hati-yovie-nuno.html",
                 "linkYoutube": "https://www.youtube.com/watch?v=bEp9CgtRfuE&list=RDbEp9CgtRfuE&start_radio=1",
                 "category": "PopIndo",
-                "isNew": true
+                "isNew": false
         }
 ];
 
@@ -3148,7 +3148,7 @@ Rungkad"></textarea>
     }
 
     // ================= SISTEM UPDATE VERSI GITHUB =================
-    const WEB_VERSION = 56; // Angka versi Master di GitHub
+    const WEB_VERSION = 57; // Angka versi Master di GitHub
     let localVerNum = parseInt(localStorage.getItem('setlistVerNumVal')) || 0;
     let currentVerNum = localVerNum;
     let daftarLagu = [];
@@ -3301,7 +3301,7 @@ Rungkad"></textarea>
             isAdmin = false;
             loggedInPassword = "";
             document.body.classList.add('protected-content');
-            showCustomAlert("Mode Penonton", "Kamu telah keluar dari Mode Admin.", "👁️");
+            showCustomAlert("Mode Penonton", "Kamu telah keluar dari Mode Edit.", "👁️");
             updateAdminUI();
         }
     }
@@ -3333,14 +3333,14 @@ Rungkad"></textarea>
                 loggedInPassword = pass;
                 document.body.classList.remove('protected-content');
                 closeAdminLoginModal();
-                showCustomAlert("Login Berhasil!", "Password khusus berhasil terikat di HP ini.", "🔑");
+                showCustomAlert("Login Berhasil!", "Kamu masuk sebagai Tamu. Password khusus berhasil terikat di HP ini.", "🎫");
                 updateAdminUI();
             } else if (lockedDeviceId === myDeviceId) {
                 isAdmin = true;
                 loggedInPassword = pass;
                 document.body.classList.remove('protected-content');
                 closeAdminLoginModal();
-                showCustomAlert("Berhasil Login!", "Kamu masuk sebagai Admin.", "👑");
+                showCustomAlert("Berhasil Login!", "Kamu masuk sebagai Tamu.", "🎫");
                 updateAdminUI();
             } else {
                 showCustomAlert("Akses Ditolak", "Password khusus ini sudah terikat di HP milik temanmu yang lain!", "🔒");
@@ -3348,7 +3348,7 @@ Rungkad"></textarea>
             return;
         }
 
-        showCustomAlert("Password Salah!", "Kata sandi Admin yang dimasukkan tidak sesuai.", "❌");
+        showCustomAlert("Password Salah!", "Kata sandi yang dimasukkan tidak sesuai.", "❌");
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -3361,7 +3361,7 @@ Rungkad"></textarea>
                 }
             });
         }
-        renderSongs();
+        updateAdminUI(); // Panggil updateAdminUI agar tombol langsung keriset jadi "Penonton"
     });
 
     function updateAdminUI() {
@@ -3370,16 +3370,19 @@ Rungkad"></textarea>
         const tipongOnlyControls = document.querySelectorAll('.tipong-only-controls');
 
         if (isAdmin) {
-            modeBtn.innerText = "👑 Admin";
             modeBtn.className = "mode-badge mode-admin";
             adminControls.forEach(function(el) { el.classList.add('active'); });
 
+            // Cek apakah yang login bos utamanya atau sekadar Tamu
             if (loggedInPassword === "tipong123") {
+                modeBtn.innerText = "👑 Admin";
                 tipongOnlyControls.forEach(function(el) { el.classList.add('active'); });
             } else {
+                modeBtn.innerText = "🎫 Tamu"; // Nama diubah jadi Tamu kalau pakai pass band
                 tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); });
             }
         } else {
+            // Mode Default Penonton
             modeBtn.innerText = "👁️ Penonton";
             modeBtn.className = "mode-badge mode-viewer";
             adminControls.forEach(function(el) { el.classList.remove('active'); });
@@ -4351,7 +4354,7 @@ Rungkad"></textarea>
         window.open(waUrl, '_blank');
     }
 
-    renderSongs();
+    // Hapus renderSongs() di sini, karena sudah dipanggil di dalam DOMContentLoaded
 </script>
 
 </body>
