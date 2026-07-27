@@ -6,6 +6,11 @@
     <title>Setlist Lagu 🎸</title>
     <!-- Font Modern dari Google -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FIREBASE SDK (Sistem Cloud) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
     <style>
         :root {
             --primary: #6366f1;
@@ -742,8 +747,6 @@
         <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup &amp; Gabung Data</button>
         <button class="btn-action-main btn-import-theme admin-controls" onclick="openImportModal()">📄 Import .txt</button>
         <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
-        <!-- Tombol EKSKLUSIF Hanya untuk Tipong (tipong123) -->
-        <button class="btn-action-main btn-generate-theme tipong-only-controls" onclick="generateUpdatedIndexHtml()">⚙️ Generate index.html</button>
     </div>
 
     <!-- ==================== MAIN PLAYLIST ==================== -->
@@ -1087,6 +1090,22 @@ Rungkad"></textarea>
 </div>
 
 <script>
+    // MASUKKAN KODE FIREBASE KAMU DI SINI
+    const firebaseConfig = {
+      apiKey: "AIzaSyAfSiMYCkJwMImohfuvM16UIu-BxDJLTCE",
+      authDomain: "setlist-personal.firebaseapp.com",
+      databaseURL: "https://setlist-personal-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "setlist-personal",
+      storageBucket: "setlist-personal.firebasestorage.app",
+      messagingSenderId: "390023766111",
+      appId: "1:390023766111:web:375df7fa9c6482a7cd7bea"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Data Bawaan Jika Database Masih Kosong
     const defaultData = [
         {
                 "title": "Ada Titik Titik",
@@ -3132,13 +3151,13 @@ Rungkad"></textarea>
                 "category": "PopIndo",
                 "isNew": false
         }
-];
+    ];
 
-    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas'];
+    let daftarLagu = [];
     let isAdmin = false;
     let loggedInPassword = "";
     let autoScrollTimer = null;
-
+    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas'];
     const RESTRICTED_FRIEND_PASSWORDS = ["temen123", "band123", "bro2026"];
 
     let myDeviceId = localStorage.getItem('mySetlistDeviceId');
@@ -3147,43 +3166,35 @@ Rungkad"></textarea>
         localStorage.setItem('mySetlistDeviceId', myDeviceId);
     }
 
-    // ================= SISTEM UPDATE VERSI GITHUB =================
-    const WEB_VERSION = 57; // Angka versi Master di GitHub
-    let localVerNum = parseInt(localStorage.getItem('setlistVerNumVal')) || 0;
-    let currentVerNum = localVerNum;
-    let daftarLagu = [];
-
-    // Jika versi web GitHub lebih baru dari versi HP, TIMPA data HP dengan data GitHub!
-    if (localVerNum < WEB_VERSION) {
-        daftarLagu = defaultData;
-        currentVerNum = WEB_VERSION;
-        localStorage.setItem('setlistVerNumVal', currentVerNum);
-        localStorage.setItem('setlistTiponkData_v' + currentVerNum, JSON.stringify(daftarLagu));
-        
-        // Munculkan notifikasi update kecil saat web pertama dibuka
-        setTimeout(() => alert("Setlist berhasil di-update ke versi terbaru!"), 500); 
-    } else {
-        // Jika tidak ada update, pakai data lokal
-        daftarLagu = JSON.parse(localStorage.getItem('setlistTiponkData_v' + currentVerNum));
-        if (!daftarLagu || daftarLagu.length === 0) { 
-            daftarLagu = defaultData;
+    // ================= MENDENGARKAN DATA DARI FIREBASE REAL-TIME =================
+    db.ref('setlistTipong').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            daftarLagu = data;
+        } else {
+            // Jika Firebase kosong, upload data default ke Firebase
+            daftarLagu = defaultData; 
+            db.ref('setlistTipong').set(daftarLagu);
         }
-    }
+        renderSongs();
+    });
+
+    db.ref('sesiManggungTipong').on('value', (snapshot) => {
+        const data = snapshot.val();
+        const listContainer = document.getElementById('list-SesiManggung');
+        if (listContainer) {
+            listContainer.innerHTML = data || "";
+        }
+    });
 
     // ================= FUNGSI CEK KEMIRIPAN JUDUL (SMART ANTI-DUPLIKAT) =================
     function isSimilarTitle(titleA, titleB) {
         if (!titleA || !titleB) return false;
-
         let normA = titleA.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
         let normB = titleB.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
-
         if (normA === normB) return true;
-
         let diff = Math.abs(normA.length - normB.length);
-        if (diff <= 2 && (normA.startsWith(normB) || normB.startsWith(normA))) {
-            return true;
-        }
-
+        if (diff <= 2 && (normA.startsWith(normB) || normB.startsWith(normA))) { return true; }
         return false;
     }
 
@@ -3209,9 +3220,7 @@ Rungkad"></textarea>
             btn.innerText = '📜 Auto Scroll: OFF';
             btn.style.background = 'var(--primary-gradient)';
         } else {
-            autoScrollTimer = setInterval(function() {
-                window.scrollBy({ top: 1, behavior: 'smooth' });
-            }, 35);
+            autoScrollTimer = setInterval(function() { window.scrollBy({ top: 1, behavior: 'smooth' }); }, 35);
             btn.innerText = '⏸️ Stop Scroll';
             btn.style.background = 'var(--danger)';
         }
@@ -3221,7 +3230,7 @@ Rungkad"></textarea>
     function bukaCatatanLengkap(encodedCatatan) {
         const catatanText = decodeURIComponent(encodedCatatan);
         const msgElement = document.getElementById('dialogMessage');
-        msgElement.classList.add('catatan-view'); // Pakai style khusus baca (fix height)
+        msgElement.classList.add('catatan-view');
         showCustomAlert("📝 Catatan Lengkap", catatanText, "📖");
     }
 
@@ -3231,46 +3240,36 @@ Rungkad"></textarea>
         document.getElementById('dialogIcon').innerText = icon;
         document.getElementById('dialogTitle').innerText = title;
         document.getElementById('dialogMessage').innerHTML = message;
-        
         const actionsDiv = document.getElementById('dialogActions');
         actionsDiv.innerHTML = '<button class="dialog-btn dialog-btn-primary" id="dialogOkBtn" onclick="closeCustomDialog()">Oke</button>';
-        
         document.getElementById('customDialogOverlay').style.display = 'flex';
-        setTimeout(function() {
-            const okBtn = document.getElementById('dialogOkBtn');
-            if(okBtn) okBtn.focus();
-        }, 100);
+        setTimeout(function() { const okBtn = document.getElementById('dialogOkBtn'); if(okBtn) okBtn.focus(); }, 100);
     }
 
     function showCustomConfirm(title, message, onConfirm, icon, confirmText, cancelText) {
         if (!icon) icon = "⚠️";
         if (!confirmText) confirmText = "Ya, Lanjutkan";
         if (!cancelText) cancelText = "Batal";
-
         document.getElementById('dialogIcon').innerText = icon;
         document.getElementById('dialogTitle').innerText = title;
         document.getElementById('dialogMessage').innerHTML = message;
-        
         const actionsDiv = document.getElementById('dialogActions');
         actionsDiv.innerHTML = `
             <button class="dialog-btn dialog-btn-cancel" onclick="closeCustomDialog()">${cancelText}</button>
             <button class="dialog-btn dialog-btn-primary" id="btnConfirmAction">${confirmText}</button>
         `;
-        
         document.getElementById('btnConfirmAction').onclick = function() {
             closeCustomDialog();
             onConfirm();
         };
-
         document.getElementById('customDialogOverlay').style.display = 'flex';
     }
 
     function closeCustomDialog() {
         document.getElementById('customDialogOverlay').style.display = 'none';
-        document.getElementById('dialogMessage').classList.remove('catatan-view'); // Reset style catatan
+        document.getElementById('dialogMessage').classList.remove('catatan-view');
     }
 
-    // Global Keydown untuk Enter pada Dialog Custom & Modal Login
     document.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             const dialogOverlay = document.getElementById('customDialogOverlay');
@@ -3279,7 +3278,6 @@ Rungkad"></textarea>
                 closeCustomDialog();
                 return;
             }
-
             const loginModal = document.getElementById('adminLoginModal');
             if (loginModal.style.display === "flex") {
                 event.preventDefault();
@@ -3289,14 +3287,12 @@ Rungkad"></textarea>
         }
     });
 
-    // Admin Toggle System
+    // ================= Admin Toggle System =================
     function toggleAdminMode() {
         if (!isAdmin) {
             document.getElementById('adminPasswordInput').value = '';
             document.getElementById('adminLoginModal').style.display = 'flex';
-            setTimeout(function() {
-                document.getElementById('adminPasswordInput').focus();
-            }, 100);
+            setTimeout(function() { document.getElementById('adminPasswordInput').focus(); }, 100);
         } else {
             isAdmin = false;
             loggedInPassword = "";
@@ -3306,13 +3302,10 @@ Rungkad"></textarea>
         }
     }
 
-    function closeAdminLoginModal() {
-        document.getElementById('adminLoginModal').style.display = 'none';
-    }
+    function closeAdminLoginModal() { document.getElementById('adminLoginModal').style.display = 'none'; }
 
     function submitAdminPassword() {
         const pass = document.getElementById('adminPasswordInput').value.trim();
-
         if (pass === "tipong123") {
             isAdmin = true;
             loggedInPassword = "tipong123";
@@ -3326,7 +3319,6 @@ Rungkad"></textarea>
         if (RESTRICTED_FRIEND_PASSWORDS.includes(pass)) {
             let lockKey = 'pass_lock_' + pass;
             let lockedDeviceId = localStorage.getItem(lockKey);
-
             if (!lockedDeviceId) {
                 localStorage.setItem(lockKey, myDeviceId);
                 isAdmin = true;
@@ -3347,7 +3339,6 @@ Rungkad"></textarea>
             }
             return;
         }
-
         showCustomAlert("Password Salah!", "Kata sandi yang dimasukkan tidak sesuai.", "❌");
     }
 
@@ -3361,7 +3352,7 @@ Rungkad"></textarea>
                 }
             });
         }
-        updateAdminUI(); // Panggil updateAdminUI agar tombol langsung keriset jadi "Penonton"
+        updateAdminUI();
     });
 
     function updateAdminUI() {
@@ -3373,28 +3364,25 @@ Rungkad"></textarea>
             modeBtn.className = "mode-badge mode-admin";
             adminControls.forEach(function(el) { el.classList.add('active'); });
 
-            // Cek apakah yang login bos utamanya atau sekadar Tamu
             if (loggedInPassword === "tipong123") {
                 modeBtn.innerText = "👑 Admin";
                 tipongOnlyControls.forEach(function(el) { el.classList.add('active'); });
             } else {
-                modeBtn.innerText = "🎫 Tamu"; // Nama diubah jadi Tamu kalau pakai pass band
+                modeBtn.innerText = "🎫 Tamu";
                 tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); });
             }
         } else {
-            // Mode Default Penonton
             modeBtn.innerText = "👁️ Penonton";
             modeBtn.className = "mode-badge mode-viewer";
             adminControls.forEach(function(el) { el.classList.remove('active'); });
             tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); });
         }
-        renderSongs();
+        if(daftarLagu.length > 0) renderSongs();
     }
 
     function togglePlaylist() {
         const container = document.getElementById('container-Playlist');
         const icon = document.getElementById('icon-Playlist');
-        
         if (container.style.display === "none" || container.style.display === "") {
             container.style.display = "block";
             icon.innerText = "▲";
@@ -3422,9 +3410,7 @@ Rungkad"></textarea>
         const allCategories = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'SesiManggung'];
         allCategories.forEach(function(cat) {
             const el = document.getElementById('content-' + cat);
-            if(el) {
-                el.style.display = (cat === targetCategory) ? 'block' : 'none';
-            }
+            if(el) el.style.display = (cat === targetCategory) ? 'block' : 'none';
             const searchInput = document.getElementById('search-' + cat);
             if(searchInput) {
                 searchInput.value = "";
@@ -3448,16 +3434,11 @@ Rungkad"></textarea>
 
     function renderSongs() {
         folderKeys.forEach(function(cat) {
-            document.getElementById('list-' + cat).innerHTML = '';
+            const listEl = document.getElementById('list-' + cat);
+            if(listEl) listEl.innerHTML = '';
         });
 
         let counts = { PopIndo: 0, PopInggris: 0, Ambyar: 0, Lawas: 0 };
-
-        // Tambahan sistem backup data sesi manggung
-        let savedSessionData = localStorage.getItem('setlistSesiManggung_' + currentVerNum);
-        if(savedSessionData) {
-            document.getElementById('list-SesiManggung').innerHTML = savedSessionData;
-        }
 
         daftarLagu.forEach(function(lagu, index) {
             if (counts[lagu.category] !== undefined) counts[lagu.category]++;
@@ -3467,14 +3448,10 @@ Rungkad"></textarea>
             li.setAttribute('data-category', lagu.category);
             
             const hasWebChord = lagu.linkChord && lagu.linkChord.trim() !== "";
-
-            if (!hasWebChord) {
-                li.classList.add('incomplete-card');
-            }
+            if (!hasWebChord) li.classList.add('incomplete-card');
 
             const btnChordClass = lagu.linkChord ? "info-link" : "info-link empty";
             const btnChordText = lagu.linkChord ? "Buka Web 🔗" : "Kosong";
-            
             const btnYtClass = lagu.linkYoutube ? "info-link" : "info-link empty";
             const btnYtText = lagu.linkYoutube ? "Tonton ▶️" : "Kosong";
 
@@ -3488,7 +3465,6 @@ Rungkad"></textarea>
                         <button class="btn-mini btn-edit" onclick="openModal(${index})">✏️ Edit</button>
                         <button class="btn-mini btn-delete" onclick="hapusLagu(${index})">🗑️ Hapus</button>
                     </div>
-
                     <div class="move-action">
                         <span>Pindah Folder:</span>
                         <select class="custom-select" onchange="pindahKategori(${index}, this.value)">
@@ -3501,14 +3477,12 @@ Rungkad"></textarea>
                 `;
             }
 
-            // MODIFIKASI: Menampilkan preview kecil sebelum tombol Buka Catatan
             let catatanTeks = lagu.catatan || "";
             let catatanHtml = ": -";
             if (catatanTeks.trim() !== "") {
-                let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27"); // Aman dari petik satu
+                let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27");
                 let preview = catatanTeks.length > 20 ? catatanTeks.substring(0, 20) + "..." : catatanTeks;
-                preview = preview.replace(/\n/g, ' '); // Hapus enter di preview biar sebaris
-                
+                preview = preview.replace(/\n/g, ' '); 
                 catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}')">Baca 📖</button>`;
             }
 
@@ -3518,35 +3492,15 @@ Rungkad"></textarea>
                     <span class="song-badge-detail">Detail 📌</span>
                     <span class="music-icon">🎵</span>
                 </div>
-                
                 <div class="song-details">
                     <div class="info-box">
-                        <div class="info-row">
-                            <span class="info-label">🎸 Chord Asli</span>
-                            <span class="info-value">: ${lagu.chordAsli || "-"}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">🧑 Chord Cowok</span>
-                            <span class="info-value">: ${lagu.chordCowok || "-"}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">👩 Chord Cewek</span>
-                            <span class="info-value">: ${lagu.chordCewek || "-"}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">📝 Catatan</span>
-                            <span class="info-value val-catatan" data-raw="${encodeURIComponent(catatanTeks).replace(/'/g, "%27")}">${catatanHtml}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">🌐 Web Chord</span>
-                            <span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">📺 YouTube</span>
-                            <span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span>
-                        </div>
+                        <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value">: ${lagu.chordAsli || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value">: ${lagu.chordCowok || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value">: ${lagu.chordCewek || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-raw="${encodeURIComponent(catatanTeks).replace(/'/g, "%27")}">${catatanHtml}</span></div>
+                        <div class="info-row"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
+                        <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div>
                     </div>
-                    
                     ${adminActionHtml}
                 </div>
             `;
@@ -3559,31 +3513,24 @@ Rungkad"></textarea>
             const countEl = document.getElementById('count-' + cat);
             if(countEl) countEl.innerText = `(${counts[cat]})`;
         });
-        
-        localStorage.setItem('setlistVerNumVal', currentVerNum);
-        localStorage.setItem('setlistTiponkData_v' + currentVerNum, JSON.stringify(daftarLagu));
     }
 
     function toggleDetails(element, index) {
         const details = element.nextElementSibling;
         details.style.display = (details.style.display === 'block') ? 'none' : 'block';
-
         if (typeof index !== 'undefined' && daftarLagu[index] && daftarLagu[index].isNew) {
             daftarLagu[index].isNew = false;
-            localStorage.setItem('setlistTiponkData_v' + currentVerNum, JSON.stringify(daftarLagu));
+            db.ref('setlistTipong').set(daftarLagu); // Sinkron hapus lencana NEW ke database
             const newBadge = element.querySelector('.badge-new');
-            if (newBadge) {
-                newBadge.remove();
-            }
+            if (newBadge) newBadge.remove();
         }
     }
 
     function pindahKategori(index, newCategory) {
         if (!isAdmin) return;
         const currentCategory = daftarLagu[index].category;
-        
         daftarLagu[index].category = newCategory;
-        renderSongs();
+        db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
         openFolder(currentCategory);
     }
 
@@ -3592,22 +3539,14 @@ Rungkad"></textarea>
         const items = document.getElementsByClassName('song-item');
         const foldersGrid = document.getElementById('folders-grid');
 
-        let foundCategories = {
-            PopIndo: false,
-            PopInggris: false,
-            Ambyar: false,
-            Lawas: false
-        };
+        let foundCategories = { PopIndo: false, PopInggris: false, Ambyar: false, Lawas: false };
 
         for (let i = 0; i < items.length; i++) {
             let title = items[i].querySelector('.song-title').innerText.toLowerCase();
             let category = items[i].getAttribute('data-category');
-            
             if (title.includes(filter)) {
                 items[i].style.display = "";
-                if(foundCategories[category] !== undefined) {
-                    foundCategories[category] = true;
-                }
+                if(foundCategories[category] !== undefined) foundCategories[category] = true;
             } else {
                 items[i].style.display = "none";
             }
@@ -3627,15 +3566,11 @@ Rungkad"></textarea>
         filter = filter.toLowerCase();
         const targetList = document.getElementById('list-' + categoryKey);
         if(!targetList) return;
-
         const items = targetList.getElementsByClassName('song-item');
         for (let i = 0; i < items.length; i++) {
             let title = items[i].querySelector('.song-title').innerText.toLowerCase();
-            if (title.includes(filter)) {
-                items[i].style.display = "";
-            } else {
-                items[i].style.display = "none";
-            }
+            if (title.includes(filter)) items[i].style.display = "";
+            else items[i].style.display = "none";
         }
     }
 
@@ -3647,7 +3582,6 @@ Rungkad"></textarea>
         }
         document.getElementById('songModal').style.display = 'flex';
         const isEdit = index >= 0;
-        
         document.getElementById('modalTitle').innerText = isEdit ? "Edit Lagu" : "Tambah Lagu Baru";
         document.getElementById('editIndex').value = index;
 
@@ -3666,9 +3600,7 @@ Rungkad"></textarea>
         }
     }
 
-    function closeModal() {
-        document.getElementById('songModal').style.display = 'none';
-    }
+    function closeModal() { document.getElementById('songModal').style.display = 'none'; }
 
     function saveSong(event) {
         event.preventDefault(); 
@@ -3690,11 +3622,7 @@ Rungkad"></textarea>
 
         if (existingIndex !== -1 && index === -1) {
             let matchedTitle = daftarLagu[existingIndex].title;
-            showCustomAlert(
-                "Lagu Terdeteksi Duplikat! 🛑", 
-                `Judul <b>"${title}"</b> sangat mirip dengan lagu yang sudah ada di database:<br><br>👉 <b>"${matchedTitle}"</b><br><br>Sistem menolak penambahan lagu duplikat ini!`, 
-                "❌"
-            );
+            showCustomAlert("Lagu Terdeteksi Duplikat! 🛑", `Judul <b>"${title}"</b> sangat mirip dengan lagu yang sudah ada di database:<br><br>👉 <b>"${matchedTitle}"</b><br><br>Sistem menolak penambahan lagu duplikat ini!`, "❌");
             return;
         }
 
@@ -3706,9 +3634,8 @@ Rungkad"></textarea>
             showCustomAlert("Lagu Baru Ditambahkan! 🎵", `<b>${title}</b> berhasil masuk ke kategori <b>${category}</b>!`, "🎉");
         }
 
-        renderSongs();
+        db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
         closeModal();
-        
         document.getElementById('container-Playlist').style.display = 'block';
         document.getElementById('icon-Playlist').innerText = "▲";
         openFolder(category);
@@ -3718,23 +3645,21 @@ Rungkad"></textarea>
         if (!isAdmin) return;
         showCustomConfirm("Hapus Lagu", `Apakah kamu yakin ingin menghapus "${daftarLagu[index].title}" dari setlist?`, function() {
             daftarLagu.splice(index, 1);
-            renderSongs();
+            db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
             showCustomAlert("Terhapus", "Lagu berhasil dihapus.", "🗑️");
         }, "⚠️", "Ya, Lanjutkan", "Batal");
     }
 
     function openImportModal() {
         if (!isAdmin) {
-            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu sebagai Admin untuk meng-import lagu.", "🔒");
+            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒");
             return;
         }
         document.getElementById('importModal').style.display = 'flex';
         document.getElementById('txtFileInput').value = '';
     }
 
-    function closeImportModal() {
-        document.getElementById('importModal').style.display = 'none';
-    }
+    function closeImportModal() { document.getElementById('importModal').style.display = 'none'; }
 
     function processTxtImport() {
         if (!isAdmin) return;
@@ -3752,14 +3677,11 @@ Rungkad"></textarea>
         reader.onload = function(e) {
             const content = e.target.result;
             const lines = content.split(/\r?\n/);
-            
             let addedSongsList = [];
             let countSkipped = 0;
 
             lines.forEach(function(line) {
-                let trimmedLine = line.trim();
-                trimmedLine = trimmedLine.replace(/^[\d+[\.\)\-]\s*/, '');
-
+                let trimmedLine = line.trim().replace(/^[\d+[\.\)\-]\s*/, '');
                 if (trimmedLine.length < 2) return;
 
                 let chordAsli = "";
@@ -3770,7 +3692,6 @@ Rungkad"></textarea>
                 }
 
                 trimmedLine = trimmedLine.replace(/[\(\)\-\:\,]+$/g, '').trim();
-
                 let cleanTitle = trimmedLine.split(' ').map(function(word) {
                     if (word.length === 0) return '';
                     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -3780,15 +3701,8 @@ Rungkad"></textarea>
 
                 if (!isExist) {
                     daftarLagu.push({
-                        title: cleanTitle,
-                        chordAsli: chordAsli,
-                        chordCowok: "",
-                        chordCewek: "",
-                        catatan: "",
-                        linkChord: "",
-                        linkYoutube: "",
-                        category: defaultCategory,
-                        isNew: true
+                        title: cleanTitle, chordAsli: chordAsli, chordCowok: "", chordCewek: "", catatan: "",
+                        linkChord: "", linkYoutube: "", category: defaultCategory, isNew: true
                     });
                     addedSongsList.push(cleanTitle);
                 } else {
@@ -3796,68 +3710,30 @@ Rungkad"></textarea>
                 }
             });
 
-            renderSongs();
+            db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
             closeImportModal();
 
-            let alertMsg = `<b>✅ Berhasil Menambahkan ${addedSongsList.length} Lagu Baru dengan tanda <span class='badge-new' style='font-size:10px;'>NEW</span>:</b><br>`;
+            let alertMsg = `<b>✅ Berhasil Menambahkan ${addedSongsList.length} Lagu Baru:</b><br>`;
             if(addedSongsList.length > 0) {
                 alertMsg += "<ul style='margin: 5px 0 10px 15px; padding-left: 0; font-size: 11px;'>";
-                addedSongsList.forEach(function(songName) {
-                    alertMsg += `<li>• ${songName}</li>`;
-                });
+                addedSongsList.forEach(songName => alertMsg += `<li>• ${songName}</li>`);
                 alertMsg += "</ul>";
-            } else {
-                alertMsg += "<i>(Tidak ada lagu baru yang ditambahkan)</i><br>";
-            }
-            if(countSkipped > 0) {
-                alertMsg += `<br><span style='color:var(--warning);'>⚠️ ${countSkipped} lagu dilewati karena mirip/duplikat.</span>`;
-            }
-
+            } else { alertMsg += "<i>(Tidak ada lagu baru)</i><br>"; }
+            if(countSkipped > 0) alertMsg += `<br><span style='color:var(--warning);'>⚠️ ${countSkipped} dilewati (duplikat).</span>`;
             showCustomAlert("Hasil Import .txt 🚀", alertMsg, "📋");
         };
-
         reader.readAsText(file);
     }
 
-    // ================= FITUR GENERATE INDEX.HTML (KHUSUS TIPONG) =================
-    function generateUpdatedIndexHtml() {
-        if (!isAdmin || loggedInPassword !== "tipong123") {
-            showCustomAlert("Akses Terkunci", "Fitur ini hanya bisa diakses oleh Admin Utama (Tipong)!", "🔒");
-            return;
-        }
-
-        let nextVerNum = currentVerNum + 1;
-        let htmlSource = document.documentElement.outerHTML;
-
-        let formattedData = "const defaultData = " + JSON.stringify(daftarLagu, null, 8) + ";";
-        htmlSource = htmlSource.replace(/const defaultData = \[[\s\S]*?\];/m, formattedData);
-        htmlSource = htmlSource.replace(/const WEB_VERSION = \d+;/g, "const WEB_VERSION = " + nextVerNum + ";");
-
-        let fullCode = "<!DOCTYPE html>\n<html lang=\"id\">\n" + htmlSource.substring(htmlSource.indexOf('<head>'));
-
-        const blob = new Blob([fullCode], { type: "text/html;charset=utf-8" });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = "index.html";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-
-        showCustomAlert("Generate Berhasil!", `File index.html versi v${nextVerNum} berhasil didownload! Silakan upload ke GitHub.`, "⚙️");
-    }
-
-    // ================= FITUR BACKUP & GABUNG DATA (MERGE) JSON =================
     function openBackupModal() {
         if (!isAdmin) {
-            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu sebagai Admin untuk Backup/Restore.", "🔒");
+            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒");
             return;
         }
         document.getElementById('backupModal').style.display = 'flex';
     }
 
-    function closeBackupModal() {
-        document.getElementById('backupModal').style.display = 'none';
-    }
+    function closeBackupModal() { document.getElementById('backupModal').style.display = 'none'; }
 
     function exportBackupData() {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(daftarLagu, null, 2));
@@ -3867,13 +3743,13 @@ Rungkad"></textarea>
         document.body.appendChild(downloadAnchor);
         downloadAnchor.click();
         downloadAnchor.remove();
-        showCustomAlert("Backup Berhasil", "File cadangan (.json) berhasil di-download! Silakan kirim file ini ke Tipong.", "💾");
+        showCustomAlert("Backup Berhasil", "File cadangan (.json) berhasil didownload.", "💾");
     }
 
     function mergeBackupData() {
         const fileInput = document.getElementById('jsonFileInput');
         if (!fileInput.files || fileInput.files.length === 0) {
-            showCustomAlert("Pilih File", "Silakan pilih file cadangan (.json) dari temanmu terlebih dahulu!", "⚠️");
+            showCustomAlert("Pilih File", "Silakan pilih file cadangan (.json)!", "⚠️");
             return;
         }
 
@@ -3884,72 +3760,54 @@ Rungkad"></textarea>
             try {
                 const importedData = JSON.parse(e.target.result);
                 if (Array.isArray(importedData)) {
-                    showCustomConfirm("Gabung Data (Merge)", "Apakah kamu ingin menggabungkan lagu baru dari file ini ke setlist kamu? (Lagu lama yang sudah ada akan tetap aman).", function() {
+                    showCustomConfirm("Gabung Data", "Ingin menggabungkan lagu baru dari file ini ke database?", function() {
                         let addedSongsList = [];
                         let countSkipped = 0;
 
                         importedData.forEach(function(importedSong) {
-                            let isExist = daftarLagu.some(function(existingSong) {
-                                return isSimilarTitle(existingSong.title, importedSong.title);
-                            });
-
+                            let isExist = daftarLagu.some(existingSong => isSimilarTitle(existingSong.title, importedSong.title));
                             if (!isExist) {
                                 importedSong.isNew = true;
                                 daftarLagu.push(importedSong);
                                 addedSongsList.push(importedSong.title);
-                            } else {
-                                countSkipped++;
-                            }
+                            } else { countSkipped++; }
                         });
 
-                        renderSongs();
+                        db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
                         closeBackupModal();
 
-                        let alertMsg = `<b>✅ Berhasil Menggabungkan ${addedSongsList.length} Lagu Baru dengan tanda <span class='badge-new' style='font-size:10px;'>NEW</span>:</b><br>`;
+                        let alertMsg = `<b>✅ Menggabungkan ${addedSongsList.length} Lagu:</b><br>`;
                         if(addedSongsList.length > 0) {
                             alertMsg += "<ul style='margin: 5px 0 10px 15px; padding-left: 0; font-size: 11px;'>";
-                            addedSongsList.forEach(function(songName) {
-                                alertMsg += `<li>• ${songName}</li>`;
-                            });
+                            addedSongsList.forEach(songName => alertMsg += `<li>• ${songName}</li>`);
                             alertMsg += "</ul>";
-                        } else {
-                            alertMsg += "<i>(Tidak ada lagu baru, semua sudah ada di database)</i><br>";
-                        }
-                        if(countSkipped > 0) {
-                            alertMsg += `<br><span style='color:var(--warning);'>⚠️ ${countSkipped} lagu dilewati karena sudah ada sebelumnya.</span>`;
-                        }
-
-                        showCustomAlert("Penggabungan Selesai! 🔀", alertMsg, "✨");
+                        } else { alertMsg += "<i>(Tidak ada lagu baru)</i><br>"; }
+                        if(countSkipped > 0) alertMsg += `<br><span style='color:var(--warning);'>⚠️ ${countSkipped} dilewati.</span>`;
+                        showCustomAlert("Selesai! 🔀", alertMsg, "✨");
                     }, "⚠️", "Ya, Gabungkan", "Batal");
-                } else {
-                    showCustomAlert("Format Salah", "File cadangan tidak valid!", "❌");
                 }
-            } catch (err) {
-                showCustomAlert("Error", "Gagal membaca file backup JSON.", "❌");
-            }
+            } catch (err) { showCustomAlert("Error", "Gagal membaca file.", "❌"); }
         };
-
         reader.readAsText(file);
     }
 
     function resetDatabaseToDefault() {
         if (loggedInPassword !== "tipong123") {
-            showCustomAlert("Akses Terkunci", "Fitur Reset hanya dapat dilakukan oleh Admin Utama (Tipong)!", "🔒");
+            showCustomAlert("Akses Terkunci", "Hanya Admin Utama yang bisa me-reset data!", "🔒");
             return;
         }
-
-        showCustomConfirm("Reset Data", "Apakah kamu yakin ingin mengembalikan data ke daftar bawaan awal?", function() {
+        showCustomConfirm("Reset Data", "Yakin kembalikan ke daftar bawaan?", function() {
             daftarLagu = defaultData;
-            renderSongs();
+            db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
             closeBackupModal();
             showCustomAlert("Reset Berhasil", "Data telah dikembalikan ke awal.", "🔄");
         }, "⚠️", "Ya, Lanjutkan", "Batal");
     }
 
-    function simpanSesiManggungKeLokal() {
+    function simpanSesiManggungKeCloud() {
         const listContainer = document.getElementById('list-SesiManggung');
         if (listContainer) {
-            localStorage.setItem('setlistSesiManggung_' + currentVerNum, listContainer.innerHTML);
+            db.ref('sesiManggungTipong').set(listContainer.innerHTML);
         }
     }
 
@@ -3959,38 +3817,25 @@ Rungkad"></textarea>
         document.getElementById('pasteTextArea').value = '';
         switchPasteTab(1);
     }
-
-    function closePasteModal() {
-        document.getElementById('pasteModal').style.display = 'none';
-    }
+    function closePasteModal() { document.getElementById('pasteModal').style.display = 'none'; }
 
     function switchPasteTab(tabNum) {
-        const t1 = document.getElementById('tabContent1');
-        const t2 = document.getElementById('tabContent2');
-        const b1 = document.getElementById('btnTab1');
-        const b2 = document.getElementById('btnTab2');
-
+        const t1 = document.getElementById('tabContent1'), t2 = document.getElementById('tabContent2');
+        const b1 = document.getElementById('btnTab1'), b2 = document.getElementById('btnTab2');
         if(tabNum === 1) {
-            t1.style.display = 'block';
-            t2.style.display = 'none';
-            b1.className = 'tab-btn active';
-            b2.className = 'tab-btn';
+            t1.style.display = 'block'; t2.style.display = 'none';
+            b1.className = 'tab-btn active'; b2.className = 'tab-btn';
         } else {
-            t1.style.display = 'none';
-            t2.style.display = 'block';
-            b1.className = 'tab-btn';
-            b2.className = 'tab-btn active';
+            t1.style.display = 'none'; t2.style.display = 'block';
+            b1.className = 'tab-btn'; b2.className = 'tab-btn active';
         }
     }
 
     function moveSessionItem(btnEl, direction) {
         const li = btnEl.closest('li.song-item');
-        if (direction === -1 && li.previousElementSibling) {
-            li.parentNode.insertBefore(li, li.previousElementSibling);
-        } else if (direction === 1 && li.nextElementSibling) {
-            li.parentNode.insertBefore(li.nextElementSibling, li);
-        }
-        simpanSesiManggungKeLokal();
+        if (direction === -1 && li.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
+        else if (direction === 1 && li.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
+        simpanSesiManggungKeCloud();
     }
 
     function buildSessionSongItem(rawLine, foundSong, customDetails) {
@@ -4014,14 +3859,12 @@ Rungkad"></textarea>
 
         let dbBadge = foundSong ? '<small style="color:var(--success); font-weight:600;">(Ada di DB)</small>' : '';
 
-        // MODIFIKASI: Menampilkan preview kecil sebelum tombol Buka Catatan di Sesi Manggung
         let catatanTeks = customDetails ? customDetails.catatan : (foundSong ? foundSong.catatan : "");
         let catatanHtml = ": -";
         if (catatanTeks && catatanTeks.trim() !== "") {
             let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27");
             let preview = catatanTeks.length > 20 ? catatanTeks.substring(0, 20) + "..." : catatanTeks;
-            preview = preview.replace(/\n/g, ' '); // Hapus enter di preview biar sebaris
-            
+            preview = preview.replace(/\n/g, ' '); 
             catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}')">Baca 📖</button>`;
         }
 
@@ -4051,54 +3894,31 @@ Rungkad"></textarea>
 
     function processPasteSetlist() {
         const text = document.getElementById('pasteTextArea').value.trim();
-        if(!text) {
-            showCustomAlert("Teks Kosong", "Silakan tempel (paste) teks setlist terlebih dahulu!", "⚠️");
-            return;
-        }
-
+        if(!text) { showCustomAlert("Teks Kosong", "Silakan tempel teks setlist!", "⚠️"); return; }
         const lines = text.split(/\r?\n/);
         const listContainer = document.getElementById('list-SesiManggung');
         listContainer.innerHTML = '';
-
         let currentUl = document.createElement('ul');
 
         lines.forEach(function(line) {
             let rawLine = line.trim();
             if(!rawLine || rawLine === '-') return;
-
             if(rawLine.toLowerCase().includes('sesi') || rawLine.toLowerCase().includes('optional') || rawLine.toLowerCase().includes('set')) {
                 const sessionHeader = document.createElement('div');
                 sessionHeader.className = 'session-title-header';
-                sessionHeader.innerHTML = `
-                    <span>${rawLine}</span>
-                    <button class="btn-sesi-mini" onclick="addEmptySlotToUl(this)">➕ Tambah Kolom</button>
-                `;
+                sessionHeader.innerHTML = `<span>${rawLine}</span><button class="btn-sesi-mini" onclick="addEmptySlotToUl(this)">➕ Tambah Kolom</button>`;
                 listContainer.appendChild(sessionHeader);
-
                 currentUl = document.createElement('ul');
                 listContainer.appendChild(currentUl);
                 return;
             }
-
-            let searchKey = rawLine.toLowerCase()
-                .replace(/^[\d+[\.\)\-]\s*/, '')
-                .replace(/\(.*?\)/g, '')
-                .replace(/[-]/g, ' ')
-                .trim();
-
-            let foundSong = daftarLagu.find(function(l) {
-                return isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey);
-            });
-
+            let searchKey = rawLine.toLowerCase().replace(/^[\d+[\.\)\-]\s*/, '').replace(/\(.*?\)/g, '').replace(/[-]/g, ' ').trim();
+            let foundSong = daftarLagu.find(l => isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey));
             const li = buildSessionSongItem(rawLine, foundSong);
-
-            if(!currentUl.parentNode) {
-                listContainer.appendChild(currentUl);
-            }
+            if(!currentUl.parentNode) listContainer.appendChild(currentUl);
             currentUl.appendChild(li);
         });
-
-        simpanSesiManggungKeLokal();
+        simpanSesiManggungKeCloud();
         closePasteModal();
         openFolder('SesiManggung');
     }
@@ -4106,25 +3926,17 @@ Rungkad"></textarea>
     function generateEmptyTemplateSesi() {
         const listContainer = document.getElementById('list-SesiManggung');
         listContainer.innerHTML = '';
-
         const defaultSessions = ["SESI 1", "SESI 2", "OPTIONAL"];
-
         defaultSessions.forEach(function(sessionName) {
             const sessionHeader = document.createElement('div');
             sessionHeader.className = 'session-title-header';
-            sessionHeader.innerHTML = `
-                <span>${sessionName}</span>
-                <button class="btn-sesi-mini" onclick="addEmptySlotToUl(this)">➕ Tambah Kolom</button>
-            `;
+            sessionHeader.innerHTML = `<span>${sessionName}</span><button class="btn-sesi-mini" onclick="addEmptySlotToUl(this)">➕ Tambah Kolom</button>`;
             listContainer.appendChild(sessionHeader);
-
             const ul = document.createElement('ul');
-            const li = buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)");
-            ul.appendChild(li);
+            ul.appendChild(buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)"));
             listContainer.appendChild(ul);
         });
-
-        simpanSesiManggungKeLokal();
+        simpanSesiManggungKeCloud();
         closePasteModal();
         openFolder('SesiManggung');
     }
@@ -4132,23 +3944,15 @@ Rungkad"></textarea>
     function addEmptySlotToUl(btnEl) {
         const headerDiv = btnEl.parentNode;
         let ul = headerDiv.nextElementSibling;
-        
-        if(!ul || ul.tagName !== 'UL') {
-            ul = document.createElement('ul');
-            headerDiv.after(ul);
-        }
-
-        const li = buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)");
-        ul.appendChild(li);
-        simpanSesiManggungKeLokal();
+        if(!ul || ul.tagName !== 'UL') { ul = document.createElement('ul'); headerDiv.after(ul); }
+        ul.appendChild(buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)"));
+        simpanSesiManggungKeCloud();
     }
 
-    // Edit Form Khusus Sesi
     let currentEditingLi = null;
 
     function openEditSessionModal(btnEl) {
         currentEditingLi = btnEl.closest('li.song-item');
-        
         const titleSpan = currentEditingLi.querySelector('.song-title');
         let oldTitle = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)/g, '').trim();
 
@@ -4156,7 +3960,6 @@ Rungkad"></textarea>
         const valChordCowok = currentEditingLi.querySelector('.val-chord-cowok').innerText.replace(':', '').trim();
         const valChordCewek = currentEditingLi.querySelector('.val-chord-cewek').innerText.replace(':', '').trim();
         
-        // MODIFIKASI UNTUK MENGAMBIL CATATAN DARI TOMBOL/DATA-RAW
         const catatanEl = currentEditingLi.querySelector('.val-catatan');
         let valCatatan = "";
         if (catatanEl && catatanEl.hasAttribute('data-raw')) {
@@ -4179,10 +3982,8 @@ Rungkad"></textarea>
         document.getElementById('editSesiCatatan').value = valCatatan;
         document.getElementById('editSesiLinkChord').value = valLinkChord;
         document.getElementById('editSesiLinkYoutube').value = valLinkYt;
-
         document.getElementById('editSesiSaveToDb').checked = false;
         document.getElementById('groupSesiCategory').style.display = 'none';
-
         document.getElementById('editSessionModal').style.display = 'flex';
     }
 
@@ -4190,10 +3991,7 @@ Rungkad"></textarea>
         document.getElementById('groupSesiCategory').style.display = isChecked ? 'block' : 'none';
     }
 
-    function closeEditSessionModal() {
-        document.getElementById('editSessionModal').style.display = 'none';
-        currentEditingLi = null;
-    }
+    function closeEditSessionModal() { document.getElementById('editSessionModal').style.display = 'none'; currentEditingLi = null; }
 
     function saveSessionSongEdit(event) {
         event.preventDefault();
@@ -4211,34 +4009,22 @@ Rungkad"></textarea>
         const dbCategory = document.getElementById('editSesiCategory').value;
 
         if (saveToDb && title.length > 1) {
-            const isExist = daftarLagu.some(function(l) { return isSimilarTitle(l.title, title); });
+            const isExist = daftarLagu.some(l => isSimilarTitle(l.title, title));
             if (!isExist) {
                 daftarLagu.push({
-                    title: title,
-                    chordAsli: chordAsli,
-                    chordCowok: chordCowok,
-                    chordCewek: chordCewek,
-                    catatan: catatan,
-                    linkChord: linkChord,
-                    linkYoutube: linkYoutube,
-                    category: dbCategory,
-                    isNew: true
+                    title: title, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek,
+                    catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube, category: dbCategory, isNew: true
                 });
-                renderSongs();
-                showCustomAlert("Tersimpan!", `Lagu "${title}" berhasil dimasukkan ke Playlist Utama (${dbCategory})!`, "✅");
-            } else {
-                showCustomAlert("Sudah Ada / Mirip 🛑", `Lagu yang mirip dengan "${title}" sudah ada di Playlist Utama.`, "ℹ️");
-            }
+                db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
+                showCustomAlert("Tersimpan!", `Lagu dimasukkan ke Playlist Utama (${dbCategory})!`, "✅");
+            } else { showCustomAlert("Sudah Ada", `Lagu sudah ada di Playlist Utama.`, "ℹ️"); }
         }
 
         let searchKey = title.toLowerCase().replace(/\(.*?\)/g, '').trim();
-        let foundSong = daftarLagu.find(function(l) { return isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey); });
-
-        const customDetails = { chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek, catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube };
-        const newLi = buildSessionSongItem(title, (searchKey.length > 2 ? foundSong : null), customDetails);
-
-        currentEditingLi.replaceWith(newLi);
-        simpanSesiManggungKeLokal();
+        let foundSong = daftarLagu.find(l => isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey));
+        const customDetails = { chordAsli, chordCowok, chordCewek, catatan, linkChord, linkYoutube };
+        currentEditingLi.replaceWith(buildSessionSongItem(title, (searchKey.length > 2 ? foundSong : null), customDetails));
+        simpanSesiManggungKeCloud();
         closeEditSessionModal();
     }
 
@@ -4246,7 +4032,7 @@ Rungkad"></textarea>
         const li = btnEl.closest('li.song-item');
         showCustomConfirm("Hapus Baris Sesi", "Apakah kamu yakin ingin menghapus lagu ini dari list sesi?", function() {
             li.remove();
-            simpanSesiManggungKeLokal();
+            simpanSesiManggungKeCloud();
             showCustomAlert("Terhapus", "Lagu telah dihapus dari sesi.", "🗑️");
         }, "⚠️", "Ya, Lanjutkan", "Batal");
     }
@@ -4271,27 +4057,17 @@ Rungkad"></textarea>
                     const titleSpan = li.querySelector('.song-title');
                     if (!titleSpan) return;
 
-                    let titleText = titleSpan.innerText
-                        .replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)|NEW|🌐/g, '')
-                        .trim();
-
+                    let titleText = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)|NEW|🌐/g, '').trim();
                     if (!titleText || titleText === "(Lagu Kosong)") return;
 
                     let chordAsli = li.querySelector('.val-chord-asli') ? li.querySelector('.val-chord-asli').innerText.replace(':', '').trim() : '';
                     let chordCowok = li.querySelector('.val-chord-cowok') ? li.querySelector('.val-chord-cowok').innerText.replace(':', '').trim() : '';
                     let chordCewek = li.querySelector('.val-chord-cewek') ? li.querySelector('.val-chord-cewek').innerText.replace(':', '').trim() : '';
                     
-                    // Mencegah WhatsApp menampilkan tulisan "Baca"
                     let catatanEl = li.querySelector('.val-catatan');
                     let catatan = '';
-                    if (catatanEl && catatanEl.hasAttribute('data-raw')) {
-                        catatan = decodeURIComponent(catatanEl.getAttribute('data-raw'));
-                    } else {
-                        catatan = catatanEl ? catatanEl.innerText.replace(':', '').trim() : '';
-                        if (catatan.includes('Baca 📖') || catatan === '-') catatan = '';
-                    }
-
-                    // Bersihkan enter di catatan untuk WA
+                    if (catatanEl && catatanEl.hasAttribute('data-raw')) catatan = decodeURIComponent(catatanEl.getAttribute('data-raw'));
+                    else { catatan = catatanEl ? catatanEl.innerText.replace(':', '').trim() : ''; if (catatan.includes('Baca 📖') || catatan === '-') catatan = ''; }
                     catatan = catatan.replace(/\n/g, ' / ');
 
                     let extraInfo = [];
@@ -4307,54 +4083,30 @@ Rungkad"></textarea>
                 result += "\n";
             }
         });
-
         return result.trim();
     }
 
     function copySessionText() {
         const text = getFormattedSessionText();
-        if (!text) {
-            showCustomAlert("Sesi Kosong", "Belum ada daftar lagu di sesi manggung!", "⚠️");
-            return;
-        }
-
+        if (!text) { showCustomAlert("Sesi Kosong", "Belum ada daftar lagu!", "⚠️"); return; }
         if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text).then(function() {
-                showCustomAlert("Teks Disalin", "Setlist berhasil disalin! Siap ditempel (paste) di WhatsApp.", "📋");
-            }).catch(function() {
-                fallbackCopyText(text);
-            });
-        } else {
-            fallbackCopyText(text);
-        }
+            navigator.clipboard.writeText(text).then(() => showCustomAlert("Teks Disalin", "Setlist siap di-paste ke WhatsApp.", "📋")).catch(() => fallbackCopyText(text));
+        } else { fallbackCopyText(text); }
     }
 
     function fallbackCopyText(text) {
         const textArea = document.createElement("textarea");
-        textArea.value = text;
-        document.body.appendChild(textArea);
-        textArea.select();
-        try {
-            document.execCommand('copy');
-            showCustomAlert("Teks Disalin", "Setlist berhasil disalin! Siap ditempel (paste) di WhatsApp.", "📋");
-        } catch (err) {
-            showCustomAlert("Gagal Menyalin", "Gagal menyalin teks secara otomatis.", "❌");
-        }
+        textArea.value = text; document.body.appendChild(textArea); textArea.select();
+        try { document.execCommand('copy'); showCustomAlert("Teks Disalin", "Setlist siap di-paste ke WhatsApp.", "📋"); } 
+        catch (err) { showCustomAlert("Gagal Menyalin", "Gagal menyalin teks.", "❌"); }
         document.body.removeChild(textArea);
     }
 
     function shareToWhatsApp() {
         const text = getFormattedSessionText();
-        if (!text) {
-            showCustomAlert("Sesi Kosong", "Belum ada daftar lagu di sesi manggung!", "⚠️");
-            return;
-        }
-        const encodedText = encodeURIComponent(text);
-        const waUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
-        window.open(waUrl, '_blank');
+        if (!text) { showCustomAlert("Sesi Kosong", "Belum ada daftar lagu!", "⚠️"); return; }
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
     }
-
-    // Hapus renderSongs() di sini, karena sudah dipanggil di dalam DOMContentLoaded
 </script>
 
 </body>
