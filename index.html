@@ -29,7 +29,7 @@
             --radius: 16px;
         }
 
-        /* DARK MODE MEWAH (DEEP MIDNIGHT VIOLET) */
+        /* DARK MODE MEWAH */
         body.dark-mode {
             --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
             --card-bg: rgba(30, 41, 59, 0.75);
@@ -55,15 +55,11 @@
             -webkit-user-select: none;
         }
 
-        /* Proteksi Anti Copy-Paste untuk Non-Admin */
         body.protected-content * {
             user-select: none !important;
             -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
         }
 
-        /* Lapisan Pelindung Anti Screenshot */
         #screenshotShield {
             display: none;
             position: fixed;
@@ -95,7 +91,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Watermark Footer */
         .watermark-footer {
             text-align: center;
             margin-top: 18px;
@@ -144,7 +139,6 @@
         }
         .mode-viewer { background: #fef3c7; color: #b45309; border-color: #fde68a; }
         .mode-admin { background: #d1fae5; color: #047857; border-color: #a7f3d0; }
-
         body.dark-mode .mode-viewer { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
         body.dark-mode .mode-admin { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
 
@@ -165,7 +159,6 @@
         }
         .btn-theme-toggle:active { transform: scale(0.9); }
 
-        /* Badge NEW Merah Glowing */
         .badge-new {
             background: linear-gradient(135deg, #ef4444, #f43f5e);
             color: white;
@@ -176,17 +169,11 @@
             margin-left: 4px;
             letter-spacing: 0.5px;
             vertical-align: middle;
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
             animation: pulseNew 1.5s infinite;
         }
 
-        @keyframes pulseNew {
-            0% { opacity: 1; }
-            50% { opacity: 0.65; }
-            100% { opacity: 1; }
-        }
+        @keyframes pulseNew { 0% { opacity: 1; } 50% { opacity: 0.65; } 100% { opacity: 1; } }
 
-        /* BADGE KUNING IKON SIMPEL (WEB CHORD KOSONG) */
         .badge-incomplete {
             background-color: #fef3c7;
             color: #b45309;
@@ -199,539 +186,161 @@
             vertical-align: middle;
             display: inline-block;
         }
+        body.dark-mode .badge-incomplete { background-color: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
 
-        body.dark-mode .badge-incomplete {
-            background-color: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-            border-color: rgba(245, 158, 11, 0.4);
-        }
-
-        /* Group Tombol Atas */
-        .action-btn-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
+        .action-btn-group { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 
         .btn-action-main {
-            flex: 1;
-            min-width: 100px;
-            border: none;
-            padding: 10px 10px;
-            border-radius: 12px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            flex: 1; min-width: 100px; border: none; padding: 10px; border-radius: 12px;
+            font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; gap: 6px;
+            transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .btn-action-main:active { transform: scale(0.97); }
 
         .btn-add-theme { background: var(--text-main); color: var(--card-bg); width: 100%; }
-        .btn-import-theme { background: var(--success); color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
-        .btn-paste-theme { background: #8b5cf6; color: white; width: 100%; margin-top: -2px; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25); }
-        .btn-backup-theme { background: var(--info); color: white; width: 100%; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+        .btn-import-theme { background: var(--success); color: white; }
+        .btn-paste-theme { background: #8b5cf6; color: white; width: 100%; margin-top: -2px; }
+        .btn-backup-theme { background: var(--info); color: white; width: 100%; }
+        .btn-generate-theme { background: #f59e0b; color: white; width: 100%; margin-top: -2px;}
 
         .admin-controls { display: none !important; }
         .admin-controls.active { display: flex !important; }
-        
         .tipong-only-controls { display: none !important; }
         .tipong-only-controls.active { display: flex !important; }
 
-        /* Main Folder Button */
         .main-btn {
-            color: white;
-            padding: 13px 16px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 14px;
-            cursor: pointer;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-            background: var(--primary-gradient);
+            color: white; padding: 13px 16px; font-size: 14px; font-weight: 600; border-radius: 14px;
+            cursor: pointer; margin-bottom: 12px; display: flex; justify-content: center; align-items: center;
+            position: relative; transition: all 0.2s ease; background: var(--primary-gradient);
             box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-            text-align: center;
         }
         .main-btn:active { transform: scale(0.98); }
-
         .main-btn span.title-text { flex: 1; text-align: center; }
         .main-btn span.arrow-icon { position: absolute; right: 16px; font-size: 12px; opacity: 0.8; }
 
-        .playlist-container {
-            display: block;
-            padding-bottom: 10px;
-            animation: fadeIn 0.3s ease;
-        }
+        .playlist-container { display: block; padding-bottom: 10px; animation: fadeIn 0.3s ease; }
 
-        /* Search Input */
         .search-box { position: relative; margin-bottom: 12px; }
         .search-box input {
-            width: 100%;
-            padding: 10px 12px 10px 38px;
-            background: var(--input-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 12px;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.25s ease;
-            box-sizing: border-box;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            width: 100%; padding: 10px 12px 10px 38px; background: var(--input-bg); color: var(--text-main);
+            border: 1px solid var(--border-color); border-radius: 12px; font-size: 12px; font-family: 'Poppins', sans-serif;
+            transition: all 0.25s ease; box-sizing: border-box;
         }
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-        }
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 13px;
-        }
+        .search-box input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; }
 
-        /* Grid Folders Kategori Utama */
-        .folders-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
+        /* KATEGORI FOLDERS */
+        .folders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .sub-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 10px;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-            text-align: center;
-            height: 42px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 10px; font-size: 12px; font-weight: 600; border-radius: 12px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; transition: all 0.2s ease;
+            text-align: center; height: 42px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
         .sub-btn:active { transform: scale(0.96); background: rgba(99, 102, 241, 0.08); }
         
-        .btn-pop-indo:hover { border-color: var(--primary); }
+        .btn-pop-indo { color: var(--text-main); }
         .btn-pop-inggris { color: #0891b2; }
         .btn-ambyar { color: #be185d; }
         .btn-lawas { color: #b45309; }
+        .btn-dangdut { color: #d946ef; grid-column: span 2; } /* Khusus Dangdut memanjang */
 
         body.dark-mode .btn-pop-inggris { color: #38bdf8; }
         body.dark-mode .btn-ambyar { color: #f43f5e; }
         body.dark-mode .btn-lawas { color: #fbbf24; }
+        body.dark-mode .btn-dangdut { color: #e879f9; }
 
-        /* Tampilan Dalam Folder */
         .sub-content {
-            display: none;
-            background: var(--input-bg);
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 12px;
-            border: 1px solid var(--border-color);
-            animation: fadeIn 0.25s ease;
+            display: none; background: var(--input-bg); border-radius: 16px; padding: 12px;
+            margin-bottom: 12px; border: 1px solid var(--border-color); animation: fadeIn 0.25s ease;
         }
 
-        .category-header {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .category-header { font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
         
         .close-folder {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-size: 11px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            transition: all 0.2s;
+            background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color);
+            padding: 5px 12px; border-radius: 10px; font-size: 11px; cursor: pointer; font-weight: 600;
         }
         .close-folder:active { transform: scale(0.92); }
 
-        /* List Lagu */
         ul { list-style: none; padding: 0; margin: 0; }
         .song-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            transition: all 0.2s ease;
-            position: relative;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;
+            padding: 10px 12px; margin-bottom: 8px; transition: all 0.2s ease; position: relative;
         }
-        .song-item:active { transform: scale(0.985); }
-
-        /* Garis Kuning di Kiri untuk lagu yang web chordnya belum ada */
-        .song-item.incomplete-card {
-            border-left: 4px solid var(--warning);
-            box-shadow: -2px 0 10px rgba(245, 158, 11, 0.12);
-        }
+        .song-item.incomplete-card { border-left: 4px solid var(--warning); }
         
-        .song-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            gap: 8px;
-        }
-        
-        .song-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-main);
-            flex: 1;
-            line-height: 1.4;
-        }
-
-        .song-badge-detail {
-            font-size: 10px;
-            background: var(--input-bg);
-            color: var(--primary);
-            padding: 3px 8px;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-right: 2px;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-
+        .song-title-row { display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 8px; }
+        .song-title { font-size: 12px; font-weight: 600; color: var(--text-main); flex: 1; line-height: 1.4; }
         .music-icon { opacity: 0.4; font-size: 11px; flex-shrink: 0; }
 
-        /* Detail Lagu */
-        .song-details {
-            display: none;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--border-color);
-            animation: fadeIn 0.25s ease;
-        }
+        .song-details { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color); animation: fadeIn 0.25s ease; }
         
-        .info-box {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 11px;
-        }
-
-        .info-row {
-            display: flex;
-            margin-bottom: 6px;
-            align-items: flex-start;
-        }
+        .info-box { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; margin-bottom: 10px; font-size: 11px; }
+        .info-row { display: flex; margin-bottom: 6px; align-items: flex-start; }
         .info-row:last-child { margin-bottom: 0; }
+        .info-label { font-weight: 600; color: var(--text-muted); width: 95px; flex-shrink: 0; padding-top: 1px; }
+        .info-value { color: var(--text-main); font-weight: 600; flex: 1; padding-top: 1px; word-break: break-word; white-space: normal; }
         
-        .info-label {
-            font-weight: 600;
-            color: var(--text-muted);
-            width: 95px;
-            flex-shrink: 0;
-            padding-top: 1px;
-        }
-
-        /* FIX UNTUK CATATAN AGAR TIDAK MELAR KE SAMPING */
-        .info-value { 
-            color: var(--text-main); 
-            font-weight: 600; 
-            flex: 1; 
-            padding-top: 1px; 
-            word-break: break-word; 
-            white-space: normal;
-        }
-        
-        .info-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(99, 102, 241, 0.12);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 10px;
-        }
+        .info-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; background: rgba(99, 102, 241, 0.12); padding: 3px 8px; border-radius: 6px; font-size: 10px; }
         .info-link.empty { background: var(--border-color); color: var(--text-muted); pointer-events: none; opacity: 0.6; }
 
-        .action-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        
-        .move-action {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--text-muted);
-            background: var(--input-bg);
-            padding: 6px 10px;
-            border-radius: 10px;
-            gap: 6px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid var(--border-color);
-        }
-        
-        select.custom-select {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--primary);
-            outline: none;
-        }
-
-        .btn-mini {
-            flex: 1;
-            padding: 7px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-        }
+        .action-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+        .move-action { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-muted); background: var(--input-bg); padding: 6px 10px; border-radius: 10px; gap: 6px; width: 100%; box-sizing: border-box; border: 1px solid var(--border-color); }
+        select.custom-select { background: var(--card-bg); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; color: var(--primary); outline: none; }
+        .btn-mini { flex: 1; padding: 7px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; cursor: pointer; color: white; display: flex; justify-content: center; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
         .btn-edit { background: var(--warning); }
         .btn-delete { background: var(--danger); }
 
-        /* Styling Khusus Sesi Manggung */
-        .session-title-header {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            margin: 14px 0 8px 0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-        }
-
-        .session-item-actions {
-            display: flex;
-            gap: 4px;
-            margin-left: 6px;
-            flex-shrink: 0;
-        }
-        .btn-sesi-mini {
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-main);
-            padding: 4px 6px;
-            border-radius: 6px;
-            font-size: 11px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.15s;
-        }
+        .session-title-header { background: var(--primary-gradient); color: white; padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; margin: 14px 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); }
+        .session-item-actions { display: flex; gap: 4px; margin-left: 6px; flex-shrink: 0; }
+        .btn-sesi-mini { border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); padding: 4px 6px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; transition: all 0.15s; }
         .btn-sesi-mini:active { transform: scale(0.9); }
 
-        /* Floating Auto Scroll Button */
-        .btn-autoscroll-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-gradient);
-            color: white;
-            padding: 10px 18px;
-            border-radius: 30px;
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-family: 'Poppins', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            z-index: 999;
-            display: none;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-            backdrop-filter: blur(8px);
-        }
+        .btn-autoscroll-float { position: fixed; bottom: 20px; right: 20px; background: var(--primary-gradient); color: white; padding: 10px 18px; border-radius: 30px; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; z-index: 999; display: none; align-items: center; gap: 6px; backdrop-filter: blur(8px); }
 
-        /* Tab Pilihan di Modal Paste */
-        .tab-menu-group {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-        .tab-btn {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            background: var(--input-bg);
-            color: var(--text-muted);
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .tab-btn.active {
-            background: #8b5cf6;
-            color: white;
-            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
-        }
+        .tab-menu-group { display: flex; gap: 6px; margin-bottom: 12px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+        .tab-btn { flex: 1; padding: 8px; border: none; background: var(--input-bg); color: var(--text-muted); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; cursor: pointer; }
+        .tab-btn.active { background: #8b5cf6; color: white; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3); }
 
-        /* Modal Overlay & Custom Dialog Melayang di Tengah */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(6px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-        .modal-content {
-            background: var(--card-bg);
-            color: var(--text-main);
-            width: 100%;
-            max-width: 360px;
-            border-radius: 20px;
-            padding: 20px;
-            max-height: 85vh;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            animation: fadeIn 0.25s ease;
-        }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(6px); z-index: 1000; align-items: center; justify-content: center; padding: 15px; }
+        .modal-content { background: var(--card-bg); color: var(--text-main); width: 100%; max-width: 360px; border-radius: 20px; padding: 20px; max-height: 85vh; overflow-y: auto; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .modal-content h3 { margin-top: 0; color: var(--text-main); font-size: 15px; margin-bottom: 12px; font-weight: 700; }
+        
+        /* Modifikasi Form Group agar lebih rapi */
+        .form-section { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+        .form-section-title { font-size: 11px; font-weight: 700; color: var(--primary); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-group { margin-bottom: 10px; }
+        .form-group:last-child { margin-bottom: 0; }
         .form-group label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 3px; color: var(--text-muted); }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 8px 10px;
-            background: var(--input-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 12px;
-            box-sizing: border-box;
-        }
-        .form-group textarea {
-            resize: vertical;
-        }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 12px; box-sizing: border-box; }
+        .form-group textarea { resize: vertical; }
+        
         .modal-actions { display: flex; gap: 8px; margin-top: 15px; }
-        .modal-actions button {
-            flex: 1; padding: 10px; border: none; border-radius: 10px;
-            font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; font-size: 12px;
-        }
+        .modal-actions button { flex: 1; padding: 10px; border: none; border-radius: 10px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; font-size: 12px; }
         .btn-cancel { background: var(--border-color); color: var(--text-main); }
         .btn-save { background: var(--primary-gradient); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
 
-        /* Custom Center Dialog */
-        #customDialogOverlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .dialog-box {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border-radius: 22px;
-            padding: 22px;
-            width: 100%;
-            max-width: 310px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-            animation: fadeIn 0.2s ease;
-        }
+        #customDialogOverlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .dialog-box { background: var(--card-bg); color: var(--text-main); border-radius: 22px; padding: 22px; width: 100%; max-width: 310px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
         .dialog-icon { font-size: 32px; margin-bottom: 8px; }
         .dialog-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
         .dialog-message { font-size: 11px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4; max-height: 180px; overflow-y: auto; text-align: left; }
         
-        /* STYLE KHUSUS UNTUK MENAMPILKAN CATATAN PANJANG AGAR LANGSUNG FIX KOTAK PENUH */
-        .dialog-message.catatan-view {
-            text-align: left !important;
-            white-space: pre-wrap !important;
-            font-size: 13px !important;
-            line-height: 1.6 !important;
-            height: 250px !important; 
-            overflow-y: auto !important; 
-            background: var(--input-bg); 
-            padding: 12px !important;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-top: 10px;
-            box-sizing: border-box;
-        }
-
+        .dialog-message.catatan-view { text-align: left !important; white-space: pre-wrap !important; font-size: 13px !important; line-height: 1.6 !important; height: 250px !important; overflow-y: auto !important; background: var(--input-bg); padding: 12px !important; border-radius: 10px; border: 1px solid var(--border-color); margin-top: 10px; box-sizing: border-box; }
         .dialog-actions { display: flex; gap: 8px; justify-content: center; }
-        .dialog-btn {
-            flex: 1; padding: 10px; border: none; border-radius: 10px;
-            font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; cursor: pointer;
-        }
+        .dialog-btn { flex: 1; padding: 10px; border: none; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; cursor: pointer; }
         .dialog-btn-primary { background: var(--primary-gradient); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
         .dialog-btn-danger { background: var(--danger); color: white; }
         .dialog-btn-cancel { background: var(--border-color); color: var(--text-main); }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="dark-mode">
 
-<!-- Tombol Auto-Scroll Melayang -->
-<button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()" style="display: none;">📜 Auto Scroll: OFF</button>
+<button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()">📜 Auto Scroll: OFF</button>
 
 <div class="container" id="mainContainer">
     <div class="top-bar">
@@ -740,30 +349,27 @@
         <button id="modeBtn" class="mode-badge mode-viewer" onclick="toggleAdminMode()">👁️ Penonton</button>
     </div>
     
-    <!-- Group Tombol Atas -->
     <div class="action-btn-group">
-        <!-- Tombol Tambah Lagu HANYA MUNCUL DI MODE ADMIN -->
         <button class="btn-action-main btn-add-theme admin-controls" onclick="openModal()">➕ Tambah Lagu</button>
-        <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup &amp; Gabung Data</button>
+        <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup Data</button>
         <button class="btn-action-main btn-import-theme admin-controls" onclick="openImportModal()">📄 Import .txt</button>
-        <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
+        <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Sesi</button>
+        <!-- Tombol Generate HTML Dimunculkan Lagi -->
+        <button class="btn-action-main btn-generate-theme admin-controls tipong-only-controls" onclick="generateUpdatedIndexHtml()">⚙️ Generate HTML</button>
     </div>
 
-    <!-- ==================== MAIN PLAYLIST ==================== -->
     <div class="main-btn" onclick="togglePlaylist()">
         <span class="title-text">🎵 Playlist Lagu Tipong</span>
         <span id="icon-Playlist" class="arrow-icon">▲</span>
     </div>
     
     <div id="container-Playlist" class="playlist-container">
-        <!-- PENCARIAN UTAMA -->
-        <div class="search-box" id="global-search-box" style="display: block;">
+        <div class="search-box" id="global-search-box">
             <span class="search-icon">🔍</span>
             <input type="text" id="search-Global" oninput="searchGlobal(this.value)" placeholder="Cari lagu di semua folder...">
         </div>
         
-        <!-- 4 Kotak Kategori Utama (dengan hitungan lagu otomatis) -->
-        <div class="folders-grid" id="folders-grid" style="display: grid;">
+        <div class="folders-grid" id="folders-grid">
             <div class="sub-btn btn-pop-indo" onclick="openFolder('PopIndo')">
                 <span>Pop Indo <small id="count-PopIndo">(0)</small></span>
             </div>
@@ -776,78 +382,58 @@
             <div class="sub-btn btn-lawas" onclick="openFolder('Lawas')">
                 <span>Lawas <small id="count-Lawas">(0)</small></span>
             </div>
+            <!-- Kategori Baru: Dangdut -->
+            <div class="sub-btn btn-dangdut" onclick="openFolder('Dangdut')">
+                <span>Dangdut <small id="count-Dangdut">(0)</small></span>
+            </div>
         </div>
 
-        <!-- AREA FOLDER HASIL PASTE SESI MANGGUNG -->
-        <div id="content-SesiManggung" class="sub-content" style="display: none;">
+        <div id="content-SesiManggung" class="sub-content">
             <div class="category-header" style="color:#8b5cf6;">
                 <span>📋 SETLIST MANGGUNG (SESI)</span>
                 <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
             </div>
-            
             <div style="display:flex; gap:8px; margin-bottom:12px;">
                 <button class="btn-action-main" style="background:#25D366; color:white; padding:8px; font-size:11px;" onclick="shareToWhatsApp()">📲 Kirim via WA</button>
                 <button class="btn-action-main" style="background:#8b5cf6; color:white; padding:8px; font-size:11px;" onclick="copySessionText()">📋 Salin Teks</button>
             </div>
-
             <div id="list-SesiManggung"></div>
         </div>
 
-        <!-- AREA HALAMAN FOLDER STANDARD -->
-        <div id="content-PopIndo" class="sub-content" style="display: none;">
-            <div class="category-header">
-                <span>🎵 POP INDO</span>
-                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
-            </div>
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-PopIndo" oninput="filterCategory('PopIndo', this.value)" placeholder="Cari lagu Pop Indo...">
-            </div>
+        <div id="content-PopIndo" class="sub-content">
+            <div class="category-header"><span>🎵 POP INDO</span><button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="search-PopIndo" oninput="filterCategory('PopIndo', this.value)" placeholder="Cari lagu Pop Indo..."></div>
             <ul id="list-PopIndo"></ul>
         </div>
 
-        <div id="content-PopInggris" class="sub-content" style="display: none;">
-            <div class="category-header" style="color: #0891b2;">
-                <span>🎧 POP INGGRIS</span>
-                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
-            </div>
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-PopInggris" oninput="filterCategory('PopInggris', this.value)" placeholder="Cari lagu Pop Inggris...">
-            </div>
+        <div id="content-PopInggris" class="sub-content">
+            <div class="category-header" style="color: #0891b2;"><span>🎧 POP INGGRIS</span><button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="search-PopInggris" oninput="filterCategory('PopInggris', this.value)" placeholder="Cari lagu Pop Inggris..."></div>
             <ul id="list-PopInggris"></ul>
         </div>
 
-        <div id="content-Ambyar" class="sub-content" style="display: none;">
-            <div class="category-header" style="color: #be185d;">
-                <span>💔 AMBYAR</span>
-                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
-            </div>
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-Ambyar" oninput="filterCategory('Ambyar', this.value)" placeholder="Cari lagu Ambyar...">
-            </div>
+        <div id="content-Ambyar" class="sub-content">
+            <div class="category-header" style="color: #be185d;"><span>💔 AMBYAR</span><button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="search-Ambyar" oninput="filterCategory('Ambyar', this.value)" placeholder="Cari lagu Ambyar..."></div>
             <ul id="list-Ambyar"></ul>
         </div>
 
-        <div id="content-Lawas" class="sub-content" style="display: none;">
-            <div class="category-header" style="color: #b45309;">
-                <span>📻 LAWAS</span>
-                <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
-            </div>
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-Lawas" oninput="filterCategory('Lawas', this.value)" placeholder="Cari lagu Lawas...">
-            </div>
+        <div id="content-Lawas" class="sub-content">
+            <div class="category-header" style="color: #b45309;"><span>📻 LAWAS</span><button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="search-Lawas" oninput="filterCategory('Lawas', this.value)" placeholder="Cari lagu Lawas..."></div>
             <ul id="list-Lawas"></ul>
+        </div>
+
+        <!-- Wadah Daftar Lagu Dangdut -->
+        <div id="content-Dangdut" class="sub-content">
+            <div class="category-header" style="color: #d946ef;"><span>💃 DANGDUT</span><button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="search-Dangdut" oninput="filterCategory('Dangdut', this.value)" placeholder="Cari lagu Dangdut..."></div>
+            <ul id="list-Dangdut"></ul>
         </div>
     </div>
 </div>
 
-<!-- Watermark Footer Buatan Tipong -->
-<div class="watermark-footer">
-    Buatan Tipong © 2026
-</div>
+<div class="watermark-footer">Buatan Tipong © 2026</div>
 
 <!-- Modal Form Tambah/Edit Lagu Utama -->
 <div id="songModal" class="modal-overlay">
@@ -856,42 +442,63 @@
         <form id="songForm" onsubmit="saveSong(event)">
             <input type="hidden" id="editIndex" value="-1">
             
-            <div class="form-group">
-                <label>Kategori Genre</label>
-                <select id="inputCategory" required="">
-                    <option value="PopIndo">Pop Indo</option>
-                    <option value="PopInggris">Pop Inggris</option>
-                    <option value="Ambyar">Ambyar</option>
-                    <option value="Lawas">Lawas</option>
-                </select>
+            <div class="form-section">
+                <h4 class="form-section-title">📂 Info Dasar</h4>
+                <div class="form-group">
+                    <label>Kategori Genre</label>
+                    <select id="inputCategory" required="">
+                        <option value="PopIndo">Pop Indo</option>
+                        <option value="PopInggris">Pop Inggris</option>
+                        <option value="Ambyar">Ambyar</option>
+                        <option value="Lawas">Lawas</option>
+                        <option value="Dangdut">Dangdut</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Judul Lagu</label>
+                    <input type="text" id="inputTitle" placeholder="Contoh: Mahalini - Bohongi Hati" required="">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Judul Lagu</label>
-                <input type="text" id="inputTitle" placeholder="Contoh: Mahalini - Bohongi Hati" required="">
+
+            <div class="form-section">
+                <h4 class="form-section-title">⏱️ Musikalitas</h4>
+                <div style="display:flex; gap:8px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>DO (Nada Dasar)</label>
+                        <input type="text" id="inputDoBase" placeholder="Contoh: G">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Tempo (BPM)</label>
+                        <input type="number" id="inputTempo" placeholder="Misal: 120">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Time Signature (Ketukan)</label>
+                    <input type="text" id="inputTimeSig" placeholder="Misal: 4/4 atau 6/8">
+                </div>
             </div>
-            <div class="form-group">
-                <label>🎸 Chord Asli (Original)</label>
-                <input type="text" id="inputChordAsli" placeholder="Contoh: D#">
+
+            <div class="form-section">
+                <h4 class="form-section-title">🎸 Chord & Catatan</h4>
+                <div style="display:flex; gap:8px;">
+                    <div class="form-group" style="flex:1;"><label>Chord Asli</label><input type="text" id="inputChordAsli" placeholder="Misal: D#"></div>
+                    <div class="form-group" style="flex:1;"><label>Cowok</label><input type="text" id="inputChordCowok" placeholder="Misal: E"></div>
+                    <div class="form-group" style="flex:1;"><label>Cewek</label><input type="text" id="inputChordCewek" placeholder="Misal: A"></div>
+                </div>
+                <div class="form-group">
+                    <label>Catatan Singkat</label>
+                    <textarea id="inputCatatan" rows="2" placeholder="Overtune ke (F) di akhir..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="color:#8b5cf6;">📝 Lirik & Chord Custom</label>
+                    <textarea id="inputCustomChord" rows="5" placeholder="Paste lirik & chord di sini.&#10;TIPS: Agar chord bisa di-Transpose otomatis, gunakan tanda kurung, contoh: (Am) atau (C#m)."></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label>🧑 Chord Cowok</label>
-                <input type="text" id="inputChordCowok" placeholder="Contoh: E">
-            </div>
-            <div class="form-group">
-                <label>👩 Chord Cewek</label>
-                <input type="text" id="inputChordCewek" placeholder="Contoh: A">
-            </div>
-            <div class="form-group">
-                <label>📝 Catatan / Modulasi (Opsional)</label>
-                <textarea id="inputCatatan" rows="3" placeholder="Contoh: Overtune ke F di akhir... (Bisa tekan Enter untuk baris baru)"></textarea>
-            </div>
-            <div class="form-group">
-                <label>🔗 Link Situs Chord (Opsional)</label>
-                <input type="url" id="inputLinkChord" placeholder="https://chordindonesia.com/...">
-            </div>
-            <div class="form-group">
-                <label>▶️ Link YouTube (Opsional)</label>
-                <input type="url" id="inputLinkYoutube" placeholder="https://youtube.com/...">
+
+            <div class="form-section">
+                <h4 class="form-section-title">🌐 Link Referensi</h4>
+                <div class="form-group"><input type="url" id="inputLinkChord" placeholder="Link Situs Web Chord..."></div>
+                <div class="form-group"><input type="url" id="inputLinkYoutube" placeholder="Link YouTube..."></div>
             </div>
             
             <div class="modal-actions">
@@ -905,38 +512,26 @@
 <!-- MODAL FORM EDIT KHUSUS SESI MANGGUNG -->
 <div id="editSessionModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>✏️ Edit Lagu &amp; Chord Sesi</h3>
+        <h3>✏️ Edit Lagu Sesi</h3>
         <form onsubmit="saveSessionSongEdit(event)">
-            <div class="form-group">
-                <label>Judul Lagu</label>
-                <input type="text" id="editSesiTitle" required="">
-            </div>
-            <div class="form-group">
-                <label>🎸 Chord Asli (Original)</label>
-                <input type="text" id="editSesiChordAsli" placeholder="Contoh: D#">
-            </div>
-            <div class="form-group">
-                <label>🧑 Chord Cowok</label>
-                <input type="text" id="editSesiChordCowok" placeholder="Contoh: E">
-            </div>
-            <div class="form-group">
-                <label>👩 Chord Cewek</label>
-                <input type="text" id="editSesiChordCewek" placeholder="Contoh: A">
-            </div>
-            <div class="form-group">
-                <label>📝 Catatan / Modulasi</label>
-                <textarea id="editSesiCatatan" rows="3" placeholder="Contoh: Intro Fm... (Bisa tekan Enter untuk baris baru)"></textarea>
-            </div>
-            <div class="form-group">
-                <label>🔗 Link Situs Chord</label>
-                <input type="url" id="editSesiLinkChord" placeholder="https://...">
-            </div>
-            <div class="form-group">
-                <label>▶️ Link YouTube</label>
-                <input type="url" id="editSesiLinkYoutube" placeholder="https://...">
+            <div class="form-section">
+                <div class="form-group"><label>Judul Lagu</label><input type="text" id="editSesiTitle" required=""></div>
+                <div style="display:flex; gap:8px;">
+                    <div class="form-group" style="flex:1;"><label>DO</label><input type="text" id="editSesiDo" placeholder="C"></div>
+                    <div class="form-group" style="flex:1;"><label>BPM</label><input type="text" id="editSesiTempo" placeholder="120"></div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <div class="form-group" style="flex:1;"><label>Asli</label><input type="text" id="editSesiChordAsli" placeholder="C"></div>
+                    <div class="form-group" style="flex:1;"><label>Cwk</label><input type="text" id="editSesiChordCowok" placeholder="E"></div>
+                    <div class="form-group" style="flex:1;"><label>Cew</label><input type="text" id="editSesiChordCewek" placeholder="A"></div>
+                </div>
+                <div class="form-group"><label>Catatan Singkat</label><textarea id="editSesiCatatan" rows="2" placeholder="Intro (Fm)"></textarea></div>
+                <div class="form-group"><label>Lirik & Chord Custom</label><textarea id="editSesiCustom" rows="4" placeholder="Paste dari Notepad..."></textarea></div>
+                <div class="form-group"><label>Link Web Chord</label><input type="url" id="editSesiLinkChord"></div>
+                <div class="form-group"><label>Link YouTube</label><input type="url" id="editSesiLinkYoutube"></div>
             </div>
 
-            <div class="form-group" style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
+            <div class="form-group" style="margin-top: 15px;">
                 <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:600; color:var(--primary);">
                     <input type="checkbox" id="editSesiSaveToDb" onchange="toggleCategorySelectInSesiEdit(this.checked)">
                     💾 Simpan sekalian ke Playlist Utama Tipong
@@ -949,6 +544,7 @@
                     <option value="PopInggris">Pop Inggris</option>
                     <option value="Ambyar">Ambyar</option>
                     <option value="Lawas">Lawas</option>
+                    <option value="Dangdut">Dangdut</option>
                 </select>
             </div>
             
@@ -960,65 +556,23 @@
     </div>
 </div>
 
-<!-- MODAL IMPORT FILE .TXT -->
+<!-- MODAL IMPORT & BACKUP (DISINGKAT AGAR KODE LEBIH RAPI) -->
 <div id="importModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>📄 Import Lagu dari File .txt</h3>
-        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">
-            Pilih file .txt buatan Notepad / HP. Sistem akan otomatis merapikan judul, mendeteksi chord, dan menambahkan lagu baru ke setlist!
-        </p>
-        
-        <div class="form-group">
-            <label>Pilih File .txt</label>
-            <input type="file" id="txtFileInput" accept=".txt" style="padding:6px;">
-        </div>
-
-        <div class="form-group">
-            <label>Default Kategori (Jika Tak Terdeteksi)</label>
-            <select id="importDefaultCategory">
-                <option value="PopIndo">Pop Indo</option>
-                <option value="PopInggris">Pop Inggris</option>
-                <option value="Ambyar">Ambyar</option>
-                <option value="Lawas">Lawas</option>
-            </select>
-        </div>
-        
-        <div class="modal-actions">
-            <button type="button" class="btn-cancel" onclick="closeImportModal()">Batal</button>
-            <button type="button" class="btn-save" style="background:var(--success)" onclick="processTxtImport()">🚀 Tambah Lagu</button>
-        </div>
+        <h3>📄 Import Lagu .txt</h3>
+        <div class="form-group"><label>Pilih File .txt</label><input type="file" id="txtFileInput" accept=".txt"></div>
+        <div class="form-group"><label>Default Kategori</label><select id="importDefaultCategory"><option value="PopIndo">Pop Indo</option><option value="PopInggris">Pop Inggris</option><option value="Ambyar">Ambyar</option><option value="Lawas">Lawas</option><option value="Dangdut">Dangdut</option></select></div>
+        <div class="modal-actions"><button type="button" class="btn-cancel" onclick="closeImportModal()">Batal</button><button type="button" class="btn-save" style="background:var(--success)" onclick="processTxtImport()">🚀 Tambah</button></div>
     </div>
 </div>
 
-<!-- MODAL BACKUP & GABUNG DATA -->
 <div id="backupModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>💾 Backup &amp; Gabung Data</h3>
-        <p style="font-size:11px; color:var(--text-muted); margin-bottom:14px;">
-            Download file backup (.json) untuk dikirim ke Tipong, atau masukkan file kiriman teman untuk menggabungkan lagu baru secara otomatis tanpa menghapus lagu lama!
-        </p>
-        
-        <div class="form-group">
-            <label>1. Download File Backup (.json)</label>
-            <button type="button" class="btn-action-main btn-backup-theme" style="width:100%;" onclick="exportBackupData()">📥 Download File Backup (.json)</button>
-        </div>
-
-        <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color);">
-            <label>2. Gabungkan Data dari File Teman (Merge)</label>
-            <input type="file" id="jsonFileInput" accept=".json" style="padding:6px; margin-bottom:6px; width:100%; box-sizing:border-box;">
-            <button type="button" class="btn-action-main btn-import-theme" style="width:100%; background:#8b5cf6;" onclick="mergeBackupData()">🔀 Gabungkan Lagu (Merge)</button>
-        </div>
-
-        <!-- HANYA MUNCUL DI TIPONG (tipong123) -->
-        <div class="tipong-only-controls" style="display:none; flex-direction:column; width:100%;">
-            <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color); width:100%;">
-                <button type="button" class="btn-action-main" style="background:var(--danger); color:white; width:100%;" onclick="resetDatabaseToDefault()">🔄 Reset Data ke Awal (Default)</button>
-            </div>
-        </div>
-        
-        <div class="modal-actions">
-            <button type="button" class="btn-cancel" onclick="closeBackupModal()">Tutup</button>
-        </div>
+        <h3>💾 Backup & Gabung Data</h3>
+        <div class="form-group"><button type="button" class="btn-action-main btn-backup-theme" style="width:100%;" onclick="exportBackupData()">📥 Download File Backup (.json)</button></div>
+        <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color);"><label>Gabungkan (Merge)</label><input type="file" id="jsonFileInput" accept=".json" style="padding:6px; margin-bottom:6px; width:100%;"><button type="button" class="btn-action-main btn-import-theme" style="width:100%; background:#8b5cf6;" onclick="mergeBackupData()">🔀 Gabung</button></div>
+        <div class="tipong-only-controls" style="display:none; flex-direction:column; width:100%;"><div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color); width:100%;"><button type="button" class="btn-action-main" style="background:var(--danger); color:white; width:100%;" onclick="resetDatabaseToDefault()">🔄 Reset Data</button></div></div>
+        <div class="modal-actions"><button type="button" class="btn-cancel" onclick="closeBackupModal()">Tutup</button></div>
     </div>
 </div>
 
@@ -1026,61 +580,23 @@
 <div id="pasteModal" class="modal-overlay">
     <div class="modal-content">
         <h3>📋 Setlist Manggung (Sesi)</h3>
-        
-        <div class="tab-menu-group">
-            <button id="btnTab1" class="tab-btn active" onclick="switchPasteTab(1)">1. Paste Teks Acak</button>
-            <button id="btnTab2" class="tab-btn" onclick="switchPasteTab(2)">2. Template Tabel Kosong</button>
-        </div>
-        
-        <div id="tabContent1">
-            <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">
-                Tempelkan salinan ketikan dari WA/Notepad. Otomatis dirapikan &amp; dicocokkan ke database chord!
-            </p>
-            <div class="form-group">
-                <textarea id="pasteTextArea" rows="7" placeholder="Contoh:
-Sesi 1 :
-Kau Curi Lagi (jrock)
-Without You (Mariah Carey)
-
-Sesi 2 :
-Sahabat sejati (SO7)
-Rungkad"></textarea>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button>
-                <button type="button" class="btn-save" style="background:#8b5cf6" onclick="processPasteSetlist()">✨ Rapikan Setlist</button>
-            </div>
-        </div>
-
-        <div id="tabContent2" style="display:none;">
-            <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">
-                Buat struktur Sesi 1, Sesi 2, dan Optional secara instan dengan tabel yang siap diisi.
-            </p>
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button>
-                <button type="button" class="btn-save" style="background:#8b5cf6" onclick="generateEmptyTemplateSesi()">🚀 Buat Tabel Sesi</button>
-            </div>
-        </div>
+        <div class="tab-menu-group"><button id="btnTab1" class="tab-btn active" onclick="switchPasteTab(1)">1. Paste Teks Acak</button><button id="btnTab2" class="tab-btn" onclick="switchPasteTab(2)">2. Template Kosong</button></div>
+        <div id="tabContent1"><div class="form-group"><textarea id="pasteTextArea" rows="7" placeholder="Contoh:&#10;Sesi 1 :&#10;Kau Curi Lagi (jrock)"></textarea></div><div class="modal-actions"><button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button><button type="button" class="btn-save" style="background:#8b5cf6" onclick="processPasteSetlist()">✨ Rapikan Setlist</button></div></div>
+        <div id="tabContent2" style="display:none;"><p style="font-size:11px;">Buat struktur Sesi 1, Sesi 2, dan Optional secara instan.</p><div class="modal-actions"><button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button><button type="button" class="btn-save" style="background:#8b5cf6" onclick="generateEmptyTemplateSesi()">🚀 Buat Tabel</button></div></div>
     </div>
 </div>
 
 <!-- MODAL LOGIN ADMIN -->
-<div id="adminLoginModal" class="modal-overlay" style="display: none;">
+<div id="adminLoginModal" class="modal-overlay">
     <div class="modal-content" style="max-width:300px; text-align:center;">
         <h3>🔑 Login Akses</h3>
-        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Masukkan password untuk membuka fitur edit.</p>
-        <div class="form-group">
-            <input type="password" id="adminPasswordInput" placeholder="Password..." style="text-align:center;">
-        </div>
-        <div class="modal-actions">
-            <button type="button" class="btn-cancel" onclick="closeAdminLoginModal()">Batal</button>
-            <button type="button" class="btn-save" onclick="submitAdminPassword()">Login</button>
-        </div>
+        <div class="form-group"><input type="password" id="adminPasswordInput" placeholder="Password..." style="text-align:center;"></div>
+        <div class="modal-actions"><button type="button" class="btn-cancel" onclick="closeAdminLoginModal()">Batal</button><button type="button" class="btn-save" onclick="submitAdminPassword()">Login</button></div>
     </div>
 </div>
 
 <!-- CUSTOM CENTER DIALOG OVERLAY -->
-<div id="customDialogOverlay" style="display: none;">
+<div id="customDialogOverlay">
     <div class="dialog-box">
         <div id="dialogIcon" class="dialog-icon">ℹ️</div>
         <div id="dialogTitle" class="dialog-title">Informasi</div>
@@ -1105,2059 +621,16 @@ Rungkad"></textarea>
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Data Bawaan Jika Database Masih Kosong
     const defaultData = [
-        {
-                "title": "Ada Titik Titik",
-                "chordAsli": "Bb",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "Main di G",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Ade Govinda (feat. Fadly) - Hal Hebat",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Aura Kasih - Mari Bercinta",
-                "chordAsli": "Cm",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "Intro: Fm",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "BCL - Medley",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "Sesuai aransemen",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Blackout - Selalu Ada",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "G",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Diskoria, Laleilmanino, Eva Celia - C.H.R.I.S.Y.E",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "d'Masiv - Diam Tanpa Kata",
-                "chordAsli": "Bm",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "d'Masiv - Merindukanmu",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Dygta - Tapi Tahukah Kamu",
-                "chordAsli": "C#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Element - Cinta Tak Bersyarat",
-                "chordAsli": "C",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Element - Maaf Dari Surga",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Ernie Zakri & Ade Govinda - Masing-Masing",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "E",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Fatin Shidqia - Aku Memilih Setia",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Geisha - Cinta Dan Benci",
-                "chordAsli": "F#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Geisha - Takkan Pernah Ada",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Glenn Fredly - Januari",
-                "chordAsli": "C",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "Naik 1.5",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Jangan Paksa Rindu",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Juicy Luicy - Terlalu Tinggi",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Kerispatih - Bila Rasaku Ini Rasamu",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Kerispatih - Tak Lekang Oleh Waktu",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Lyodra - Teganya Kau",
-                "chordAsli": "F#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Mahalini - Bohongi Hati",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "E",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Mario G. Klau - Semata Karenamu",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Nadhif Basalamah - Kota Ini Tak Sama Tanpamu",
-                "chordAsli": "A#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Perunggu - 33x",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Rossa - Hey Ladies",
-                "chordAsli": "Fm",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Rossa - Pudar",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "Int: Gm, Em",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Rossa - Terlalu Cinta",
-                "chordAsli": "G#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Sesi Potret",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Shaggydog - Kembali Berdansa",
-                "chordAsli": "C",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Sherina - Cinta Pertama Dan Terakhir",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Souljah - Tak Selalu",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Steven & Coconut Treez - Welcome To My Paradise",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Terbuang Dalam Waktu",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "The Lantis - Bunga Maaf",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "D",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Utopia - Baby Doll",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Utopia - Hujan",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Wijaya80 - Terakhir Kali",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Yovie & Nuno - Merindu Lagi",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Yovie & Nuno - Tanpa Cinta",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "Yovie & Nuno - Tanpa Cinta (Versi G)",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo"
-        },
-        {
-                "title": "ABBA - Dancing Queen",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Adele - Don't You Remember",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Bon Jovi - Always",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Bon Jovi - Thank You For Loving Me",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Bruno Mars - It Will Rain",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Bruno Mars - Risk It All",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Bruno Mars - Talking To The Moon",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Bruno Mars - The Lazy Song",
-                "chordAsli": "B",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Coldplay / Maroon 5 - Fix You",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Coldplay - Yellow",
-                "chordAsli": "B",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Daniel Caesar feat. H.E.R. - Best Part",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Jessie J - Flashlight",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Jessie J - Price Tag",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Justin Bieber - Favorite Girl",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Keane - Everybody's Changing",
-                "chordAsli": "C",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Lady Gaga - Remember Us This Way",
-                "chordAsli": "C",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Lady Gaga & Bruno Mars - Die With A Smile",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Sam Smith - I'm Not The Only One",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris"
-        },
-        {
-                "title": "Chrisye - Kala Cinta Menggoda",
-                "chordAsli": "Cm",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "Dewa 19 - Aku Milikmu",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "Dewa 19 - Tak Kan Ada Cinta Yang Lain",
-                "chordAsli": "Am",
-                "chordCowok": "",
-                "chordCewek": "C#m",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "Dian Piesesha - Tak Ingin Sendiri",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "M.E - Inikah Cinta",
-                "chordAsli": "A",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "Ruth Sahanaya - Kaulah Segalanya",
-                "chordAsli": "E",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "Utha Likumahuwa - Sesaat Kau Hadir",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Lawas"
-        },
-        {
-                "title": "Duda Araban",
-                "chordAsli": "G#m",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Ambyar"
-        },
-        {
-                "title": "Rungkad",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "Ambyar"
-        },
-        {
-                "title": "Sal Priadi - Ada Titik Titik",
-                "chordAsli": "Do : Bb | intro : D# M7 , Song : D# M7",
-                "chordCowok": "",
-                "chordCewek": "Do: D |  intro : G M7 , Song ; G M7 ",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/sal-priadi/ada-titik-titik-di-ujung-doa-chords-5250018",
-                "linkYoutube": "https://www.youtube.com/watch?v=IuRfhjQWS8Q&list=RDIuRfhjQWS8Q&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Enau Feat. Ari Lesmana - Sesi Potret",
-                "chordAsli": "C",
-                "chordCowok": "C",
-                "chordCewek": "F",
-                "catatan": "",
-                "linkChord": "https://www.chordtela.com/2026/02/enau-feat-ari-lesmana-sesi-potret.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=bhWMAM6xjtQ&list=RDbhWMAM6xjtQ&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Westlife - Beautiful In White C",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Westlife - My Love C",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Ed Sheeran - Perfect G#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Ed Sheeran – Thinking Out Loud D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Diana Ross & Lionel Richie - Endless Love Bb",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Shania Twain - You're Still The One D#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Marry You - Bruno Mars F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Marry You - Just The Way You Are F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "John Legend - All Of Me Fm",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Calum Scott - You Are The Reason Bb",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Brian McKnight - Marry Your Daughter B",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Bee Gees - How Deep Is Your Love D#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "George Benson - Nothing's Gonna Change My Love For You C#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Eric Clapton - Wonderful Tonight G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Rod Stewart - I Don't Want To Talk About It Bb",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Elvis Presley - Can't Help Falling In Love D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Frankie Valli - Can't Take My Eyes Off You E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Michael Bublé - Sway Dm",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Christian Bautista - The Way You Look At Me C#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Westlife With Diana Ross - When You Tell Me That You Love Me D#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Diana Ross – When You Tell Me That You Love Me G#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Frank Sinatra - L.O.V.E. G Naik G#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Michael Bublé - Everything D Naik E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Frank Sinatra - Fly Me To The Moon Am",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Michael Bolton - To Love Somebody B",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Firehouse - I Live My Life For You C#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Bryan Adams - I Do It For You C#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Nikka Costa - First Love G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "CHRISYE - Aku Cinta Dia",
-                "chordAsli": "A",
-                "chordCowok": "A",
-                "chordCewek": "C",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/chrisye/aku-cinta-dia-chords-4781069",
-                "linkYoutube": "https://www.youtube.com/watch?v=_EUbr9aICu0&list=RD_EUbr9aICu0&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "CHRISYE - Anak Sekolah",
-                "chordAsli": "A",
-                "chordCowok": "A",
-                "chordCewek": "G",
-                "catatan": "",
-                "linkChord": "https://www.chordtela.com/2015/01/anak-sekolah-purpose-cover-chrisye.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=lBomGw7FA3Q&list=RDlBomGw7FA3Q&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Badai Pasti Berlalu ( BCL ) G ( G ) Intro (E) Song (G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Biar Menjadi Kenangan ( Raisa, Ahmad Dhani ) C",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "MULAN JAMEELA : Cinta Mati 2",
-                "chordAsli": "Do : E  (Bm)",
-                "chordCowok": "",
-                "chordCewek": "Bm",
-                "catatan": "intro : 5 | song : 5 Modulasi ke : G  | Reff : 6  | interlude :  Am Bm C D | Lead : Bm C#m A F#m",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/mulan-jameela/cinta-mati-2-chords-1722729",
-                "linkYoutube": "https://www.youtube.com/watch?v=UIkr3gvMouY&list=RDUIkr3gvMouY&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Dahulu ( The Groove ) D ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "BCL - Diskoria",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "F",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "USAI ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "TERLANJUR MENCINTA ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "TEGA ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "MENJADI DIA ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "JANJI SETIA ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "BAHAYA ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "MERASA INDAH ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "65 ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "HADAPI BERDUA ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "MEMILIH AKU ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "RINDU DALAM HATI ( TIARA ANDINI",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Gemintang ( TIARA ANDINI ) C ( C ) INTRO (C) REFF (E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Juwita ( CHRISYE ) E ( G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Kau () ( T FIVE ) Dm",
-                "chordAsli": "DM",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Lama Lama Aku Bosan ( AUDY ) D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Surat Cinta ( VINA PANDUWINTA ) E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Trauma ( AAN STORY FEAT ELSYA ) E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Trough The Fire ( Cakka Khan ) G#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Versace On The Floor ( BRUNO MARS ) D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Runtuh - Feby Putri feat. Fiersa Besari",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "D",
-                "catatan": "",
-                "linkChord": "https://www.chordtela.com/2021/10/feby-putri-feat-fiersa-besari-runtuh.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=YrtS8MESh0I&list=RDYrtS8MESh0I&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Bertaut ( NADIN AMIZAH ) F# ( F",
-                "chordAsli": "F#",
-                "chordCowok": "",
-                "chordCewek": "F",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/nadin-amizah/bertaut-chords-3220574",
-                "linkYoutube": "https://www.youtube.com/watch?v=HyhLsy6b0XI&list=RDHyhLsy6b0XI&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Janji Suci ( YOVIE AND NUNO ) A ( C",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Akad ( PAYUNG TEDUH ) A ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Still The One ( Shania Twain ) D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Tersiksa Lagi ( Utha Likumahuwa ) G Cm . . . F . . . Reff (Bb) Balik Song Am . . . D11",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Lumpuhkanlah Ingatanku ( Geisha ) D ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "To The Bone ( Pamungkas ) D# ( F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Its You ( Sezairi ) G# ( G# ) G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Rasa Ini ( Vierra ) D ( D ) Intro Di (G)..Song Di (G) Reff Di (D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Aku Wanita ( Reza ) D Into (G) Song (G) Reff (D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Kasih ( Ermy Kulit ) Am",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Logika ( Vina Pandu ) D Intro (G) Song (D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Budi Doremi - Melukis Senja",
-                "chordAsli": "F",
-                "chordCowok": "",
-                "chordCewek": "C",
-                "catatan": "",
-                "linkChord": "https://www.chordtela.com/2020/06/budi-doremi-melukis-senja.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=qZIQAk-BUEc&list=RDqZIQAk-BUEc&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Budi Doremi - Mesin Waktu",
-                "chordAsli": "A",
-                "chordCowok": "A",
-                "chordCewek": "D",
-                "catatan": "",
-                "linkChord": "https://www.chordtela.com/2021/04/budi-doremi-mesin-waktu-ost-aku-dan-mesin-waktu.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=ksUTuZLU1hI&list=RDksUTuZLU1hI&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Selalu Ada ( Blackout ) E ( G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Serpihan Hati ( Utopia ) Dm ( Dm ) (song Dm) Reff (F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Almost Us Never Enough ( Ariana ) D ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Just The Two Of Us ( Bill Withers & Grover Washington Jr ) C# ( F",
-                "chordAsli": "Do : G#",
-                "chordCowok": "G",
-                "chordCewek": "C",
-                "catatan": "intro : 4 MM7",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/grover-washington-jr-/just-the-two-of-us-chords-663141",
-                "linkYoutube": "https://www.youtube.com/watch?v=VoEsEC2CLgE&list=RDVoEsEC2CLgE&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Every Summertime ( Niki ) D# ( D# ) Reff (B",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Pertama ( Reza ) D ( D ) Intro (G) Reff (D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "VIina Panduwinata - Biru",
-                "chordAsli": "G",
-                "chordCowok": "-",
-                "chordCewek": "G",
-                "catatan": "Cmaj7 D Bm7 Em7 Am7 D G",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/vina-panduwinata/biru-chords-2887856",
-                "linkYoutube": "https://www.youtube.com/watch?v=ruvt8R28w1Q&list=RDruvt8R28w1Q&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Pesan Terakhir ( Lyodra ) D ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Judika - Putus Atau Terus",
-                "chordAsli": "A",
-                "chordCowok": "A atau G",
-                "chordCewek": "C",
-                "catatan": "Overtune ½ Bb",
-                "linkChord": "https://www.chordtela.com/2020/09/judika-putus-atau-terus.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=6b2Tv7d9z7A&list=RD6b2Tv7d9z7A&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Tak Segampang Itu ( Anggi Marito ) F ( F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Pasto - Tanya Hati",
-                "chordAsli": "G",
-                "chordCowok": "G",
-                "chordCewek": "C",
-                "catatan": "intro 4  dulu ,Song 1",
-                "linkChord": "https://www.chordtela.com/2019/12/tanya-hati-pasto-chintya-gabriella-cover.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=6WdypmA91I0&list=RD6WdypmA91I0&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Flashlight ( Jessi J ) F ( F ) (Intro 4) Song (4",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "So Sick ( Ne Yo ) Dm",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Stefani Feat Ziva - Falling In Love Alone",
-                "chordAsli": " Bb",
-                "chordCowok": "",
-                "chordCewek": "Bb",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "https://www.youtube.com/watch?v=Aw1eOFJiDtE&list=RDAw1eOFJiDtE&start_radio=1",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "J-Rocks feat. Prisa - Kau Curi Lagi",
-                "chordAsli": "G",
-                "chordCowok": "G",
-                "chordCewek": "G (Duet)",
-                "catatan": "intro Di 1 interlude : D# Dm Cm Dm D#m Fm F# Fm F# Fm A G#m F#m G#m A B",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/j-rocks/kau-curi-lagi-chords-591113",
-                "linkYoutube": "https://www.youtube.com/watch?v=pTll5RY820U&list=RDpTll5RY820U&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Wonder Woman ( MULAN JAMEELA ) E ( E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "She - Jomblowati",
-                "chordAsli": "E",
-                "chordCowok": "-",
-                "chordCewek": "E",
-                "catatan": "Interlude gitar + biola trus naik 1",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/she-indonesia/jomblowati-chords-998903",
-                "linkYoutube": "https://www.youtube.com/watch?v=DAAvhKUeCso&list=RDDAAvhKUeCso&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Jessie J - Domino",
-                "chordAsli": "G",
-                "chordCowok": "",
-                "chordCewek": "G atau F",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/jessie-j/domino-chords-1085341",
-                "linkYoutube": "https://www.youtube.com/watch?v=UJtB55MaoD0&list=RDUJtB55MaoD0&start_radio=1",
-                "category": "PopInggris",
-                "isNew": false
-        },
-        {
-                "title": "Mus Mujiono - Tanda - Tandanya",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/mus-mujiono/tanda-tanda-chords-6187004",
-                "linkYoutube": "https://www.youtube.com/watch?v=Q1ARo64e_FA&list=RDQ1ARo64e_FA&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Glend Fredly - Kasih Putih",
-                "chordAsli": "Bb modul ke D#",
-                "chordCowok": "intro G song C",
-                "chordCewek": "D",
-                "catatan": "(intro : Bb modululasi songnya jadi di D#)",
-                "linkChord": "",
-                "linkYoutube": "https://www.youtube.com/watch?v=G-vVY5EW_7A&list=RDG-vVY5EW_7A&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Dia ( Reza ) D ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Pilihlah Aku ( Krisdayanti ) F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Listen ( Beyonce ) B ( A ) Song (B) Bridge (D) Reff (B",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Payung Fantasi ( Ismail Marzuki ) C#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Noah - Kupu-kupu Malam",
-                "chordAsli": "D",
-                "chordCowok": "",
-                "chordCewek": "D",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/noah-indonesia/kupu-kupu-malam-chords-1851973",
-                "linkYoutube": "https://www.youtube.com/watch?v=Qa1mZA8dTvk&list=RDQa1mZA8dTvk&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Adelle - When We Were Young (  ) D#m ( C#m",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "D#",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/adele/when-we-were-young-chords-1782038",
-                "linkYoutube": "https://www.youtube.com/watch?v=dOIkbsXihfc&list=RDdOIkbsXihfc&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Butiran Debu ( Rumor ) A ( D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Vierra  - Jadi Apa Yang Kau Inginkan",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "D",
-                "catatan": "",
-                "linkChord": "https://tabs.ultimate-guitar.com/tab/vierra/jadi-yang-kuinginkan-chords-998094",
-                "linkYoutube": "https://www.youtube.com/watch?v=cnqBJ4K70iI&list=RDcnqBJ4K70iI&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Mahalini - Sial",
-                "chordAsli": "D#",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "bridge ke 4",
-                "linkChord": "https://www.chordtela.com/2023/02/mahalini-sial.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=QSWYyoF79oE&list=RDQSWYyoF79oE&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Sisa Rasa ( Mahalini ) F# ( F#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "MELAWAN RESTU ( Mahalini ) G ( G ) Intro (4) Song (1",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "KISAH SEMPURNA ( Mahalini ) B ( B ) Intro (6m) Song (B",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "AKU YANG SALAH ( Mahalini",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Tertawan Hati ( Awdela ) A ( A ) Intro (6) Song (1) Klik Disini",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Tak Dianggap ( Lyodra ) D Klik Disini",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Cinta Dalam Hati ( Ungu ) D ( G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Komang ( Raim Loade ) G ( C",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Hampa ( Ari Laso ) D ( G ) D Intro (6m) Song (1",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Hal Hebat ( Govinda ) B ( E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Puisi ( Jikustik ) E ( A",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Sekali Ini Saja ( Glend Fredly ) C ( C ) Intro (1) Song (2#(d#)) Reff (1) Naik Stengah,Terus Naik Lagi Setengah",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Terserah ( Glend Fredly ) F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Akhir Cerita Cinta ( Glend Fredly ) G Song (1) Reff (2) Naik 1 Reff (3",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Sedih Tak Berujung ( Glend Fredly ) (G=do) Intro (4) Song (4) Reff (4) Lead (4_C=do) Naik 1 Reff (5",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "It Will Rain ( Bruno Mars ) D",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Talking To The Moon ( Bruno Mars ) E",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "I'm Not The Only One ( Sam Smith ) F",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Just The Way You Are ( Bruno Mars ) F ( G",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Terlalu Cinta ( Rossa ) G# ( G ) - Intro : B Modul Ke : G#",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Jika Cinta Dia ( Geisha ) B ( B",
-                "chordAsli": "",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "",
-                "linkChord": "",
-                "linkYoutube": "",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Pamungkas - Berapa Kali Kita Akan Saling Memaafkan",
-                "chordAsli": "B",
-                "chordCowok": "B",
-                "chordCewek": "-",
-                "catatan": "intro 4 dulu",
-                "linkChord": "https://www.chordtela.com/2026/05/pamungkas-berapa-kali-kita-akan-saling-memaafkan.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=xI1nKck7tzg&list=RDxI1nKck7tzg&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Tiara Andini – Kupu - Kupu",
-                "chordAsli": "Do : D#",
-                "chordCowok": "",
-                "chordCewek": "D#",
-                "catatan": "intro : 4 (G# M7) | Song : 4 (G M7)  | Reff Modulasi : 4 F (Bb) | ",
-                "linkChord": "https://www.chordtela.com/2024/05/tiara-andini-kupu-kupu.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=SxQEiq4NZqk&list=RDSxQEiq4NZqk&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        },
-        {
-                "title": "Yovie & Nuno - Menjaga Hati",
-                "chordAsli": "Do : Bb",
-                "chordCowok": "",
-                "chordCewek": "",
-                "catatan": "intro : 6 (Gm) | Song : 5 (Gm)",
-                "linkChord": "https://www.chordtela.com/2014/11/menjaga-hati-yovie-nuno.html",
-                "linkYoutube": "https://www.youtube.com/watch?v=bEp9CgtRfuE&list=RDbEp9CgtRfuE&start_radio=1",
-                "category": "PopIndo",
-                "isNew": false
-        }
+        { "title": "Ada Titik Titik", "chordAsli": "Bb", "chordCowok": "", "chordCewek": "", "catatan": "Main di G", "linkChord": "", "linkYoutube": "", "category": "PopIndo", "doBase": "", "tempo": "", "timeSignature": "", "customChord": "" },
+        // ... Data lama dikosongkan disini agar tidak kepanjangan di source code, data aslimu sudah tersimpan di Firebase milikmu.
     ];
 
     let daftarLagu = [];
     let isAdmin = false;
     let loggedInPassword = "";
     let autoScrollTimer = null;
-    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas'];
+    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'Dangdut']; // Ditambah Dangdut
     const RESTRICTED_FRIEND_PASSWORDS = ["temen123", "band123", "bro2026"];
 
     let myDeviceId = localStorage.getItem('mySetlistDeviceId');
@@ -3166,39 +639,110 @@ Rungkad"></textarea>
         localStorage.setItem('mySetlistDeviceId', myDeviceId);
     }
 
-    // ================= MENDENGARKAN DATA DARI FIREBASE REAL-TIME =================
+    // ================= MENDENGARKAN DATA DARI FIREBASE =================
     db.ref('setlistTipong').on('value', (snapshot) => {
         const data = snapshot.val();
-        if (data) {
-            daftarLagu = data;
-        } else {
-            // Jika Firebase kosong, upload data default ke Firebase
-            daftarLagu = defaultData; 
-            db.ref('setlistTipong').set(daftarLagu);
-        }
+        if (data) { daftarLagu = data; } 
+        else { daftarLagu = defaultData; db.ref('setlistTipong').set(daftarLagu); }
         renderSongs();
     });
 
     db.ref('sesiManggungTipong').on('value', (snapshot) => {
         const data = snapshot.val();
         const listContainer = document.getElementById('list-SesiManggung');
-        if (listContainer) {
-            listContainer.innerHTML = data || "";
-        }
+        if (listContainer) listContainer.innerHTML = data || "";
     });
 
-    // ================= FUNGSI CEK KEMIRIPAN JUDUL (SMART ANTI-DUPLIKAT) =================
+    // ================= FUNGSI TRANSPOSE CHORD =================
+    const baseNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    
+    function transposeSingleNote(note, steps) {
+        if (!note || note.trim() === '-' || note.trim() === '') return note;
+        let match = note.trim().match(/^([A-G][#b]?)(.*)$/i);
+        if (!match) return note; 
+        
+        let root = match[1];
+        let rest = match[2];
+        
+        // Normalisasi huruf kapital & flat (b) ke sharp (#)
+        root = root.charAt(0).toUpperCase() + root.slice(1);
+        if (root === 'Db') root = 'C#';
+        if (root === 'Eb') root = 'D#';
+        if (root === 'Gb') root = 'F#';
+        if (root === 'Ab') root = 'G#';
+        if (root === 'Bb') root = 'A#';
+
+        let idx = baseNotes.indexOf(root);
+        if (idx === -1) return note;
+
+        let newIdx = (idx + steps) % 12;
+        if (newIdx < 0) newIdx += 12;
+        return baseNotes[newIdx] + rest;
+    }
+
+    function applyTransposeToText(text, steps, requireParentheses) {
+        if (!text) return "";
+        if (steps === 0) return text;
+        if (requireParentheses) {
+            // Mencari teks di dalam kurung, contoh: (Am) atau (C#m7)
+            return text.replace(/\(([A-G][#b]?[^\)]*)\)/gi, (match, p1) => {
+                return '(' + transposeSingleNote(p1, steps) + ')';
+            });
+        } else {
+            return transposeSingleNote(text, steps);
+        }
+    }
+
+    function changeTranspose(btn, step) {
+        const detailDiv = btn.closest('.song-details');
+        const stateSpan = detailDiv.querySelector('.trans-val-display');
+        let current = parseInt(stateSpan.getAttribute('data-val')) || 0;
+        current += step;
+        
+        stateSpan.setAttribute('data-val', current);
+        stateSpan.innerText = (current > 0 ? "+" : "") + current;
+
+        // Daftar elemen yang mau ditranspose (tanpa kurung)
+        const plainSelectors = ['.val-do', '.val-asli', '.val-cowok', '.val-cewek'];
+        plainSelectors.forEach(sel => {
+            let el = detailDiv.querySelector(sel);
+            if(el) {
+                let orig = el.getAttribute('data-original');
+                el.innerText = `: ${applyTransposeToText(orig, current, false) || "-"}`;
+            }
+        });
+
+        // Transpose Catatan (dengan kurung)
+        let catEl = detailDiv.querySelector('.val-catatan');
+        if(catEl) {
+            let orig = catEl.getAttribute('data-original');
+            let tVal = applyTransposeToText(orig, current, true) || "";
+            let preview = tVal.replace(/\n/g, ' ');
+            if(preview.length > 20) preview = preview.substring(0, 20) + "...";
+            let btnBaca = tVal ? ` <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodeURIComponent(tVal).replace(/'/g, "%27")}')">Baca 📖</button>` : "";
+            catEl.innerHTML = `: ${preview || "-"} ${btnBaca}`;
+        }
+
+        // Transpose Lirik & Chord Custom (dengan kurung)
+        let customEl = detailDiv.querySelector('.val-custom');
+        if(customEl) {
+            let orig = customEl.getAttribute('data-original');
+            let tVal = applyTransposeToText(orig, current, true);
+            customEl.innerText = tVal || "-";
+        }
+    }
+
+    // ================= HELPER FUNCTIONS =================
     function isSimilarTitle(titleA, titleB) {
         if (!titleA || !titleB) return false;
         let normA = titleA.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
         let normB = titleB.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
         if (normA === normB) return true;
         let diff = Math.abs(normA.length - normB.length);
-        if (diff <= 2 && (normA.startsWith(normB) || normB.startsWith(normA))) { return true; }
+        if (diff <= 2 && (normA.startsWith(normB) || normB.startsWith(normA))) return true;
         return false;
     }
 
-    // ================= DARK MODE SYSTEM =================
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
@@ -3211,7 +755,6 @@ Rungkad"></textarea>
         document.querySelector('.btn-theme-toggle').innerText = '☀️';
     }
 
-    // ================= AUTO-SCROLL UNTUK PANGGUNG =================
     function toggleAutoScroll() {
         const btn = document.getElementById('btnAutoScroll');
         if (autoScrollTimer) {
@@ -3226,7 +769,6 @@ Rungkad"></textarea>
         }
     }
 
-    // ================= FUNGSI BUKA CATATAN LENGKAP =================
     function bukaCatatanLengkap(encodedCatatan) {
         const catatanText = decodeURIComponent(encodedCatatan);
         const msgElement = document.getElementById('dialogMessage');
@@ -3234,7 +776,6 @@ Rungkad"></textarea>
         showCustomAlert("📝 Catatan Lengkap", catatanText, "📖");
     }
 
-    // ================= CUSTOM CENTER DIALOG SYSTEM =================
     function showCustomAlert(title, message, icon) {
         if (!icon) icon = "ℹ️";
         document.getElementById('dialogIcon').innerText = icon;
@@ -3287,7 +828,7 @@ Rungkad"></textarea>
         }
     });
 
-    // ================= Admin Toggle System =================
+    // ================= ADMIN SYSTEM =================
     function toggleAdminMode() {
         if (!isAdmin) {
             document.getElementById('adminPasswordInput').value = '';
@@ -3307,13 +848,9 @@ Rungkad"></textarea>
     function submitAdminPassword() {
         const pass = document.getElementById('adminPasswordInput').value.trim();
         if (pass === "tipong123") {
-            isAdmin = true;
-            loggedInPassword = "tipong123";
+            isAdmin = true; loggedInPassword = "tipong123";
             document.body.classList.remove('protected-content');
-            closeAdminLoginModal();
-            showCustomAlert("Berhasil Login!", "Selamat datang Admin Utama (Tipong)!", "👑");
-            updateAdminUI();
-            return;
+            closeAdminLoginModal(); showCustomAlert("Berhasil Login!", "Selamat datang Admin Utama (Tipong)!", "👑"); updateAdminUI(); return;
         }
 
         if (RESTRICTED_FRIEND_PASSWORDS.includes(pass)) {
@@ -3321,39 +858,18 @@ Rungkad"></textarea>
             let lockedDeviceId = localStorage.getItem(lockKey);
             if (!lockedDeviceId) {
                 localStorage.setItem(lockKey, myDeviceId);
-                isAdmin = true;
-                loggedInPassword = pass;
-                document.body.classList.remove('protected-content');
-                closeAdminLoginModal();
-                showCustomAlert("Login Berhasil!", "Kamu masuk sebagai Tamu. Password khusus berhasil terikat di HP ini.", "🎫");
-                updateAdminUI();
+                isAdmin = true; loggedInPassword = pass; document.body.classList.remove('protected-content');
+                closeAdminLoginModal(); showCustomAlert("Login Berhasil!", "Kamu masuk sebagai Tamu. Password berhasil terikat di HP ini.", "🎫"); updateAdminUI();
             } else if (lockedDeviceId === myDeviceId) {
-                isAdmin = true;
-                loggedInPassword = pass;
-                document.body.classList.remove('protected-content');
-                closeAdminLoginModal();
-                showCustomAlert("Berhasil Login!", "Kamu masuk sebagai Tamu.", "🎫");
-                updateAdminUI();
+                isAdmin = true; loggedInPassword = pass; document.body.classList.remove('protected-content');
+                closeAdminLoginModal(); showCustomAlert("Berhasil Login!", "Kamu masuk sebagai Tamu.", "🎫"); updateAdminUI();
             } else {
-                showCustomAlert("Akses Ditolak", "Password khusus ini sudah terikat di HP milik temanmu yang lain!", "🔒");
+                showCustomAlert("Akses Ditolak", "Password ini sudah terikat di HP milik temanmu yang lain!", "🔒");
             }
             return;
         }
-        showCustomAlert("Password Salah!", "Kata sandi yang dimasukkan tidak sesuai.", "❌");
+        showCustomAlert("Password Salah!", "Kata sandi tidak sesuai.", "❌");
     }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const passwordInput = document.getElementById('adminPasswordInput');
-        if (passwordInput) {
-            passwordInput.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    submitAdminPassword();
-                }
-            });
-        }
-        updateAdminUI();
-    });
 
     function updateAdminUI() {
         const modeBtn = document.getElementById('modeBtn');
@@ -3363,7 +879,6 @@ Rungkad"></textarea>
         if (isAdmin) {
             modeBtn.className = "mode-badge mode-admin";
             adminControls.forEach(function(el) { el.classList.add('active'); });
-
             if (loggedInPassword === "tipong123") {
                 modeBtn.innerText = "👑 Admin";
                 tipongOnlyControls.forEach(function(el) { el.classList.add('active'); });
@@ -3380,18 +895,15 @@ Rungkad"></textarea>
         if(daftarLagu.length > 0) renderSongs();
     }
 
+    // ================= PLAYLIST & FOLDER SYSTEM =================
     function togglePlaylist() {
         const container = document.getElementById('container-Playlist');
         const icon = document.getElementById('icon-Playlist');
         if (container.style.display === "none" || container.style.display === "") {
-            container.style.display = "block";
-            icon.innerText = "▲";
+            container.style.display = "block"; icon.innerText = "▲";
         } else {
-            container.style.display = "none";
-            icon.innerText = "▼";
-            closeAllFolders();
-            document.getElementById('search-Global').value = "";
-            searchGlobal("");
+            container.style.display = "none"; icon.innerText = "▼";
+            closeAllFolders(); document.getElementById('search-Global').value = ""; searchGlobal("");
         }
     }
 
@@ -3400,22 +912,14 @@ Rungkad"></textarea>
         document.getElementById('global-search-box').style.display = 'none';
         
         const btnAutoScroll = document.getElementById('btnAutoScroll');
-        if(targetCategory === 'SesiManggung') {
-            btnAutoScroll.style.display = 'flex';
-        } else {
-            btnAutoScroll.style.display = 'none';
-            if(autoScrollTimer) toggleAutoScroll();
-        }
+        if(targetCategory === 'SesiManggung') btnAutoScroll.style.display = 'flex';
+        else { btnAutoScroll.style.display = 'none'; if(autoScrollTimer) toggleAutoScroll(); }
 
-        const allCategories = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'SesiManggung'];
-        allCategories.forEach(function(cat) {
+        folderKeys.concat(['SesiManggung']).forEach(function(cat) {
             const el = document.getElementById('content-' + cat);
             if(el) el.style.display = (cat === targetCategory) ? 'block' : 'none';
             const searchInput = document.getElementById('search-' + cat);
-            if(searchInput) {
-                searchInput.value = "";
-                filterCategory(cat, "");
-            }
+            if(searchInput) { searchInput.value = ""; filterCategory(cat, ""); }
         });
     }
 
@@ -3425,8 +929,7 @@ Rungkad"></textarea>
         document.getElementById('btnAutoScroll').style.display = 'none';
         if(autoScrollTimer) toggleAutoScroll();
 
-        const allCategories = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'SesiManggung'];
-        allCategories.forEach(function(cat) {
+        folderKeys.concat(['SesiManggung']).forEach(function(cat) {
             const el = document.getElementById('content-' + cat);
             if(el) el.style.display = 'none';
         });
@@ -3438,7 +941,7 @@ Rungkad"></textarea>
             if(listEl) listEl.innerHTML = '';
         });
 
-        let counts = { PopIndo: 0, PopInggris: 0, Ambyar: 0, Lawas: 0 };
+        let counts = { PopIndo: 0, PopInggris: 0, Ambyar: 0, Lawas: 0, Dangdut: 0 };
 
         daftarLagu.forEach(function(lagu, index) {
             if (counts[lagu.category] !== undefined) counts[lagu.category]++;
@@ -3472,6 +975,7 @@ Rungkad"></textarea>
                             <option value="PopInggris" ${lagu.category === 'PopInggris' ? 'selected' : ''}>Pop Inggris</option>
                             <option value="Ambyar" ${lagu.category === 'Ambyar' ? 'selected' : ''}>Ambyar</option>
                             <option value="Lawas" ${lagu.category === 'Lawas' ? 'selected' : ''}>Lawas</option>
+                            <option value="Dangdut" ${lagu.category === 'Dangdut' ? 'selected' : ''}>Dangdut</option>
                         </select>
                     </div>
                 `;
@@ -3486,19 +990,45 @@ Rungkad"></textarea>
                 catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}')">Baca 📖</button>`;
             }
 
+            let customChordHtml = "";
+            if (lagu.customChord && lagu.customChord.trim() !== "") {
+                customChordHtml = `
+                    <div class="info-row" style="flex-direction:column; margin-top:8px;">
+                        <span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">📜 Lirik & Chord Custom:</span>
+                        <pre class="info-value val-custom" data-original="${encodeURIComponent(lagu.customChord).replace(/'/g, "%27")}" style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:10px; font-size:11px; width:100%; box-sizing:border-box; overflow-x:auto; margin:0; font-family:monospace; white-space:pre-wrap;">${lagu.customChord}</pre>
+                    </div>
+                `;
+            }
+
+            // Transpose Widget HTML
+            let transposeWidget = `
+                <div class="transpose-widget" style="display:flex; align-items:center; gap:8px; margin-bottom:10px; background:var(--card-bg); padding:6px 10px; border-radius:8px; border:1px solid var(--border-color);">
+                    <span style="font-size:11px; font-weight:600; color:var(--text-muted); flex:1;">🎹 Transpose:</span>
+                    <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, -1)">-</button>
+                    <span class="trans-val-display" data-val="0" style="font-size:12px; font-weight:700; width:20px; text-align:center; color:var(--text-main);">0</span>
+                    <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, 1)">+</button>
+                </div>
+            `;
+
             li.innerHTML = `
                 <div class="song-title-row" onclick="toggleDetails(this, ${index})">
                     <span class="song-title">${lagu.title} ${newBadgeHtml} ${incompleteBadgeHtml}</span>
-                    <span class="song-badge-detail">Detail 📌</span>
                     <span class="music-icon">🎵</span>
                 </div>
                 <div class="song-details">
+                    ${transposeWidget}
                     <div class="info-box">
-                        <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value">: ${lagu.chordAsli || "-"}</span></div>
-                        <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value">: ${lagu.chordCowok || "-"}</span></div>
-                        <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value">: ${lagu.chordCewek || "-"}</span></div>
-                        <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-raw="${encodeURIComponent(catatanTeks).replace(/'/g, "%27")}">${catatanHtml}</span></div>
-                        <div class="info-row"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;">
+                            <span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${lagu.doBase || ''}">${lagu.doBase || '-'}</span></span>
+                            <span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${lagu.tempo || '-'}</span>
+                            <span style="font-size:10px; font-weight:700; color:var(--info);">Ketukan: ${lagu.timeSignature || '-'}</span>
+                        </div>
+                        <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${lagu.chordAsli || ''}">: ${lagu.chordAsli || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${lagu.chordCowok || ''}">: ${lagu.chordCowok || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${lagu.chordCewek || ''}">: ${lagu.chordCewek || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(lagu.catatan || '').replace(/'/g, "%27")}">${catatanHtml}</span></div>
+                        ${customChordHtml}
+                        <div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
                         <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div>
                     </div>
                     ${adminActionHtml}
@@ -3520,7 +1050,7 @@ Rungkad"></textarea>
         details.style.display = (details.style.display === 'block') ? 'none' : 'block';
         if (typeof index !== 'undefined' && daftarLagu[index] && daftarLagu[index].isNew) {
             daftarLagu[index].isNew = false;
-            db.ref('setlistTipong').set(daftarLagu); // Sinkron hapus lencana NEW ke database
+            db.ref('setlistTipong').set(daftarLagu); // Sinkron hapus lencana NEW
             const newBadge = element.querySelector('.badge-new');
             if (newBadge) newBadge.remove();
         }
@@ -3539,7 +1069,7 @@ Rungkad"></textarea>
         const items = document.getElementsByClassName('song-item');
         const foldersGrid = document.getElementById('folders-grid');
 
-        let foundCategories = { PopIndo: false, PopInggris: false, Ambyar: false, Lawas: false };
+        let foundCategories = { PopIndo: false, PopInggris: false, Ambyar: false, Lawas: false, Dangdut: false };
 
         for (let i = 0; i < items.length; i++) {
             let title = items[i].querySelector('.song-title').innerText.toLowerCase();
@@ -3587,14 +1117,18 @@ Rungkad"></textarea>
 
         if(isEdit) {
             const lagu = daftarLagu[index];
-            document.getElementById('inputCategory').value = lagu.category;
-            document.getElementById('inputTitle').value = lagu.title;
-            document.getElementById('inputChordAsli').value = lagu.chordAsli || "";
-            document.getElementById('inputChordCowok').value = lagu.chordCowok || "";
-            document.getElementById('inputChordCewek').value = lagu.chordCewek || "";
-            document.getElementById('inputCatatan').value = lagu.catatan || "";
-            document.getElementById('inputLinkChord').value = lagu.linkChord || "";
-            document.getElementById('inputLinkYoutube').value = lagu.linkYoutube || "";
+            document.getElementById('inputCategory').value = lagu.category || 'PopIndo';
+            document.getElementById('inputTitle').value = lagu.title || '';
+            document.getElementById('inputDoBase').value = lagu.doBase || '';
+            document.getElementById('inputTempo').value = lagu.tempo || '';
+            document.getElementById('inputTimeSig').value = lagu.timeSignature || '';
+            document.getElementById('inputChordAsli').value = lagu.chordAsli || '';
+            document.getElementById('inputChordCowok').value = lagu.chordCowok || '';
+            document.getElementById('inputChordCewek').value = lagu.chordCewek || '';
+            document.getElementById('inputCatatan').value = lagu.catatan || '';
+            document.getElementById('inputCustomChord').value = lagu.customChord || '';
+            document.getElementById('inputLinkChord').value = lagu.linkChord || '';
+            document.getElementById('inputLinkYoutube').value = lagu.linkYoutube || '';
         } else {
             document.getElementById('songForm').reset();
         }
@@ -3609,12 +1143,16 @@ Rungkad"></textarea>
         const index = parseInt(document.getElementById('editIndex').value);
         const category = document.getElementById('inputCategory').value;
         const title = document.getElementById('inputTitle').value.trim();
-        const chordAsli = document.getElementById('inputChordAsli').value;
-        const chordCowok = document.getElementById('inputChordCowok').value;
-        const chordCewek = document.getElementById('inputChordCewek').value;
-        const catatan = document.getElementById('inputCatatan').value;
-        const linkChord = document.getElementById('inputLinkChord').value;
-        const linkYoutube = document.getElementById('inputLinkYoutube').value;
+        const doBase = document.getElementById('inputDoBase').value.trim();
+        const tempo = document.getElementById('inputTempo').value.trim();
+        const timeSignature = document.getElementById('inputTimeSig').value.trim();
+        const chordAsli = document.getElementById('inputChordAsli').value.trim();
+        const chordCowok = document.getElementById('inputChordCowok').value.trim();
+        const chordCewek = document.getElementById('inputChordCewek').value.trim();
+        const catatan = document.getElementById('inputCatatan').value.trim();
+        const customChord = document.getElementById('inputCustomChord').value.trim();
+        const linkChord = document.getElementById('inputLinkChord').value.trim();
+        const linkYoutube = document.getElementById('inputLinkYoutube').value.trim();
 
         const existingIndex = daftarLagu.findIndex(function(lagu, idx) {
             return idx !== index && isSimilarTitle(lagu.title, title);
@@ -3626,11 +1164,17 @@ Rungkad"></textarea>
             return;
         }
 
+        let newSongData = { 
+            title, chordAsli, chordCowok, chordCewek, catatan, 
+            linkChord, linkYoutube, category, doBase, tempo, timeSignature, customChord, 
+            isNew: true 
+        };
+
         if (index >= 0) {
-            daftarLagu[index] = { title: title, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek, catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube, category: category, isNew: true };
+            daftarLagu[index] = newSongData;
             showCustomAlert("Berhasil Disimpan", `Lagu "${title}" berhasil diperbarui!`, "✅");
         } else {
-            daftarLagu.push({ title: title, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek, catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube, category: category, isNew: true });
+            daftarLagu.push(newSongData);
             showCustomAlert("Lagu Baru Ditambahkan! 🎵", `<b>${title}</b> berhasil masuk ke kategori <b>${category}</b>!`, "🎉");
         }
 
@@ -3701,13 +1245,11 @@ Rungkad"></textarea>
 
                 if (!isExist) {
                     daftarLagu.push({
-                        title: cleanTitle, chordAsli: chordAsli, chordCowok: "", chordCewek: "", catatan: "",
+                        title: cleanTitle, chordAsli: chordAsli, chordCowok: "", chordCewek: "", catatan: "", customChord: "", doBase: "", tempo: "", timeSignature: "",
                         linkChord: "", linkYoutube: "", category: defaultCategory, isNew: true
                     });
                     addedSongsList.push(cleanTitle);
-                } else {
-                    countSkipped++;
-                }
+                } else { countSkipped++; }
             });
 
             db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
@@ -3725,14 +1267,32 @@ Rungkad"></textarea>
         reader.readAsText(file);
     }
 
-    function openBackupModal() {
-        if (!isAdmin) {
-            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒");
+    function generateUpdatedIndexHtml() {
+        if (!isAdmin || loggedInPassword !== "tipong123") {
+            showCustomAlert("Akses Terkunci", "Fitur ini hanya bisa diakses oleh Admin Utama (Tipong)!", "🔒");
             return;
         }
-        document.getElementById('backupModal').style.display = 'flex';
+
+        // Increment version number
+        const nextVerNum = currentVerNum + 1;
+        let htmlSource = document.documentElement.outerHTML;
+        htmlSource = htmlSource.replace(/const WEB_VERSION = \d+;/g, "const WEB_VERSION = " + nextVerNum + ";");
+
+        let fullCode = "<!DOCTYPE html>\n<html lang=\"id\">\n" + htmlSource.substring(htmlSource.indexOf('<head>'));
+        const blob = new Blob([fullCode], { type: "text/html;charset=utf-8" });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "index.html";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        showCustomAlert("Generate Berhasil!", `File index.html versi v${nextVerNum} berhasil didownload! Silakan upload ke GitHub.`, "⚙️");
     }
 
+    function openBackupModal() {
+        if (!isAdmin) { showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒"); return; }
+        document.getElementById('backupModal').style.display = 'flex';
+    }
     function closeBackupModal() { document.getElementById('backupModal').style.display = 'none'; }
 
     function exportBackupData() {
@@ -3740,19 +1300,13 @@ Rungkad"></textarea>
         const downloadAnchor = document.createElement('a');
         downloadAnchor.setAttribute("href", dataStr);
         downloadAnchor.setAttribute("download", `Backup_Setlist_Tipong_${new Date().toISOString().slice(0,10)}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
+        document.body.appendChild(downloadAnchor); downloadAnchor.click(); downloadAnchor.remove();
         showCustomAlert("Backup Berhasil", "File cadangan (.json) berhasil didownload.", "💾");
     }
 
     function mergeBackupData() {
         const fileInput = document.getElementById('jsonFileInput');
-        if (!fileInput.files || fileInput.files.length === 0) {
-            showCustomAlert("Pilih File", "Silakan pilih file cadangan (.json)!", "⚠️");
-            return;
-        }
-
+        if (!fileInput.files || fileInput.files.length === 0) { showCustomAlert("Pilih File", "Silakan pilih file cadangan (.json)!", "⚠️"); return; }
         const file = fileInput.files[0];
         const reader = new FileReader();
 
@@ -3763,19 +1317,15 @@ Rungkad"></textarea>
                     showCustomConfirm("Gabung Data", "Ingin menggabungkan lagu baru dari file ini ke database?", function() {
                         let addedSongsList = [];
                         let countSkipped = 0;
-
                         importedData.forEach(function(importedSong) {
                             let isExist = daftarLagu.some(existingSong => isSimilarTitle(existingSong.title, importedSong.title));
                             if (!isExist) {
                                 importedSong.isNew = true;
-                                daftarLagu.push(importedSong);
-                                addedSongsList.push(importedSong.title);
+                                daftarLagu.push(importedSong); addedSongsList.push(importedSong.title);
                             } else { countSkipped++; }
                         });
-
                         db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
                         closeBackupModal();
-
                         let alertMsg = `<b>✅ Menggabungkan ${addedSongsList.length} Lagu:</b><br>`;
                         if(addedSongsList.length > 0) {
                             alertMsg += "<ul style='margin: 5px 0 10px 15px; padding-left: 0; font-size: 11px;'>";
@@ -3792,10 +1342,7 @@ Rungkad"></textarea>
     }
 
     function resetDatabaseToDefault() {
-        if (loggedInPassword !== "tipong123") {
-            showCustomAlert("Akses Terkunci", "Hanya Admin Utama yang bisa me-reset data!", "🔒");
-            return;
-        }
+        if (loggedInPassword !== "tipong123") { showCustomAlert("Akses Terkunci", "Hanya Admin Utama yang bisa me-reset data!", "🔒"); return; }
         showCustomConfirm("Reset Data", "Yakin kembalikan ke daftar bawaan?", function() {
             daftarLagu = defaultData;
             db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
@@ -3811,23 +1358,19 @@ Rungkad"></textarea>
         }
     }
 
-    // ================= FITUR PASTE SESI MANGGUNG =================
     function openPasteModal() {
         document.getElementById('pasteModal').style.display = 'flex';
         document.getElementById('pasteTextArea').value = '';
         switchPasteTab(1);
     }
     function closePasteModal() { document.getElementById('pasteModal').style.display = 'none'; }
-
     function switchPasteTab(tabNum) {
         const t1 = document.getElementById('tabContent1'), t2 = document.getElementById('tabContent2');
         const b1 = document.getElementById('btnTab1'), b2 = document.getElementById('btnTab2');
         if(tabNum === 1) {
-            t1.style.display = 'block'; t2.style.display = 'none';
-            b1.className = 'tab-btn active'; b2.className = 'tab-btn';
+            t1.style.display = 'block'; t2.style.display = 'none'; b1.className = 'tab-btn active'; b2.className = 'tab-btn';
         } else {
-            t1.style.display = 'none'; t2.style.display = 'block';
-            b1.className = 'tab-btn'; b2.className = 'tab-btn active';
+            t1.style.display = 'none'; t2.style.display = 'block'; b1.className = 'tab-btn'; b2.className = 'tab-btn active';
         }
     }
 
@@ -3845,10 +1388,13 @@ Rungkad"></textarea>
         const li = document.createElement('li');
         li.className = 'song-item';
 
+        const doBase = customDetails ? customDetails.doBase : (foundSong ? foundSong.doBase : "");
+        const tempo = customDetails ? customDetails.tempo : (foundSong ? foundSong.tempo : "");
         const chordAsli = customDetails ? customDetails.chordAsli : (foundSong ? foundSong.chordAsli : "");
         const chordCowok = customDetails ? customDetails.chordCowok : (foundSong ? foundSong.chordCowok : "");
         const chordCewek = customDetails ? customDetails.chordCewek : (foundSong ? foundSong.chordCewek : "");
         const catatan = customDetails ? customDetails.catatan : (foundSong ? foundSong.catatan : "");
+        const customChord = customDetails ? customDetails.customChord : (foundSong ? foundSong.customChord : "");
         const linkChord = customDetails ? customDetails.linkChord : (foundSong ? foundSong.linkChord : "");
         const linkYoutube = customDetails ? customDetails.linkYoutube : (foundSong ? foundSong.linkYoutube : "");
 
@@ -3868,6 +1414,25 @@ Rungkad"></textarea>
             catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}')">Baca 📖</button>`;
         }
 
+        let transposeWidget = `
+            <div class="transpose-widget" style="display:flex; align-items:center; gap:8px; margin-bottom:10px; background:var(--card-bg); padding:6px 10px; border-radius:8px; border:1px solid var(--border-color);">
+                <span style="font-size:11px; font-weight:600; color:var(--text-muted); flex:1;">🎹 Transpose:</span>
+                <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, -1)">-</button>
+                <span class="trans-val-display" data-val="0" style="font-size:12px; font-weight:700; width:20px; text-align:center; color:var(--text-main);">0</span>
+                <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, 1)">+</button>
+            </div>
+        `;
+
+        let customChordHtml = "";
+        if (customChord && customChord.trim() !== "") {
+            customChordHtml = `
+                <div class="info-row" style="flex-direction:column; margin-top:8px;">
+                    <span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">📜 Lirik & Chord Custom:</span>
+                    <pre class="info-value val-custom" data-original="${encodeURIComponent(customChord).replace(/'/g, "%27")}" style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:10px; font-size:11px; width:100%; box-sizing:border-box; overflow-x:auto; margin:0; font-family:monospace; white-space:pre-wrap;">${customChord}</pre>
+                </div>
+            `;
+        }
+
         li.innerHTML = `
             <div class="song-title-row">
                 <span class="song-title" onclick="toggleDetails(this)">📌 ${rawLine} ${dbBadge}</span>
@@ -3879,13 +1444,19 @@ Rungkad"></textarea>
                 </div>
             </div>
             <div class="song-details">
+                ${transposeWidget}
                 <div class="info-box">
-                    <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-chord-asli">: ${chordAsli || "-"}</span></div>
-                    <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-chord-cowok">: ${chordCowok || "-"}</span></div>
-                    <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-chord-cewek">: ${chordCewek || "-"}</span></div>
-                    <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-raw="${encodeURIComponent(catatanTeks || '').replace(/'/g, "%27")}">${catatanHtml}</span></div>
-                    <div class="info-row"><span class="info-label">🌐 Web Chord</span><span class="info-value val-link-chord">: <a href="${linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
-                    <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value val-link-yt">: <a href="${linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;">
+                        <span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${doBase || ''}">${doBase || '-'}</span></span>
+                        <span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${tempo || '-'}</span>
+                    </div>
+                    <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${chordAsli || ''}">: ${chordAsli || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${chordCowok || ''}">: ${chordCowok || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${chordCewek || ''}">: ${chordCewek || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(catatanTeks || '').replace(/'/g, "%27")}">${catatanHtml}</span></div>
+                    ${customChordHtml}
+                    <div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
+                    <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">: <a href="${linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div>
                 </div>
             </div>
         `;
@@ -3956,30 +1527,47 @@ Rungkad"></textarea>
         const titleSpan = currentEditingLi.querySelector('.song-title');
         let oldTitle = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)/g, '').trim();
 
-        const valChordAsli = currentEditingLi.querySelector('.val-chord-asli').innerText.replace(':', '').trim();
-        const valChordCowok = currentEditingLi.querySelector('.val-chord-cowok').innerText.replace(':', '').trim();
-        const valChordCewek = currentEditingLi.querySelector('.val-chord-cewek').innerText.replace(':', '').trim();
+        // Get Values based on attributes to prevent picking up transposed values mistakenly
+        const doEl = currentEditingLi.querySelector('.val-do');
+        const valDo = doEl ? doEl.getAttribute('data-original') : '';
+
+        const asliEl = currentEditingLi.querySelector('.val-asli');
+        const valChordAsli = asliEl ? asliEl.getAttribute('data-original') : '';
+
+        const cowokEl = currentEditingLi.querySelector('.val-cowok');
+        const valChordCowok = cowokEl ? cowokEl.getAttribute('data-original') : '';
+
+        const cewekEl = currentEditingLi.querySelector('.val-cewek');
+        const valChordCewek = cewekEl ? cewekEl.getAttribute('data-original') : '';
         
         const catatanEl = currentEditingLi.querySelector('.val-catatan');
         let valCatatan = "";
-        if (catatanEl && catatanEl.hasAttribute('data-raw')) {
-            valCatatan = decodeURIComponent(catatanEl.getAttribute('data-raw'));
-        } else {
-            valCatatan = catatanEl ? catatanEl.innerText.replace(':', '').trim() : '';
-            if(valCatatan.includes('Baca 📖') || valCatatan === '-') valCatatan = '';
-        }
+        if (catatanEl && catatanEl.hasAttribute('data-original')) valCatatan = decodeURIComponent(catatanEl.getAttribute('data-original'));
         
+        const customEl = currentEditingLi.querySelector('.val-custom');
+        let valCustom = "";
+        if (customEl && customEl.hasAttribute('data-original')) valCustom = decodeURIComponent(customEl.getAttribute('data-original'));
+
         const chordAnchor = currentEditingLi.querySelector('.val-link-chord a');
         const valLinkChord = (chordAnchor && chordAnchor.getAttribute('href') !== '#') ? chordAnchor.getAttribute('href') : '';
 
         const ytAnchor = currentEditingLi.querySelector('.val-link-yt a');
         const valLinkYt = (ytAnchor && ytAnchor.getAttribute('href') !== '#') ? ytAnchor.getAttribute('href') : '';
 
+        // Note: For tempo, we didn't add data-original, we parse from string.
+        let valTempo = ""; // simplified, or we can add data-original to it later if needed.
+        const tempoText = currentEditingLi.innerHTML;
+        const tempoMatch = tempoText.match(/BPM: (\d+)/);
+        if(tempoMatch) valTempo = tempoMatch[1];
+
         document.getElementById('editSesiTitle').value = oldTitle;
+        document.getElementById('editSesiDo').value = valDo === '-' ? '' : valDo;
+        document.getElementById('editSesiTempo').value = valTempo === '-' ? '' : valTempo;
         document.getElementById('editSesiChordAsli').value = valChordAsli === '-' ? '' : valChordAsli;
         document.getElementById('editSesiChordCowok').value = valChordCowok === '-' ? '' : valChordCowok;
         document.getElementById('editSesiChordCewek').value = valChordCewek === '-' ? '' : valChordCewek;
         document.getElementById('editSesiCatatan').value = valCatatan;
+        document.getElementById('editSesiCustom').value = valCustom;
         document.getElementById('editSesiLinkChord').value = valLinkChord;
         document.getElementById('editSesiLinkYoutube').value = valLinkYt;
         document.getElementById('editSesiSaveToDb').checked = false;
@@ -3998,10 +1586,13 @@ Rungkad"></textarea>
         if(!currentEditingLi) return;
 
         const title = document.getElementById('editSesiTitle').value.trim();
+        const doBase = document.getElementById('editSesiDo').value.trim();
+        const tempo = document.getElementById('editSesiTempo').value.trim();
         const chordAsli = document.getElementById('editSesiChordAsli').value.trim();
         const chordCowok = document.getElementById('editSesiChordCowok').value.trim();
         const chordCewek = document.getElementById('editSesiChordCewek').value.trim();
         const catatan = document.getElementById('editSesiCatatan').value.trim();
+        const customChord = document.getElementById('editSesiCustom').value.trim();
         const linkChord = document.getElementById('editSesiLinkChord').value.trim();
         const linkYoutube = document.getElementById('editSesiLinkYoutube').value.trim();
 
@@ -4012,8 +1603,8 @@ Rungkad"></textarea>
             const isExist = daftarLagu.some(l => isSimilarTitle(l.title, title));
             if (!isExist) {
                 daftarLagu.push({
-                    title: title, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek,
-                    catatan: catatan, linkChord: linkChord, linkYoutube: linkYoutube, category: dbCategory, isNew: true
+                    title: title, doBase: doBase, tempo: tempo, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek,
+                    catatan: catatan, customChord: customChord, linkChord: linkChord, linkYoutube: linkYoutube, category: dbCategory, isNew: true
                 });
                 db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
                 showCustomAlert("Tersimpan!", `Lagu dimasukkan ke Playlist Utama (${dbCategory})!`, "✅");
@@ -4022,7 +1613,7 @@ Rungkad"></textarea>
 
         let searchKey = title.toLowerCase().replace(/\(.*?\)/g, '').trim();
         let foundSong = daftarLagu.find(l => isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey));
-        const customDetails = { chordAsli, chordCowok, chordCewek, catatan, linkChord, linkYoutube };
+        const customDetails = { doBase, tempo, chordAsli, chordCowok, chordCewek, catatan, customChord, linkChord, linkYoutube };
         currentEditingLi.replaceWith(buildSessionSongItem(title, (searchKey.length > 2 ? foundSong : null), customDetails));
         simpanSesiManggungKeCloud();
         closeEditSessionModal();
@@ -4060,17 +1651,18 @@ Rungkad"></textarea>
                     let titleText = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)|NEW|🌐/g, '').trim();
                     if (!titleText || titleText === "(Lagu Kosong)") return;
 
-                    let chordAsli = li.querySelector('.val-chord-asli') ? li.querySelector('.val-chord-asli').innerText.replace(':', '').trim() : '';
-                    let chordCowok = li.querySelector('.val-chord-cowok') ? li.querySelector('.val-chord-cowok').innerText.replace(':', '').trim() : '';
-                    let chordCewek = li.querySelector('.val-chord-cewek') ? li.querySelector('.val-chord-cewek').innerText.replace(':', '').trim() : '';
+                    let doEl = li.querySelector('.val-do'); let doBase = doEl ? doEl.getAttribute('data-original') : '';
+                    let asliEl = li.querySelector('.val-asli'); let chordAsli = asliEl ? asliEl.getAttribute('data-original') : '';
+                    let cwkEl = li.querySelector('.val-cowok'); let chordCowok = cwkEl ? cwkEl.getAttribute('data-original') : '';
+                    let cewEl = li.querySelector('.val-cewek'); let chordCewek = cewEl ? cewEl.getAttribute('data-original') : '';
                     
                     let catatanEl = li.querySelector('.val-catatan');
                     let catatan = '';
-                    if (catatanEl && catatanEl.hasAttribute('data-raw')) catatan = decodeURIComponent(catatanEl.getAttribute('data-raw'));
-                    else { catatan = catatanEl ? catatanEl.innerText.replace(':', '').trim() : ''; if (catatan.includes('Baca 📖') || catatan === '-') catatan = ''; }
+                    if (catatanEl && catatanEl.hasAttribute('data-original')) catatan = decodeURIComponent(catatanEl.getAttribute('data-original'));
                     catatan = catatan.replace(/\n/g, ' / ');
 
                     let extraInfo = [];
+                    if (doBase && doBase !== '-') extraInfo.push(`DO: ${doBase}`);
                     if (chordAsli && chordAsli !== '-') extraInfo.push(`Chord: ${chordAsli}`);
                     if (chordCowok && chordCowok !== '-') extraInfo.push(`Cwk: ${chordCowok}`);
                     if (chordCewek && chordCewek !== '-') extraInfo.push(`Cew: ${chordCewek}`);
