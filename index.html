@@ -452,6 +452,7 @@
             padding-top: 1px;
         }
 
+        /* FIX UNTUK CATATAN AGAR TIDAK MELAR KE SAMPING */
         .info-value { 
             color: var(--text-main); 
             font-weight: 600; 
@@ -722,33 +723,27 @@
         }
     </style>
 </head>
-<body class="protected-content">
-
-<!-- Pelindung Layar Anti Screenshot -->
-<div id="screenshotShield">
-    <div style="font-size: 45px; margin-bottom: 12px;">🚫</div>
-    <div>Sory tidak bisa di SC hehehe</div>
-</div>
+<body class="dark-mode">
 
 <!-- Tombol Auto-Scroll Melayang -->
-<button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()">📜 Auto Scroll: OFF</button>
+<button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()" style="display: none;">📜 Auto Scroll: OFF</button>
 
 <div class="container" id="mainContainer">
     <div class="top-bar">
-        <button class="btn-theme-toggle" onclick="toggleDarkMode()" title="Ganti Mode Gelap/Terang">🌙</button>
+        <button class="btn-theme-toggle" onclick="toggleDarkMode()" title="Ganti Mode Gelap/Terang">☀️</button>
         <h2 class="header-title">🎧 Setlist Lagu</h2>
-        <button id="modeBtn" class="mode-badge mode-viewer" onclick="toggleAdminMode()">👁️ Penonton</button>
+        <button id="modeBtn" class="mode-badge mode-admin" onclick="toggleAdminMode()">👑 Admin</button>
     </div>
     
     <!-- Group Tombol Atas -->
     <div class="action-btn-group">
         <!-- Tombol Tambah Lagu HANYA MUNCUL DI MODE ADMIN -->
-        <button class="btn-action-main btn-add-theme admin-controls" onclick="openModal()">➕ Tambah Lagu</button>
-        <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup & Gabung Data</button>
-        <button class="btn-action-main btn-import-theme admin-controls" onclick="openImportModal()">📄 Import .txt</button>
-        <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
+        <button class="btn-action-main btn-add-theme admin-controls active" onclick="openModal()">➕ Tambah Lagu</button>
+        <button class="btn-action-main btn-backup-theme admin-controls active" onclick="openBackupModal()">💾 Backup &amp; Gabung Data</button>
+        <button class="btn-action-main btn-import-theme admin-controls active" onclick="openImportModal()">📄 Import .txt</button>
+        <button class="btn-action-main btn-paste-theme admin-controls active" onclick="openPasteModal()">📋 Paste Setlist Sesi</button>
         <!-- Tombol EKSKLUSIF Hanya untuk Tipong (tipong123) -->
-        <button class="btn-action-main btn-generate-theme tipong-only-controls" onclick="generateUpdatedIndexHtml()">⚙️ Generate index.html</button>
+        <button class="btn-action-main btn-generate-theme tipong-only-controls active" onclick="generateUpdatedIndexHtml()">⚙️ Generate index.html</button>
     </div>
 
     <!-- ==================== MAIN PLAYLIST ==================== -->
@@ -759,13 +754,13 @@
     
     <div id="container-Playlist" class="playlist-container">
         <!-- PENCARIAN UTAMA -->
-        <div class="search-box" id="global-search-box">
+        <div class="search-box" id="global-search-box" style="display: block;">
             <span class="search-icon">🔍</span>
             <input type="text" id="search-Global" oninput="searchGlobal(this.value)" placeholder="Cari lagu di semua folder...">
         </div>
         
         <!-- 4 Kotak Kategori Utama (dengan hitungan lagu otomatis) -->
-        <div class="folders-grid" id="folders-grid">
+        <div class="folders-grid" id="folders-grid" style="display: grid;">
             <div class="sub-btn btn-pop-indo" onclick="openFolder('PopIndo')">
                 <span>Pop Indo <small id="count-PopIndo">(0)</small></span>
             </div>
@@ -781,7 +776,7 @@
         </div>
 
         <!-- AREA FOLDER HASIL PASTE SESI MANGGUNG -->
-        <div id="content-SesiManggung" class="sub-content">
+        <div id="content-SesiManggung" class="sub-content" style="display: none;">
             <div class="category-header" style="color:#8b5cf6;">
                 <span>📋 SETLIST MANGGUNG (SESI)</span>
                 <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
@@ -796,7 +791,7 @@
         </div>
 
         <!-- AREA HALAMAN FOLDER STANDARD -->
-        <div id="content-PopIndo" class="sub-content">
+        <div id="content-PopIndo" class="sub-content" style="display: none;">
             <div class="category-header">
                 <span>🎵 POP INDO</span>
                 <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
@@ -808,7 +803,7 @@
             <ul id="list-PopIndo"></ul>
         </div>
 
-        <div id="content-PopInggris" class="sub-content">
+        <div id="content-PopInggris" class="sub-content" style="display: none;">
             <div class="category-header" style="color: #0891b2;">
                 <span>🎧 POP INGGRIS</span>
                 <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
@@ -820,7 +815,7 @@
             <ul id="list-PopInggris"></ul>
         </div>
 
-        <div id="content-Ambyar" class="sub-content">
+        <div id="content-Ambyar" class="sub-content" style="display: none;">
             <div class="category-header" style="color: #be185d;">
                 <span>💔 AMBYAR</span>
                 <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
@@ -832,7 +827,7 @@
             <ul id="list-Ambyar"></ul>
         </div>
 
-        <div id="content-Lawas" class="sub-content">
+        <div id="content-Lawas" class="sub-content" style="display: none;">
             <div class="category-header" style="color: #b45309;">
                 <span>📻 LAWAS</span>
                 <button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button>
@@ -860,7 +855,7 @@
             
             <div class="form-group">
                 <label>Kategori Genre</label>
-                <select id="inputCategory" required>
+                <select id="inputCategory" required="">
                     <option value="PopIndo">Pop Indo</option>
                     <option value="PopInggris">Pop Inggris</option>
                     <option value="Ambyar">Ambyar</option>
@@ -869,7 +864,7 @@
             </div>
             <div class="form-group">
                 <label>Judul Lagu</label>
-                <input type="text" id="inputTitle" placeholder="Contoh: Mahalini - Bohongi Hati" required>
+                <input type="text" id="inputTitle" placeholder="Contoh: Mahalini - Bohongi Hati" required="">
             </div>
             <div class="form-group">
                 <label>🎸 Chord Asli (Original)</label>
@@ -885,7 +880,6 @@
             </div>
             <div class="form-group">
                 <label>📝 Catatan / Modulasi (Opsional)</label>
-                <!-- DIUBAH KE TEXTAREA AGAR BISA ENTER -->
                 <textarea id="inputCatatan" rows="3" placeholder="Contoh: Overtune ke F di akhir... (Bisa tekan Enter untuk baris baru)"></textarea>
             </div>
             <div class="form-group">
@@ -908,11 +902,11 @@
 <!-- MODAL FORM EDIT KHUSUS SESI MANGGUNG -->
 <div id="editSessionModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>✏️ Edit Lagu & Chord Sesi</h3>
+        <h3>✏️ Edit Lagu &amp; Chord Sesi</h3>
         <form onsubmit="saveSessionSongEdit(event)">
             <div class="form-group">
                 <label>Judul Lagu</label>
-                <input type="text" id="editSesiTitle" required>
+                <input type="text" id="editSesiTitle" required="">
             </div>
             <div class="form-group">
                 <label>🎸 Chord Asli (Original)</label>
@@ -928,7 +922,6 @@
             </div>
             <div class="form-group">
                 <label>📝 Catatan / Modulasi</label>
-                <!-- DIUBAH KE TEXTAREA AGAR BISA ENTER -->
                 <textarea id="editSesiCatatan" rows="3" placeholder="Contoh: Intro Fm... (Bisa tekan Enter untuk baris baru)"></textarea>
             </div>
             <div class="form-group">
@@ -997,7 +990,7 @@
 <!-- MODAL BACKUP & GABUNG DATA -->
 <div id="backupModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>💾 Backup & Gabung Data</h3>
+        <h3>💾 Backup &amp; Gabung Data</h3>
         <p style="font-size:11px; color:var(--text-muted); margin-bottom:14px;">
             Download file backup (.json) untuk dikirim ke Tipong, atau masukkan file kiriman teman untuk menggabungkan lagu baru secara otomatis tanpa menghapus lagu lama!
         </p>
@@ -1014,7 +1007,7 @@
         </div>
 
         <!-- HANYA MUNCUL DI TIPONG (tipong123) -->
-        <div class="tipong-only-controls" style="display:none; flex-direction:column; width:100%;">
+        <div class="tipong-only-controls active" style="display:none; flex-direction:column; width:100%;">
             <div class="form-group" style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--border-color); width:100%;">
                 <button type="button" class="btn-action-main" style="background:var(--danger); color:white; width:100%;" onclick="resetDatabaseToDefault()">🔄 Reset Data ke Awal (Default)</button>
             </div>
@@ -1038,10 +1031,17 @@
         
         <div id="tabContent1">
             <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">
-                Tempelkan salinan ketikan dari WA/Notepad. Otomatis dirapikan & dicocokkan ke database chord!
+                Tempelkan salinan ketikan dari WA/Notepad. Otomatis dirapikan &amp; dicocokkan ke database chord!
             </p>
             <div class="form-group">
-                <textarea id="pasteTextArea" rows="7" placeholder="Contoh:&#10;Sesi 1 :&#10;Kau Curi Lagi (jrock)&#10;Without You (Mariah Carey)&#10;&#10;Sesi 2 :&#10;Sahabat sejati (SO7)&#10;Rungkad"></textarea>
+                <textarea id="pasteTextArea" rows="7" placeholder="Contoh:
+Sesi 1 :
+Kau Curi Lagi (jrock)
+Without You (Mariah Carey)
+
+Sesi 2 :
+Sahabat sejati (SO7)
+Rungkad"></textarea>
             </div>
             <div class="modal-actions">
                 <button type="button" class="btn-cancel" onclick="closePasteModal()">Batal</button>
@@ -1062,7 +1062,7 @@
 </div>
 
 <!-- MODAL LOGIN ADMIN -->
-<div id="adminLoginModal" class="modal-overlay">
+<div id="adminLoginModal" class="modal-overlay" style="display: none;">
     <div class="modal-content" style="max-width:300px; text-align:center;">
         <h3>🔑 Login Admin</h3>
         <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Masukkan password untuk membuka fitur Admin.</p>
@@ -1077,93 +1077,2062 @@
 </div>
 
 <!-- CUSTOM CENTER DIALOG OVERLAY -->
-<div id="customDialogOverlay">
+<div id="customDialogOverlay" style="display: none;">
     <div class="dialog-box">
-        <div id="dialogIcon" class="dialog-icon">ℹ️</div>
-        <div id="dialogTitle" class="dialog-title">Informasi</div>
-        <div id="dialogMessage" class="dialog-message">Pesan notifikasi di sini...</div>
-        <div id="dialogActions" class="dialog-actions"></div>
+        <div id="dialogIcon" class="dialog-icon">👑</div>
+        <div id="dialogTitle" class="dialog-title">Berhasil Login!</div>
+        <div id="dialogMessage" class="dialog-message">Selamat datang Admin Utama (Tipong)!</div>
+        <div id="dialogActions" class="dialog-actions"><button class="dialog-btn dialog-btn-primary" id="dialogOkBtn" onclick="closeCustomDialog()">Oke</button></div>
     </div>
 </div>
 
 <script>
     const defaultData = [
-        // ================= POP INDO =================
-        { title: "Ada Titik Titik", chordAsli: "Bb", chordCowok: "", chordCewek: "", catatan: "Main di G", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Ade Govinda (feat. Fadly) - Hal Hebat", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Aura Kasih - Mari Bercinta", chordAsli: "Cm", chordCowok: "", chordCewek: "", catatan: "Intro: Fm", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "BCL - Medley", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "Sesuai aransemen", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Blackout - Selalu Ada", chordAsli: "E", chordCowok: "", chordCewek: "G", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Diskoria, Laleilmanino, Eva Celia - C.H.R.I.S.Y.E", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "d'Masiv - Diam Tanpa Kata", chordAsli: "Bm", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "d'Masiv - Merindukanmu", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Dygta - Tapi Tahukah Kamu", chordAsli: "C#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Element - Cinta Tak Bersyarat", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Element - Maaf Dari Surga", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Ernie Zakri & Ade Govinda - Masing-Masing", chordAsli: "D#", chordCowok: "", chordCewek: "E", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Fatin Shidqia - Aku Memilih Setia", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Geisha - Cinta Dan Benci", chordAsli: "F#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Geisha - Takkan Pernah Ada", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Glenn Fredly - Januari", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "Naik 1.5", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Jangan Paksa Rindu", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Juicy Luicy - Terlalu Tinggi", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Kerispatih - Bila Rasaku Ini Rasamu", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Kerispatih - Tak Lekang Oleh Waktu", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Lyodra - Teganya Kau", chordAsli: "F#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Mahalini - Bohongi Hati", chordAsli: "D#", chordCowok: "", chordCewek: "E", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Mario G. Klau - Semata Karenamu", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Nadhif Basalamah - Kota Ini Tak Sama Tanpamu", chordAsli: "A#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Perunggu - 33x", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Rossa - Hey Ladies", chordAsli: "Fm", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Rossa - Pudar", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "Int: Gm, Em", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Rossa - Terlalu Cinta", chordAsli: "G#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Sesi Potret", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Shaggydog - Kembali Berdansa", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Sherina - Cinta Pertama Dan Terakhir", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Souljah - Tak Selalu", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Steven & Coconut Treez - Welcome To My Paradise", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Terbuang Dalam Waktu", chordAsli: "", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "The Lantis - Bunga Maaf", chordAsli: "A", chordCowok: "", chordCewek: "D", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Utopia - Baby Doll", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Utopia - Hujan", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Wijaya80 - Terakhir Kali", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Yovie & Nuno - Merindu Lagi", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Yovie & Nuno - Tanpa Cinta", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-        { title: "Yovie & Nuno - Tanpa Cinta (Versi G)", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopIndo" },
-
-        // ================= POP INGGRIS =================
-        { title: "ABBA - Dancing Queen", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Adele - Don't You Remember", chordAsli: "D#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Bon Jovi - Always", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Bon Jovi - Thank You For Loving Me", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Bruno Mars - It Will Rain", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Bruno Mars - Risk It All", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Bruno Mars - Talking To The Moon", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Bruno Mars - The Lazy Song", chordAsli: "B", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Coldplay / Maroon 5 - Fix You", chordAsli: "D#", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Coldplay - Yellow", chordAsli: "B", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Daniel Caesar feat. H.E.R. - Best Part", chordAsli: "D", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Jessie J - Flashlight", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Jessie J - Price Tag", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Justin Bieber - Favorite Girl", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Keane - Everybody's Changing", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Lady Gaga - Remember Us This Way", chordAsli: "C", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Lady Gaga & Bruno Mars - Die With A Smile", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-        { title: "Sam Smith - I'm Not The Only One", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "PopInggris" },
-
-        // ================= LAWAS =================
-        { title: "Chrisye - Kala Cinta Menggoda", chordAsli: "Cm", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-        { title: "Dewa 19 - Aku Milikmu", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-        { title: "Dewa 19 - Tak Kan Ada Cinta Yang Lain", chordAsli: "Am", chordCowok: "", chordCewek: "C#m", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-        { title: "Dian Piesesha - Tak Ingin Sendiri", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-        { title: "M.E - Inikah Cinta", chordAsli: "A", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-        { title: "Ruth Sahanaya - Kaulah Segalanya", chordAsli: "E", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-        { title: "Utha Likumahuwa - Sesaat Kau Hadir", chordAsli: "G", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Lawas" },
-
-        // ================= AMBYAR =================
-        { title: "Duda Araban", chordAsli: "G#m", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Ambyar" },
-        { title: "Rungkad", chordAsli: "F", chordCowok: "", chordCewek: "", catatan: "", linkChord: "", linkYoutube: "", category: "Ambyar" }
-    ];
+        {
+                "title": "Ada Titik Titik",
+                "chordAsli": "Bb",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "Main di G",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Ade Govinda (feat. Fadly) - Hal Hebat",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Aura Kasih - Mari Bercinta",
+                "chordAsli": "Cm",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "Intro: Fm",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "BCL - Medley",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "Sesuai aransemen",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Blackout - Selalu Ada",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "G",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Diskoria, Laleilmanino, Eva Celia - C.H.R.I.S.Y.E",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "d'Masiv - Diam Tanpa Kata",
+                "chordAsli": "Bm",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "d'Masiv - Merindukanmu",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Dygta - Tapi Tahukah Kamu",
+                "chordAsli": "C#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Element - Cinta Tak Bersyarat",
+                "chordAsli": "C",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Element - Maaf Dari Surga",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Ernie Zakri & Ade Govinda - Masing-Masing",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "E",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Fatin Shidqia - Aku Memilih Setia",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Geisha - Cinta Dan Benci",
+                "chordAsli": "F#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Geisha - Takkan Pernah Ada",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Glenn Fredly - Januari",
+                "chordAsli": "C",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "Naik 1.5",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Jangan Paksa Rindu",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Juicy Luicy - Terlalu Tinggi",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Kerispatih - Bila Rasaku Ini Rasamu",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Kerispatih - Tak Lekang Oleh Waktu",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Lyodra - Teganya Kau",
+                "chordAsli": "F#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Mahalini - Bohongi Hati",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "E",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Mario G. Klau - Semata Karenamu",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Nadhif Basalamah - Kota Ini Tak Sama Tanpamu",
+                "chordAsli": "A#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Perunggu - 33x",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Rossa - Hey Ladies",
+                "chordAsli": "Fm",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Rossa - Pudar",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "Int: Gm, Em",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Rossa - Terlalu Cinta",
+                "chordAsli": "G#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Sesi Potret",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Shaggydog - Kembali Berdansa",
+                "chordAsli": "C",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Sherina - Cinta Pertama Dan Terakhir",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Souljah - Tak Selalu",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Steven & Coconut Treez - Welcome To My Paradise",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Terbuang Dalam Waktu",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "The Lantis - Bunga Maaf",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "D",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Utopia - Baby Doll",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Utopia - Hujan",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Wijaya80 - Terakhir Kali",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Yovie & Nuno - Merindu Lagi",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Yovie & Nuno - Tanpa Cinta",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "Yovie & Nuno - Tanpa Cinta (Versi G)",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo"
+        },
+        {
+                "title": "ABBA - Dancing Queen",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Adele - Don't You Remember",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Bon Jovi - Always",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Bon Jovi - Thank You For Loving Me",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Bruno Mars - It Will Rain",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Bruno Mars - Risk It All",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Bruno Mars - Talking To The Moon",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Bruno Mars - The Lazy Song",
+                "chordAsli": "B",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Coldplay / Maroon 5 - Fix You",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Coldplay - Yellow",
+                "chordAsli": "B",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Daniel Caesar feat. H.E.R. - Best Part",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Jessie J - Flashlight",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Jessie J - Price Tag",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Justin Bieber - Favorite Girl",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Keane - Everybody's Changing",
+                "chordAsli": "C",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Lady Gaga - Remember Us This Way",
+                "chordAsli": "C",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Lady Gaga & Bruno Mars - Die With A Smile",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Sam Smith - I'm Not The Only One",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris"
+        },
+        {
+                "title": "Chrisye - Kala Cinta Menggoda",
+                "chordAsli": "Cm",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "Dewa 19 - Aku Milikmu",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "Dewa 19 - Tak Kan Ada Cinta Yang Lain",
+                "chordAsli": "Am",
+                "chordCowok": "",
+                "chordCewek": "C#m",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "Dian Piesesha - Tak Ingin Sendiri",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "M.E - Inikah Cinta",
+                "chordAsli": "A",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "Ruth Sahanaya - Kaulah Segalanya",
+                "chordAsli": "E",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "Utha Likumahuwa - Sesaat Kau Hadir",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Lawas"
+        },
+        {
+                "title": "Duda Araban",
+                "chordAsli": "G#m",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Ambyar"
+        },
+        {
+                "title": "Rungkad",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "Ambyar"
+        },
+        {
+                "title": "Sal Priadi - Ada Titik Titik",
+                "chordAsli": "Do : Bb | intro : D# M7 , Song : D# M7",
+                "chordCowok": "",
+                "chordCewek": "Do: D |  intro : G M7 , Song ; G M7 ",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/sal-priadi/ada-titik-titik-di-ujung-doa-chords-5250018",
+                "linkYoutube": "https://www.youtube.com/watch?v=IuRfhjQWS8Q&list=RDIuRfhjQWS8Q&start_radio=1",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Enau Feat. Ari Lesmana - Sesi Potret",
+                "chordAsli": "C",
+                "chordCowok": "C",
+                "chordCewek": "F",
+                "catatan": "",
+                "linkChord": "https://www.chordtela.com/2026/02/enau-feat-ari-lesmana-sesi-potret.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=bhWMAM6xjtQ&list=RDbhWMAM6xjtQ&start_radio=1",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Westlife - Beautiful In White C",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Westlife - My Love C",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Ed Sheeran - Perfect G#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Ed Sheeran – Thinking Out Loud D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Diana Ross & Lionel Richie - Endless Love Bb",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Shania Twain - You're Still The One D#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Marry You - Bruno Mars F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Marry You - Just The Way You Are F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "John Legend - All Of Me Fm",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Calum Scott - You Are The Reason Bb",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Brian McKnight - Marry Your Daughter B",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Bee Gees - How Deep Is Your Love D#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "George Benson - Nothing's Gonna Change My Love For You C#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Eric Clapton - Wonderful Tonight G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Rod Stewart - I Don't Want To Talk About It Bb",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Elvis Presley - Can't Help Falling In Love D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Frankie Valli - Can't Take My Eyes Off You E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Michael Bublé - Sway Dm",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Christian Bautista - The Way You Look At Me C#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Westlife With Diana Ross - When You Tell Me That You Love Me D#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Diana Ross – When You Tell Me That You Love Me G#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Frank Sinatra - L.O.V.E. G Naik G#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Michael Bublé - Everything D Naik E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Frank Sinatra - Fly Me To The Moon Am",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Michael Bolton - To Love Somebody B",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Firehouse - I Live My Life For You C#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Bryan Adams - I Do It For You C#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Nikka Costa - First Love G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "CHRISYE - Aku Cinta Dia",
+                "chordAsli": "A",
+                "chordCowok": "A",
+                "chordCewek": "C",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/chrisye/aku-cinta-dia-chords-4781069",
+                "linkYoutube": "https://www.youtube.com/watch?v=_EUbr9aICu0&list=RD_EUbr9aICu0&start_radio=1",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "CHRISYE - Anak Sekolah",
+                "chordAsli": "A",
+                "chordCowok": "A",
+                "chordCewek": "G",
+                "catatan": "",
+                "linkChord": "https://www.chordtela.com/2015/01/anak-sekolah-purpose-cover-chrisye.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=lBomGw7FA3Q&list=RDlBomGw7FA3Q&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Badai Pasti Berlalu ( BCL ) G ( G ) Intro (E) Song (G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Biar Menjadi Kenangan ( Raisa, Ahmad Dhani ) C",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "MULAN JAMEELA : Cinta Mati 2",
+                "chordAsli": "Do : E  (Bm)",
+                "chordCowok": "",
+                "chordCewek": "Bm",
+                "catatan": "intro : 5 | song : 5 Modulasi ke : G  | Reff : 6  | interlude :  Am Bm C D | Lead : Bm C#m A F#m",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/mulan-jameela/cinta-mati-2-chords-1722729",
+                "linkYoutube": "https://www.youtube.com/watch?v=UIkr3gvMouY&list=RDUIkr3gvMouY&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Dahulu ( The Groove ) D ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "BCL - Diskoria",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "F",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "USAI ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "TERLANJUR MENCINTA ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "TEGA ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "MENJADI DIA ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "JANJI SETIA ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "BAHAYA ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "MERASA INDAH ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "65 ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "HADAPI BERDUA ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "MEMILIH AKU ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "RINDU DALAM HATI ( TIARA ANDINI",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Gemintang ( TIARA ANDINI ) C ( C ) INTRO (C) REFF (E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Juwita ( CHRISYE ) E ( G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Kau () ( T FIVE ) Dm",
+                "chordAsli": "DM",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Lama Lama Aku Bosan ( AUDY ) D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Surat Cinta ( VINA PANDUWINTA ) E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Trauma ( AAN STORY FEAT ELSYA ) E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Trough The Fire ( Cakka Khan ) G#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Versace On The Floor ( BRUNO MARS ) D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Runtuh - Feby Putri feat. Fiersa Besari",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "D",
+                "catatan": "",
+                "linkChord": "https://www.chordtela.com/2021/10/feby-putri-feat-fiersa-besari-runtuh.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=YrtS8MESh0I&list=RDYrtS8MESh0I&start_radio=1",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Bertaut ( NADIN AMIZAH ) F# ( F",
+                "chordAsli": "F#",
+                "chordCowok": "",
+                "chordCewek": "F",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/nadin-amizah/bertaut-chords-3220574",
+                "linkYoutube": "https://www.youtube.com/watch?v=HyhLsy6b0XI&list=RDHyhLsy6b0XI&start_radio=1",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Janji Suci ( YOVIE AND NUNO ) A ( C",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Akad ( PAYUNG TEDUH ) A ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Still The One ( Shania Twain ) D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Tersiksa Lagi ( Utha Likumahuwa ) G Cm . . . F . . . Reff (Bb) Balik Song Am . . . D11",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Lumpuhkanlah Ingatanku ( Geisha ) D ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "To The Bone ( Pamungkas ) D# ( F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Its You ( Sezairi ) G# ( G# ) G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCobin": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Rasa Ini ( Vierra ) D ( D ) Intro Di (G)..Song Di (G) Reff Di (D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Aku Wanita ( Reza ) D Into (G) Song (G) Reff (D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Kasih ( Ermy Kulit ) Am",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Logika ( Vina Pandu ) D Intro (G) Song (D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Budi Doremi - Melukis Senja",
+                "chordAsli": "F",
+                "chordCowok": "",
+                "chordCewek": "C",
+                "catatan": "",
+                "linkChord": "https://www.chordtela.com/2020/06/budi-doremi-melukis-senja.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=qZIQAk-BUEc&list=RDqZIQAk-BUEc&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Budi Doremi - Mesin Waktu",
+                "chordAsli": "A",
+                "chordCowok": "A",
+                "chordCewek": "D",
+                "catatan": "",
+                "linkChord": "https://www.chordtela.com/2021/04/budi-doremi-mesin-waktu-ost-aku-dan-mesin-waktu.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=ksUTuZLU1hI&list=RDksUTuZLU1hI&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Selalu Ada ( Blackout ) E ( G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Serpihan Hati ( Utopia ) Dm ( Dm ) (song Dm) Reff (F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Almost Us Never Enough ( Ariana ) D ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Just The Two Of Us ( Bill Withers & Grover Washington Jr ) C# ( F",
+                "chordAsli": "Do : G#",
+                "chordCowok": "G",
+                "chordCewek": "C",
+                "catatan": "intro : 4 MM7",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/grover-washington-jr-/just-the-two-of-us-chords-663141",
+                "linkYoutube": "https://www.youtube.com/watch?v=VoEsEC2CLgE&list=RDVoEsEC2CLgE&start_radio=1",
+                "category": "PopIndo",
+                "isNew": false
+        },
+        {
+                "title": "Every Summertime ( Niki ) D# ( D# ) Reff (B",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Pertama ( Reza ) D ( D ) Intro (G) Reff (D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "VIina Panduwinata - Biru",
+                "chordAsli": "G",
+                "chordCowok": "-",
+                "chordCewek": "G",
+                "catatan": "Cmaj7 D Bm7 Em7 Am7 D G",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/vina-panduwinata/biru-chords-2887856",
+                "linkYoutube": "https://www.youtube.com/watch?v=ruvt8R28w1Q&list=RDruvt8R28w1Q&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Pesan Terakhir ( Lyodra ) D ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Judika - Putus Atau Terus",
+                "chordAsli": "A",
+                "chordCowok": "A atau G",
+                "chordCewek": "C",
+                "catatan": "Overtune ½ Bb",
+                "linkChord": "https://www.chordtela.com/2020/09/judika-putus-atau-terus.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=6b2Tv7d9z7A&list=RD6b2Tv7d9z7A&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Tak Segampang Itu ( Anggi Marito ) F ( F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Pasto - Tanya Hati",
+                "chordAsli": "G",
+                "chordCowok": "G",
+                "chordCewek": "C",
+                "catatan": "intro 4  dulu ,Song 1",
+                "linkChord": "https://www.chordtela.com/2019/12/tanya-hati-pasto-chintya-gabriella-cover.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=6WdypmA91I0&list=RD6WdypmA91I0&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Flashlight ( Jessi J ) F ( F ) (Intro 4) Song (4",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "So Sick ( Ne Yo ) Dm",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Stefani Feat Ziva - Falling In Love Alone",
+                "chordAsli": " Bb",
+                "chordCowok": "",
+                "chordCewek": "Bb",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "https://www.youtube.com/watch?v=Aw1eOFJiDtE&list=RDAw1eOFJiDtE&start_radio=1",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "J-Rocks feat. Prisa - Kau Curi Lagi",
+                "chordAsli": "G",
+                "chordCowok": "G",
+                "chordCewek": "G (Duet)",
+                "catatan": "intro Di 1 interlude : D# Dm Cm Dm D#m Fm F# Fm F# Fm A G#m F#m G#m A B",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/j-rocks/kau-curi-lagi-chords-591113",
+                "linkYoutube": "https://www.youtube.com/watch?v=pTll5RY820U&list=RDpTll5RY820U&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Wonder Woman ( MULAN JAMEELA ) E ( E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "She - Jomblowati",
+                "chordAsli": "E",
+                "chordCowok": "-",
+                "chordCewek": "E",
+                "catatan": "Interlude gitar + biola trus naik 1",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/she-indonesia/jomblowati-chords-998903",
+                "linkYoutube": "https://www.youtube.com/watch?v=DAAvhKUeCso&list=RDDAAvhKUeCso&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Jessie J - Domino",
+                "chordAsli": "G",
+                "chordCowok": "",
+                "chordCewek": "G atau F",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/jessie-j/domino-chords-1085341",
+                "linkYoutube": "https://www.youtube.com/watch?v=UJtB55MaoD0&list=RDUJtB55MaoD0&start_radio=1",
+                "category": "PopInggris",
+                "isNew": true
+        },
+        {
+                "title": "Mus Mujiono - Tanda - Tandanya",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/mus-mujiono/tanda-tanda-chords-6187004",
+                "linkYoutube": "https://www.youtube.com/watch?v=Q1ARo64e_FA&list=RDQ1ARo64e_FA&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Glend Fredly - Kasih Putih",
+                "chordAsli": "Bb modul ke D#",
+                "chordCowok": "intro G song C",
+                "chordCewek": "D",
+                "catatan": "(intro : Bb modululasi songnya jadi di D#)",
+                "linkChord": "",
+                "linkYoutube": "https://www.youtube.com/watch?v=G-vVY5EW_7A&list=RDG-vVY5EW_7A&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Dia ( Reza ) D ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Pilihlah Aku ( Krisdayanti ) F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Listen ( Beyonce ) B ( A ) Song (B) Bridge (D) Reff (B",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Payung Fantasi ( Ismail Marzuki ) C#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Noah - Kupu-kupu Malam",
+                "chordAsli": "D",
+                "chordCowok": "",
+                "chordCewek": "D",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/noah-indonesia/kupu-kupu-malam-chords-1851973",
+                "linkYoutube": "https://www.youtube.com/watch?v=Qa1mZA8dTvk&list=RDQa1mZA8dTvk&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Adelle - When We Were Young (  ) D#m ( C#m",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "D#",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/adele/when-we-were-young-chords-1782038",
+                "linkYoutube": "https://www.youtube.com/watch?v=dOIkbsXihfc&list=RDdOIkbsXihfc&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Butiran Debu ( Rumor ) A ( D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Vierra  - Jadi Apa Yang Kau Inginkan",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "D",
+                "catatan": "",
+                "linkChord": "https://tabs.ultimate-guitar.com/tab/vierra/jadi-yang-kuinginkan-chords-998094",
+                "linkYoutube": "https://www.youtube.com/watch?v=cnqBJ4K70iI&list=RDcnqBJ4K70iI&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Mahalini - Sial",
+                "chordAsli": "D#",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "bridge ke 4",
+                "linkChord": "https://www.chordtela.com/2023/02/mahalini-sial.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=QSWYyoF79oE&list=RDQSWYyoF79oE&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Sisa Rasa ( Mahalini ) F# ( F#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "MELAWAN RESTU ( Mahalini ) G ( G ) Intro (4) Song (1",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "KISAH SEMPURNA ( Mahalini ) B ( B ) Intro (6m) Song (B",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "AKU YANG SALAH ( Mahalini",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Tertawan Hati ( Awdela ) A ( A ) Intro (6) Song (1) Klik Disini",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Tak Dianggap ( Lyodra ) D Klik Disini",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Cinta Dalam Hati ( Ungu ) D ( G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Komang ( Raim Loade ) G ( C",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Hampa ( Ari Laso ) D ( G ) D Intro (6m) Song (1",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Hal Hebat ( Govinda ) B ( E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Puisi ( Jikustik ) E ( A",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Sekali Ini Saja ( Glend Fredly ) C ( C ) Intro (1) Song (2#(d#)) Reff (1) Naik Stengah,Terus Naik Lagi Setengah",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Terserah ( Glend Fredly ) F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Akhir Cerita Cinta ( Glend Fredly ) G Song (1) Reff (2) Naik 1 Reff (3",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Sedih Tak Berujung ( Glend Fredly ) (G=do) Intro (4) Song (4) Reff (4) Lead (4_C=do) Naik 1 Reff (5",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "It Will Rain ( Bruno Mars ) D",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Talking To The Moon ( Bruno Mars ) E",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "I'm Not The Only One ( Sam Smith ) F",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Just The Way You Are ( Bruno Mars ) F ( G",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Terlalu Cinta ( Rossa ) G# ( G ) - Intro : B Modul Ke : G#",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Jika Cinta Dia ( Geisha ) B ( B",
+                "chordAsli": "",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "",
+                "linkChord": "",
+                "linkYoutube": "",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Pamungkas - Berapa Kali Kita Akan Saling Memaafkan",
+                "chordAsli": "B",
+                "chordCowok": "B",
+                "chordCewek": "-",
+                "catatan": "intro 4 dulu",
+                "linkChord": "https://www.chordtela.com/2026/05/pamungkas-berapa-kali-kita-akan-saling-memaafkan.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=xI1nKck7tzg&list=RDxI1nKck7tzg&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Tiara Andini – Kupu - Kupu",
+                "chordAsli": "Do : D#",
+                "chordCowok": "",
+                "chordCewek": "D#",
+                "catatan": "intro : 4 (G# M7) | Song : 4 (G M7)  | Reff Modulasi : 4 F (Bb) | ",
+                "linkChord": "https://www.chordtela.com/2024/05/tiara-andini-kupu-kupu.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=SxQEiq4NZqk&list=RDSxQEiq4NZqk&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        },
+        {
+                "title": "Yovie & Nuno - Menjaga Hati",
+                "chordAsli": "Do : Bb",
+                "chordCowok": "",
+                "chordCewek": "",
+                "catatan": "intro : 6 (Gm) | Song : 5 (Gm)",
+                "linkChord": "https://www.chordtela.com/2014/11/menjaga-hati-yovie-nuno.html",
+                "linkYoutube": "https://www.youtube.com/watch?v=bEp9CgtRfuE&list=RDbEp9CgtRfuE&start_radio=1",
+                "category": "PopIndo",
+                "isNew": true
+        }
+];
 
     const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas'];
     let isAdmin = false;
@@ -1191,7 +3160,7 @@
         localStorage.setItem('setlistVerNumVal', currentVerNum);
         localStorage.setItem('setlistTiponkData_v' + currentVerNum, JSON.stringify(daftarLagu));
         
-        // Munculkan notifikasi update kecil saat web pertama dibuka (menggunakan alert standar browser agar tidak ter-block DOM load)
+        // Munculkan notifikasi update kecil saat web pertama dibuka
         setTimeout(() => alert("Setlist berhasil di-update ke versi terbaru!"), 500); 
     } else {
         // Jika tidak ada update, pakai data lokal
@@ -1216,21 +3185,6 @@
         }
 
         return false;
-    }
-
-    // ================= DETEKSI SCREENSHOT / REKAM LAYAR =================
-    document.addEventListener("keyup", function (e) {
-        if (!isAdmin && (e.key === "PrintScreen" || e.keyCode === 44)) {
-            triggerScreenshotShield();
-        }
-    });
-
-    function triggerScreenshotShield() {
-        const shield = document.getElementById('screenshotShield');
-        shield.style.display = 'flex';
-        setTimeout(function() {
-            shield.style.display = 'none';
-        }, 2500);
     }
 
     // ================= DARK MODE SYSTEM =================
@@ -1495,6 +3449,12 @@
         });
 
         let counts = { PopIndo: 0, PopInggris: 0, Ambyar: 0, Lawas: 0 };
+
+        // Tambahan sistem backup data sesi manggung
+        let savedSessionData = localStorage.getItem('setlistSesiManggung_' + currentVerNum);
+        if(savedSessionData) {
+            document.getElementById('list-SesiManggung').innerHTML = savedSessionData;
+        }
 
         daftarLagu.forEach(function(lagu, index) {
             if (counts[lagu.category] !== undefined) counts[lagu.category]++;
@@ -1983,6 +3943,13 @@
         }, "⚠️", "Ya, Lanjutkan", "Batal");
     }
 
+    function simpanSesiManggungKeLokal() {
+        const listContainer = document.getElementById('list-SesiManggung');
+        if (listContainer) {
+            localStorage.setItem('setlistSesiManggung_' + currentVerNum, listContainer.innerHTML);
+        }
+    }
+
     // ================= FITUR PASTE SESI MANGGUNG =================
     function openPasteModal() {
         document.getElementById('pasteModal').style.display = 'flex';
@@ -2020,6 +3987,7 @@
         } else if (direction === 1 && li.nextElementSibling) {
             li.parentNode.insertBefore(li.nextElementSibling, li);
         }
+        simpanSesiManggungKeLokal();
     }
 
     function buildSessionSongItem(rawLine, foundSong, customDetails) {
@@ -2127,6 +4095,7 @@
             currentUl.appendChild(li);
         });
 
+        simpanSesiManggungKeLokal();
         closePasteModal();
         openFolder('SesiManggung');
     }
@@ -2152,6 +4121,7 @@
             listContainer.appendChild(ul);
         });
 
+        simpanSesiManggungKeLokal();
         closePasteModal();
         openFolder('SesiManggung');
     }
@@ -2167,6 +4137,7 @@
 
         const li = buildSessionSongItem("(Klik ✏️ Edit untuk isi lagu)");
         ul.appendChild(li);
+        simpanSesiManggungKeLokal();
     }
 
     // Edit Form Khusus Sesi
@@ -2264,6 +4235,7 @@
         const newLi = buildSessionSongItem(title, (searchKey.length > 2 ? foundSong : null), customDetails);
 
         currentEditingLi.replaceWith(newLi);
+        simpanSesiManggungKeLokal();
         closeEditSessionModal();
     }
 
@@ -2271,6 +4243,7 @@
         const li = btnEl.closest('li.song-item');
         showCustomConfirm("Hapus Baris Sesi", "Apakah kamu yakin ingin menghapus lagu ini dari list sesi?", function() {
             li.remove();
+            simpanSesiManggungKeLokal();
             showCustomAlert("Terhapus", "Lagu telah dihapus dari sesi.", "🗑️");
         }, "⚠️", "Ya, Lanjutkan", "Batal");
     }
