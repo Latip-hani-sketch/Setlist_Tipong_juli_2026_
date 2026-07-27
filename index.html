@@ -61,80 +61,37 @@
         }
 
         #screenshotShield {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: #090d16;
-            color: white;
-            z-index: 99999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: 700;
-            backdrop-filter: blur(10px);
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: #090d16; color: white; z-index: 99999; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 20px; font-size: 18px; font-weight: 700; backdrop-filter: blur(10px);
         }
 
         .container { 
-            max-width: 500px; 
-            margin: auto; 
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 24px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-color);
-            padding: 16px 14px 70px 14px;
-            position: relative;
-            transition: all 0.3s ease;
+            max-width: 500px; margin: auto; background: var(--card-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px; box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color); padding: 16px 14px 70px 14px;
+            position: relative; transition: all 0.3s ease;
         }
 
         .watermark-footer {
-            text-align: center;
-            margin-top: 18px;
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-            letter-spacing: 0.8px;
-            opacity: 0.75;
+            text-align: center; margin-top: 18px; font-size: 11px;
+            color: var(--text-muted); font-weight: 600; letter-spacing: 0.8px; opacity: 0.75;
         }
 
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            gap: 8px;
-        }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 8px; }
 
         h2.header-title {
-            text-align: center;
-            font-weight: 700;
-            margin: 0;
-            font-size: 17px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            flex: 1;
-            letter-spacing: -0.3px;
+            text-align: center; font-weight: 700; margin: 0; font-size: 17px;
+            color: var(--text-main); display: flex; align-items: center; justify-content: center;
+            gap: 6px; flex: 1; letter-spacing: -0.3px;
         }
 
         .mode-badge {
-            font-size: 11px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid transparent;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size: 11px; padding: 6px 12px; border-radius: 20px; font-weight: 600;
+            cursor: pointer; border: 1px solid transparent; font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease; display: flex; align-items: center; gap: 4px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .mode-viewer { background: #fef3c7; color: #b45309; border-color: #fde68a; }
@@ -143,48 +100,25 @@
         body.dark-mode .mode-admin { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
 
         .btn-theme-toggle {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
+            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main);
+            border-radius: 50%; width: 36px; height: 36px; font-size: 15px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: transform 0.2s;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
         .btn-theme-toggle:active { transform: scale(0.9); }
 
         .badge-new {
-            background: linear-gradient(135deg, #ef4444, #f43f5e);
-            color: white;
-            font-size: 9px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 6px;
-            margin-left: 4px;
-            letter-spacing: 0.5px;
-            vertical-align: middle;
-            animation: pulseNew 1.5s infinite;
+            background: linear-gradient(135deg, #ef4444, #f43f5e); color: white; font-size: 9px;
+            font-weight: 700; padding: 2px 6px; border-radius: 6px; margin-left: 4px;
+            letter-spacing: 0.5px; vertical-align: middle; animation: pulseNew 1.5s infinite;
         }
 
         @keyframes pulseNew { 0% { opacity: 1; } 50% { opacity: 0.65; } 100% { opacity: 1; } }
 
         .badge-incomplete {
-            background-color: #fef3c7;
-            color: #b45309;
-            border: 1px solid #fde68a;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 1px 5px;
-            border-radius: 6px;
-            margin-left: 4px;
-            vertical-align: middle;
-            display: inline-block;
+            background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; font-size: 10px;
+            font-weight: 700; padding: 1px 5px; border-radius: 6px; margin-left: 4px;
+            vertical-align: middle; display: inline-block;
         }
         body.dark-mode .badge-incomplete { background-color: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
 
@@ -225,7 +159,7 @@
         .search-box input {
             width: 100%; padding: 10px 12px 10px 38px; background: var(--input-bg); color: var(--text-main);
             border: 1px solid var(--border-color); border-radius: 12px; font-size: 12px; font-family: 'Poppins', sans-serif;
-            transition: all 0.25s ease; box-sizing: border-box;
+            transition: all 0.25s ease; box-sizing: border-box; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
         .search-box input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
         .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; }
@@ -272,7 +206,7 @@
         .song-item.incomplete-card { border-left: 4px solid var(--warning); }
         
         .song-title-row { display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 8px; }
-        .song-title { font-size: 12px; font-weight: 600; color: var(--text-main); flex: 1; line-height: 1.4; }
+        .song-title { font-size: 13px; font-weight: 600; color: var(--text-main); flex: 1; line-height: 1.4; }
         .music-icon { opacity: 0.4; font-size: 11px; flex-shrink: 0; }
 
         .song-details { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color); animation: fadeIn 0.25s ease; }
@@ -281,7 +215,7 @@
         .info-row { display: flex; margin-bottom: 6px; align-items: flex-start; }
         .info-row:last-child { margin-bottom: 0; }
         .info-label { font-weight: 600; color: var(--text-muted); width: 95px; flex-shrink: 0; padding-top: 1px; }
-        .info-value { color: var(--text-main); font-weight: 600; flex: 1; padding-top: 1px; word-break: break-word; white-space: normal; }
+        .info-value { color: var(--text-main); font-weight: 600; flex: 1; padding-top: 1px; word-break: break-word; white-space: pre-wrap; }
         
         .info-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; background: rgba(99, 102, 241, 0.12); padding: 3px 8px; border-radius: 6px; font-size: 10px; }
         .info-link.empty { background: var(--border-color); color: var(--text-muted); pointer-events: none; opacity: 0.6; }
@@ -308,7 +242,6 @@
         .modal-content { background: var(--card-bg); color: var(--text-main); width: 100%; max-width: 360px; border-radius: 20px; padding: 20px; max-height: 85vh; overflow-y: auto; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .modal-content h3 { margin-top: 0; color: var(--text-main); font-size: 15px; margin-bottom: 12px; font-weight: 700; }
         
-        /* Modifikasi Form Group agar lebih rapi */
         .form-section { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
         .form-section-title { font-size: 11px; font-weight: 700; color: var(--primary); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-group { margin-bottom: 10px; }
@@ -335,7 +268,6 @@
         .dialog-btn-danger { background: var(--danger); color: white; }
         .dialog-btn-cancel { background: var(--border-color); color: var(--text-main); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="dark-mode">
@@ -354,7 +286,6 @@
         <button class="btn-action-main btn-backup-theme admin-controls" onclick="openBackupModal()">💾 Backup Data</button>
         <button class="btn-action-main btn-import-theme admin-controls" onclick="openImportModal()">📄 Import .txt</button>
         <button class="btn-action-main btn-paste-theme admin-controls" onclick="openPasteModal()">📋 Paste Sesi</button>
-        <!-- Tombol Generate HTML Dimunculkan Lagi -->
         <button class="btn-action-main btn-generate-theme admin-controls tipong-only-controls" onclick="generateUpdatedIndexHtml()">⚙️ Generate HTML</button>
     </div>
 
@@ -382,7 +313,6 @@
             <div class="sub-btn btn-lawas" onclick="openFolder('Lawas')">
                 <span>Lawas <small id="count-Lawas">(0)</small></span>
             </div>
-            <!-- Kategori Baru: Dangdut -->
             <div class="sub-btn btn-dangdut" onclick="openFolder('Dangdut')">
                 <span>Dangdut <small id="count-Dangdut">(0)</small></span>
             </div>
@@ -424,7 +354,6 @@
             <ul id="list-Lawas"></ul>
         </div>
 
-        <!-- Wadah Daftar Lagu Dangdut -->
         <div id="content-Dangdut" class="sub-content">
             <div class="category-header" style="color: #d946ef;"><span>💃 DANGDUT</span><button class="close-folder" onclick="closeAllFolders()">⬅ Kembali</button></div>
             <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="search-Dangdut" oninput="filterCategory('Dangdut', this.value)" placeholder="Cari lagu Dangdut..."></div>
@@ -481,24 +410,24 @@
             <div class="form-section">
                 <h4 class="form-section-title">🎸 Chord & Catatan</h4>
                 <div style="display:flex; gap:8px;">
-                    <div class="form-group" style="flex:1;"><label>Chord Asli</label><input type="text" id="inputChordAsli" placeholder="Misal: D#"></div>
-                    <div class="form-group" style="flex:1;"><label>Cowok</label><input type="text" id="inputChordCowok" placeholder="Misal: E"></div>
-                    <div class="form-group" style="flex:1;"><label>Cewek</label><input type="text" id="inputChordCewek" placeholder="Misal: A"></div>
+                    <div class="form-group" style="flex:1;"><label>Chord Asli</label><input type="text" id="inputChordAsli" placeholder="D#"></div>
+                    <div class="form-group" style="flex:1;"><label>Cowok</label><input type="text" id="inputChordCowok" placeholder="E"></div>
+                    <div class="form-group" style="flex:1;"><label>Cewek</label><input type="text" id="inputChordCewek" placeholder="A"></div>
                 </div>
                 <div class="form-group">
-                    <label>Catatan Singkat</label>
+                    <label>📝 Catatan Singkat</label>
                     <textarea id="inputCatatan" rows="2" placeholder="Overtune ke (F) di akhir..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label style="color:#8b5cf6;">📝 Lirik & Chord Custom</label>
+                    <label style="color:#8b5cf6;">🎤 Lirik & Chord Custom</label>
                     <textarea id="inputCustomChord" rows="5" placeholder="Paste lirik & chord di sini.&#10;TIPS: Agar chord bisa di-Transpose otomatis, gunakan tanda kurung, contoh: (Am) atau (C#m)."></textarea>
                 </div>
             </div>
 
             <div class="form-section">
                 <h4 class="form-section-title">🌐 Link Referensi</h4>
-                <div class="form-group"><input type="url" id="inputLinkChord" placeholder="Link Situs Web Chord..."></div>
-                <div class="form-group"><input type="url" id="inputLinkYoutube" placeholder="Link YouTube..."></div>
+                <div class="form-group"><label>🔗 Link Web Chord / Lirik Teks</label><input type="text" id="inputLinkChord" placeholder="URL Situs atau lirik text..."></div>
+                <div class="form-group"><label>▶️ Link YouTube</label><input type="url" id="inputLinkYoutube" placeholder="https://youtube.com/..."></div>
             </div>
             
             <div class="modal-actions">
@@ -527,7 +456,7 @@
                 </div>
                 <div class="form-group"><label>Catatan Singkat</label><textarea id="editSesiCatatan" rows="2" placeholder="Intro (Fm)"></textarea></div>
                 <div class="form-group"><label>Lirik & Chord Custom</label><textarea id="editSesiCustom" rows="4" placeholder="Paste dari Notepad..."></textarea></div>
-                <div class="form-group"><label>Link Web Chord</label><input type="url" id="editSesiLinkChord"></div>
+                <div class="form-group"><label>Link Web Chord / Lirik</label><input type="text" id="editSesiLinkChord"></div>
                 <div class="form-group"><label>Link YouTube</label><input type="url" id="editSesiLinkYoutube"></div>
             </div>
 
@@ -556,7 +485,7 @@
     </div>
 </div>
 
-<!-- MODAL IMPORT & BACKUP (DISINGKAT AGAR KODE LEBIH RAPI) -->
+<!-- MODAL IMPORT & BACKUP -->
 <div id="importModal" class="modal-overlay">
     <div class="modal-content">
         <h3>📄 Import Lagu .txt</h3>
@@ -621,16 +550,16 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // Template Default
     const defaultData = [
-        { "title": "Ada Titik Titik", "chordAsli": "Bb", "chordCowok": "", "chordCewek": "", "catatan": "Main di G", "linkChord": "", "linkYoutube": "", "category": "PopIndo", "doBase": "", "tempo": "", "timeSignature": "", "customChord": "" },
-        // ... Data lama dikosongkan disini agar tidak kepanjangan di source code, data aslimu sudah tersimpan di Firebase milikmu.
+        { "title": "Ada Titik Titik", "chordAsli": "Bb", "chordCowok": "", "chordCewek": "", "catatan": "Main di G", "linkChord": "", "linkYoutube": "", "category": "PopIndo", "doBase": "", "tempo": "", "timeSignature": "", "customChord": "" }
     ];
 
     let daftarLagu = [];
     let isAdmin = false;
     let loggedInPassword = "";
     let autoScrollTimer = null;
-    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'Dangdut']; // Ditambah Dangdut
+    const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'Dangdut'];
     const RESTRICTED_FRIEND_PASSWORDS = ["temen123", "band123", "bro2026"];
 
     let myDeviceId = localStorage.getItem('mySetlistDeviceId');
@@ -664,7 +593,6 @@
         let root = match[1];
         let rest = match[2];
         
-        // Normalisasi huruf kapital & flat (b) ke sharp (#)
         root = root.charAt(0).toUpperCase() + root.slice(1);
         if (root === 'Db') root = 'C#';
         if (root === 'Eb') root = 'D#';
@@ -684,8 +612,8 @@
         if (!text) return "";
         if (steps === 0) return text;
         if (requireParentheses) {
-            // Mencari teks di dalam kurung, contoh: (Am) atau (C#m7)
-            return text.replace(/\(([A-G][#b]?[^\)]*)\)/gi, (match, p1) => {
+            // Hanya transpose yang ada di dalam kurung ( )
+            return text.replace(/\(([A-G][#b]?[a-zA-Z0-9]*)\)/g, (match, p1) => {
                 return '(' + transposeSingleNote(p1, steps) + ')';
             });
         } else {
@@ -697,36 +625,43 @@
         const detailDiv = btn.closest('.song-details');
         const stateSpan = detailDiv.querySelector('.trans-val-display');
         let current = parseInt(stateSpan.getAttribute('data-val')) || 0;
-        current += step;
+        
+        if (step === 0) { current = 0; } 
+        else { current += step; }
         
         stateSpan.setAttribute('data-val', current);
         stateSpan.innerText = (current > 0 ? "+" : "") + current;
 
-        // Daftar elemen yang mau ditranspose (tanpa kurung)
-        const plainSelectors = ['.val-do', '.val-asli', '.val-cowok', '.val-cewek'];
+        // Transpose Chord Basic (Tanpa Kurung)
+        const plainSelectors = ['.val-asli', '.val-cowok', '.val-cewek', '.val-do'];
         plainSelectors.forEach(sel => {
             let el = detailDiv.querySelector(sel);
             if(el) {
-                let orig = el.getAttribute('data-original');
-                el.innerText = `: ${applyTransposeToText(orig, current, false) || "-"}`;
+                let orig = decodeURIComponent(el.getAttribute('data-original') || "");
+                let tVal = applyTransposeToText(orig, current, false);
+                if (sel === '.val-do') {
+                    el.innerText = tVal || "-";
+                } else {
+                    el.innerText = `: ${tVal || "-"}`;
+                }
             }
         });
 
-        // Transpose Catatan (dengan kurung)
+        // Transpose Catatan Singkat (Dalam Kurung)
         let catEl = detailDiv.querySelector('.val-catatan');
         if(catEl) {
-            let orig = catEl.getAttribute('data-original');
+            let orig = decodeURIComponent(catEl.getAttribute('data-original') || "");
             let tVal = applyTransposeToText(orig, current, true) || "";
             let preview = tVal.replace(/\n/g, ' ');
             if(preview.length > 20) preview = preview.substring(0, 20) + "...";
-            let btnBaca = tVal ? ` <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodeURIComponent(tVal).replace(/'/g, "%27")}')">Baca 📖</button>` : "";
+            let btnBaca = tVal.trim() ? ` <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodeURIComponent(tVal).replace(/'/g, "%27")}', '📝 Catatan')">Baca 📖</button>` : "";
             catEl.innerHTML = `: ${preview || "-"} ${btnBaca}`;
         }
 
-        // Transpose Lirik & Chord Custom (dengan kurung)
+        // Transpose Lirik & Chord Custom (Dalam Kurung)
         let customEl = detailDiv.querySelector('.val-custom');
         if(customEl) {
-            let orig = customEl.getAttribute('data-original');
+            let orig = decodeURIComponent(customEl.getAttribute('data-original') || "");
             let tVal = applyTransposeToText(orig, current, true);
             customEl.innerText = tVal || "-";
         }
@@ -769,11 +704,11 @@
         }
     }
 
-    function bukaCatatanLengkap(encodedCatatan) {
-        const catatanText = decodeURIComponent(encodedCatatan);
+    function bukaCatatanLengkap(encodedText, title = "📝 Detail") {
+        const text = decodeURIComponent(encodedText);
         const msgElement = document.getElementById('dialogMessage');
         msgElement.classList.add('catatan-view');
-        showCustomAlert("📝 Catatan Lengkap", catatanText, "📖");
+        showCustomAlert(title, text, "📖");
     }
 
     function showCustomAlert(title, message, icon) {
@@ -953,11 +888,6 @@
             const hasWebChord = lagu.linkChord && lagu.linkChord.trim() !== "";
             if (!hasWebChord) li.classList.add('incomplete-card');
 
-            const btnChordClass = lagu.linkChord ? "info-link" : "info-link empty";
-            const btnChordText = lagu.linkChord ? "Buka Web 🔗" : "Kosong";
-            const btnYtClass = lagu.linkYoutube ? "info-link" : "info-link empty";
-            const btnYtText = lagu.linkYoutube ? "Tonton ▶️" : "Kosong";
-
             let newBadgeHtml = lagu.isNew ? '<span class="badge-new">NEW</span>' : '';
             let incompleteBadgeHtml = !hasWebChord ? '<span class="badge-incomplete" title="Web Chord Kosong">🌐</span>' : '';
 
@@ -981,32 +911,49 @@
                 `;
             }
 
+            // LINK LIRIK / CHORD
+            let linkChordHtml = ": -";
+            if (lagu.linkChord && lagu.linkChord.trim() !== "") {
+                if (lagu.linkChord.startsWith("http")) {
+                    linkChordHtml = `: <a href="${lagu.linkChord}" target="_blank" class="info-link">Buka Web 🔗</a>`;
+                } else {
+                    let encLirik = encodeURIComponent(lagu.linkChord).replace(/'/g, "%27");
+                    let prevLirik = lagu.linkChord.length > 20 ? lagu.linkChord.substring(0, 20) + "..." : lagu.linkChord;
+                    prevLirik = prevLirik.replace(/\n/g, ' '); 
+                    linkChordHtml = `: ${prevLirik} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encLirik}', '🎤 Lirik')">Baca 📖</button>`;
+                }
+            }
+
+            let linkYtHtml = lagu.linkYoutube ? `: <a href="${lagu.linkYoutube}" target="_blank" class="info-link">Tonton ▶️</a>` : ": -";
+
+            // CATATAN
             let catatanTeks = lagu.catatan || "";
             let catatanHtml = ": -";
             if (catatanTeks.trim() !== "") {
                 let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27");
                 let preview = catatanTeks.length > 20 ? catatanTeks.substring(0, 20) + "..." : catatanTeks;
                 preview = preview.replace(/\n/g, ' '); 
-                catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}')">Baca 📖</button>`;
+                catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}', '📝 Catatan')">Baca 📖</button>`;
             }
 
+            // LIRIK & CHORD CUSTOM
             let customChordHtml = "";
             if (lagu.customChord && lagu.customChord.trim() !== "") {
                 customChordHtml = `
                     <div class="info-row" style="flex-direction:column; margin-top:8px;">
-                        <span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">📜 Lirik & Chord Custom:</span>
+                        <span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">🎤 Lirik & Chord Custom:</span>
                         <pre class="info-value val-custom" data-original="${encodeURIComponent(lagu.customChord).replace(/'/g, "%27")}" style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:10px; font-size:11px; width:100%; box-sizing:border-box; overflow-x:auto; margin:0; font-family:monospace; white-space:pre-wrap;">${lagu.customChord}</pre>
                     </div>
                 `;
             }
 
-            // Transpose Widget HTML
             let transposeWidget = `
                 <div class="transpose-widget" style="display:flex; align-items:center; gap:8px; margin-bottom:10px; background:var(--card-bg); padding:6px 10px; border-radius:8px; border:1px solid var(--border-color);">
                     <span style="font-size:11px; font-weight:600; color:var(--text-muted); flex:1;">🎹 Transpose:</span>
                     <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, -1)">-</button>
                     <span class="trans-val-display" data-val="0" style="font-size:12px; font-weight:700; width:20px; text-align:center; color:var(--text-main);">0</span>
                     <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, 1)">+</button>
+                    <button type="button" class="btn-sesi-mini" style="margin-left:4px; color:var(--danger);" onclick="event.stopPropagation(); changeTranspose(this, 0)" title="Reset">🔄</button>
                 </div>
             `;
 
@@ -1019,17 +966,17 @@
                     ${transposeWidget}
                     <div class="info-box">
                         <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;">
-                            <span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${lagu.doBase || ''}">${lagu.doBase || '-'}</span></span>
+                            <span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${encodeURIComponent(lagu.doBase || '').replace(/'/g, "%27")}">${lagu.doBase || '-'}</span></span>
                             <span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${lagu.tempo || '-'}</span>
                             <span style="font-size:10px; font-weight:700; color:var(--info);">Ketukan: ${lagu.timeSignature || '-'}</span>
                         </div>
-                        <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${lagu.chordAsli || ''}">: ${lagu.chordAsli || "-"}</span></div>
-                        <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${lagu.chordCowok || ''}">: ${lagu.chordCowok || "-"}</span></div>
-                        <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${lagu.chordCewek || ''}">: ${lagu.chordCewek || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${encodeURIComponent(lagu.chordAsli || '').replace(/'/g, "%27")}">: ${lagu.chordAsli || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${encodeURIComponent(lagu.chordCowok || '').replace(/'/g, "%27")}">: ${lagu.chordCowok || "-"}</span></div>
+                        <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${encodeURIComponent(lagu.chordCewek || '').replace(/'/g, "%27")}">: ${lagu.chordCewek || "-"}</span></div>
                         <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(lagu.catatan || '').replace(/'/g, "%27")}">${catatanHtml}</span></div>
                         ${customChordHtml}
-                        <div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
-                        <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div>
+                        <div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Lirik</span><span class="info-value">${linkChordHtml}</span></div>
+                        <div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">${linkYtHtml}</span></div>
                     </div>
                     ${adminActionHtml}
                 </div>
@@ -1195,10 +1142,7 @@
     }
 
     function openImportModal() {
-        if (!isAdmin) {
-            showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒");
-            return;
-        }
+        if (!isAdmin) { showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒"); return; }
         document.getElementById('importModal').style.display = 'flex';
         document.getElementById('txtFileInput').value = '';
     }
@@ -1210,10 +1154,7 @@
         const fileInput = document.getElementById('txtFileInput');
         const defaultCategory = document.getElementById('importDefaultCategory').value;
 
-        if (!fileInput.files || fileInput.files.length === 0) {
-            showCustomAlert("Pilih File", "Silakan pilih file .txt terlebih dahulu!", "📄");
-            return;
-        }
+        if (!fileInput.files || fileInput.files.length === 0) { showCustomAlert("Pilih File", "Silakan pilih file .txt terlebih dahulu!", "📄"); return; }
 
         const file = fileInput.files[0];
         const reader = new FileReader();
@@ -1268,25 +1209,16 @@
     }
 
     function generateUpdatedIndexHtml() {
-        if (!isAdmin || loggedInPassword !== "tipong123") {
-            showCustomAlert("Akses Terkunci", "Fitur ini hanya bisa diakses oleh Admin Utama (Tipong)!", "🔒");
-            return;
-        }
-
-        // Increment version number
+        if (!isAdmin || loggedInPassword !== "tipong123") { showCustomAlert("Akses Terkunci", "Fitur ini hanya bisa diakses oleh Admin Utama (Tipong)!", "🔒"); return; }
         const nextVerNum = currentVerNum + 1;
         let htmlSource = document.documentElement.outerHTML;
-        htmlSource = htmlSource.replace(/const WEB_VERSION = \d+;/g, "const WEB_VERSION = " + nextVerNum + ";");
-
         let fullCode = "<!DOCTYPE html>\n<html lang=\"id\">\n" + htmlSource.substring(htmlSource.indexOf('<head>'));
         const blob = new Blob([fullCode], { type: "text/html;charset=utf-8" });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = "index.html";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        showCustomAlert("Generate Berhasil!", `File index.html versi v${nextVerNum} berhasil didownload! Silakan upload ke GitHub.`, "⚙️");
+        document.body.appendChild(link); link.click(); link.remove();
+        showCustomAlert("Generate Berhasil!", `File index.html berhasil didownload! Silakan upload ke GitHub.`, "⚙️");
     }
 
     function openBackupModal() {
@@ -1358,6 +1290,7 @@
         }
     }
 
+    // ================= FITUR PASTE SESI MANGGUNG =================
     function openPasteModal() {
         document.getElementById('pasteModal').style.display = 'flex';
         document.getElementById('pasteTextArea').value = '';
@@ -1411,7 +1344,7 @@
             let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27");
             let preview = catatanTeks.length > 20 ? catatanTeks.substring(0, 20) + "..." : catatanTeks;
             preview = preview.replace(/\n/g, ' '); 
-            catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}')">Baca 📖</button>`;
+            catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}', '📝 Catatan')">Baca 📖</button>`;
         }
 
         let transposeWidget = `
@@ -1420,6 +1353,7 @@
                 <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, -1)">-</button>
                 <span class="trans-val-display" data-val="0" style="font-size:12px; font-weight:700; width:20px; text-align:center; color:var(--text-main);">0</span>
                 <button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, 1)">+</button>
+                <button type="button" class="btn-sesi-mini" style="margin-left:4px; color:var(--danger);" onclick="event.stopPropagation(); changeTranspose(this, 0)" title="Reset">🔄</button>
             </div>
         `;
 
@@ -1427,7 +1361,7 @@
         if (customChord && customChord.trim() !== "") {
             customChordHtml = `
                 <div class="info-row" style="flex-direction:column; margin-top:8px;">
-                    <span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">📜 Lirik & Chord Custom:</span>
+                    <span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">🎤 Lirik & Chord Custom:</span>
                     <pre class="info-value val-custom" data-original="${encodeURIComponent(customChord).replace(/'/g, "%27")}" style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:10px; font-size:11px; width:100%; box-sizing:border-box; overflow-x:auto; margin:0; font-family:monospace; white-space:pre-wrap;">${customChord}</pre>
                 </div>
             `;
@@ -1447,12 +1381,12 @@
                 ${transposeWidget}
                 <div class="info-box">
                     <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;">
-                        <span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${doBase || ''}">${doBase || '-'}</span></span>
+                        <span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${encodeURIComponent(doBase || '').replace(/'/g, "%27")}">${doBase || '-'}</span></span>
                         <span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${tempo || '-'}</span>
                     </div>
-                    <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${chordAsli || ''}">: ${chordAsli || "-"}</span></div>
-                    <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${chordCowok || ''}">: ${chordCowok || "-"}</span></div>
-                    <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${chordCewek || ''}">: ${chordCewek || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${encodeURIComponent(chordAsli || '').replace(/'/g, "%27")}">: ${chordAsli || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${encodeURIComponent(chordCowok || '').replace(/'/g, "%27")}">: ${chordCowok || "-"}</span></div>
+                    <div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${encodeURIComponent(chordCewek || '').replace(/'/g, "%27")}">: ${chordCewek || "-"}</span></div>
                     <div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(catatanTeks || '').replace(/'/g, "%27")}">${catatanHtml}</span></div>
                     ${customChordHtml}
                     <div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div>
@@ -1527,18 +1461,17 @@
         const titleSpan = currentEditingLi.querySelector('.song-title');
         let oldTitle = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)/g, '').trim();
 
-        // Get Values based on attributes to prevent picking up transposed values mistakenly
         const doEl = currentEditingLi.querySelector('.val-do');
-        const valDo = doEl ? doEl.getAttribute('data-original') : '';
+        const valDo = doEl && doEl.hasAttribute('data-original') ? decodeURIComponent(doEl.getAttribute('data-original')) : '';
 
         const asliEl = currentEditingLi.querySelector('.val-asli');
-        const valChordAsli = asliEl ? asliEl.getAttribute('data-original') : '';
+        const valChordAsli = asliEl && asliEl.hasAttribute('data-original') ? decodeURIComponent(asliEl.getAttribute('data-original')) : '';
 
         const cowokEl = currentEditingLi.querySelector('.val-cowok');
-        const valChordCowok = cowokEl ? cowokEl.getAttribute('data-original') : '';
+        const valChordCowok = cowokEl && cowokEl.hasAttribute('data-original') ? decodeURIComponent(cowokEl.getAttribute('data-original')) : '';
 
         const cewekEl = currentEditingLi.querySelector('.val-cewek');
-        const valChordCewek = cewekEl ? cewekEl.getAttribute('data-original') : '';
+        const valChordCewek = cewekEl && cewekEl.hasAttribute('data-original') ? decodeURIComponent(cewekEl.getAttribute('data-original')) : '';
         
         const catatanEl = currentEditingLi.querySelector('.val-catatan');
         let valCatatan = "";
@@ -1554,8 +1487,7 @@
         const ytAnchor = currentEditingLi.querySelector('.val-link-yt a');
         const valLinkYt = (ytAnchor && ytAnchor.getAttribute('href') !== '#') ? ytAnchor.getAttribute('href') : '';
 
-        // Note: For tempo, we didn't add data-original, we parse from string.
-        let valTempo = ""; // simplified, or we can add data-original to it later if needed.
+        let valTempo = ""; 
         const tempoText = currentEditingLi.innerHTML;
         const tempoMatch = tempoText.match(/BPM: (\d+)/);
         if(tempoMatch) valTempo = tempoMatch[1];
@@ -1606,7 +1538,7 @@
                     title: title, doBase: doBase, tempo: tempo, chordAsli: chordAsli, chordCowok: chordCowok, chordCewek: chordCewek,
                     catatan: catatan, customChord: customChord, linkChord: linkChord, linkYoutube: linkYoutube, category: dbCategory, isNew: true
                 });
-                db.ref('setlistTipong').set(daftarLagu); // Update ke Firebase
+                db.ref('setlistTipong').set(daftarLagu); 
                 showCustomAlert("Tersimpan!", `Lagu dimasukkan ke Playlist Utama (${dbCategory})!`, "✅");
             } else { showCustomAlert("Sudah Ada", `Lagu sudah ada di Playlist Utama.`, "ℹ️"); }
         }
@@ -1651,10 +1583,10 @@
                     let titleText = titleSpan.innerText.replace(/📌|\(Ada di DB\)|\(Belum Ada Chord\)|\(Klik ✏️ Edit untuk isi lagu\)|NEW|🌐/g, '').trim();
                     if (!titleText || titleText === "(Lagu Kosong)") return;
 
-                    let doEl = li.querySelector('.val-do'); let doBase = doEl ? doEl.getAttribute('data-original') : '';
-                    let asliEl = li.querySelector('.val-asli'); let chordAsli = asliEl ? asliEl.getAttribute('data-original') : '';
-                    let cwkEl = li.querySelector('.val-cowok'); let chordCowok = cwkEl ? cwkEl.getAttribute('data-original') : '';
-                    let cewEl = li.querySelector('.val-cewek'); let chordCewek = cewEl ? cewEl.getAttribute('data-original') : '';
+                    let doEl = li.querySelector('.val-do'); let doBase = doEl && doEl.hasAttribute('data-original') ? decodeURIComponent(doEl.getAttribute('data-original')) : '';
+                    let asliEl = li.querySelector('.val-asli'); let chordAsli = asliEl && asliEl.hasAttribute('data-original') ? decodeURIComponent(asliEl.getAttribute('data-original')) : '';
+                    let cwkEl = li.querySelector('.val-cowok'); let chordCowok = cwkEl && cwkEl.hasAttribute('data-original') ? decodeURIComponent(cwkEl.getAttribute('data-original')) : '';
+                    let cewEl = li.querySelector('.val-cewek'); let chordCewek = cewEl && cewEl.hasAttribute('data-original') ? decodeURIComponent(cewEl.getAttribute('data-original')) : '';
                     
                     let catatanEl = li.querySelector('.val-catatan');
                     let catatan = '';
