@@ -1,4 +1,4 @@
-const CACHE_NAME = 'setlist-tipong-v3';
+const CACHE_NAME = 'setlist-tipong-v4';
 const urlsToCache = [
     './',
     './index.html',
