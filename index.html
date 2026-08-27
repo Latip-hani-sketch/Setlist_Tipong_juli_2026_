@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Setlist Lagu 🎸</title>
     
-    <!-- PWA Manifest -->
+    <!-- PWA Manifest & iOS Fullscreen Support -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e1b4b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Setlist">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3659/3659733.png">
 
     <!-- Font Modern dari Google -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -155,8 +159,6 @@
         .btn-sesi-mini { border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); padding: 4px 6px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; transition: all 0.15s; }
         .btn-sesi-mini:active { transform: scale(0.9); }
         
-        .btn-autoscroll-float { position: fixed; bottom: 20px; right: 20px; background: var(--primary-gradient); color: white; padding: 10px 18px; border-radius: 30px; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; z-index: 999; display: none; align-items: center; gap: 6px; backdrop-filter: blur(8px); }
-        
         .badge-db-link:active { transform: scale(0.9); }
 
         .tab-menu-group { display: flex; gap: 6px; margin-bottom: 12px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
@@ -283,6 +285,7 @@
                 <button class="close-folder" onclick="closeFolderKembali()">⬅ Kembali</button>
             </div>
             
+            <!-- PENCARIAN SESI KE DB + MIC -->
             <div class="search-box" style="margin-bottom:12px; position:relative; z-index:50;">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="searchSesiToDB" placeholder="Cari cepat lagu di Database Utama..." oninput="quickSearchDB(this.value)">
@@ -290,7 +293,7 @@
                 <div id="quickSearchResults" style="display:none; position:absolute; top:42px; left:0; right:0; background:var(--card-bg); border:1px solid var(--border-color); border-radius:12px; box-shadow:0 15px 30px rgba(0,0,0,0.3); max-height:250px; overflow-y:auto; backdrop-filter:blur(10px);"></div>
             </div>
 
-            <div style="display:flex; gap:8px; margin-bottom:12px;"><button class="btn-action-main" style="background:#25D366; color:white; padding:8px; font-size:11px;" onclick="shareToWhatsApp()">📲 Kirim via WA</button><button class="btn-action-main" style="background:#8b5cf6; color:white; padding:8px; font-size:11px;" onclick="copySessionText()">📋 Salin Teks</button></div>
+            <div style="display:flex; gap:8px; margin-bottom:12px;"><button class="btn-action-main" style="background:#25D366; color:white; padding:8px; font-size:11px;" onclick="shareToWhatsApp()">📲 Kirim via WA</button><button class="btn-action-main" style="background:#8b5cf6; color:white; padding:8px; font-size:11px;" onclick="copySessionText()">📋 Salin Teks</button><button class="btn-action-main" style="background:#1e293b; color:white; padding:8px; font-size:11px;" onclick="printSetlist()">🖨️ Print</button></div>
             <div id="list-SesiManggung"></div>
         </div>
 
@@ -523,6 +526,8 @@
     const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'Dangdut'];
     
     function toggleFullScreen() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) { showCustomAlert("Info iOS 🍎", "iPhone tidak mendukung tombol Fullscreen layar. Untuk layar penuh, silakan gunakan fitur 'Add to Home Screen' lewat menu Safari.", "ℹ️"); return; }
         if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(err => { showCustomAlert("Error", "Gagal masuk layar penuh.", "⚠️"); }); } 
         else { if (document.exitFullscreen) { document.exitFullscreen(); } }
     }
@@ -715,6 +720,7 @@
             }
 
             let durasiHtml = lagu.durasi ? `<span style="font-size:10px; font-weight:700; color:var(--success);">⏳ ${lagu.durasi} mnt</span>` : '';
+
             let catatanTeks = lagu.catatan || ""; let catatanHtml = ": -"; if (catatanTeks.trim() !== "") { let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27"); let preview = catatanTeks.length > 20 ? catatanTeks.substring(0, 20) + "..." : catatanTeks; preview = preview.replace(/\n/g, ' '); catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}', '📝 Catatan Singkat')">Baca 📖</button>`; }
             let lirikCustomTeks = lagu.lirikCustom || ""; let lirikCustomHtml = ": -"; if (lirikCustomTeks.trim() !== "") { let encodedLirik = encodeURIComponent(lirikCustomTeks).replace(/'/g, "%27"); let preview = lirikCustomTeks.length > 20 ? lirikCustomTeks.substring(0, 20) + "..." : lirikCustomTeks; preview = preview.replace(/\n/g, ' '); lirikCustomHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedLirik}', '🎤 Lirik Custom')">Baca 📖</button>`; }
             let chordCustomTeks = lagu.chordCustom || ""; let chordCustomHtml = ": -"; if (chordCustomTeks.trim() !== "") { let encodedChord = encodeURIComponent(chordCustomTeks).replace(/'/g, "%27"); let preview = chordCustomTeks.length > 20 ? chordCustomTeks.substring(0, 20) + "..." : chordCustomTeks; preview = preview.replace(/\n/g, ' '); chordCustomHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedChord}', '🎸 Chord Custom')">Baca 📖</button>`; }
