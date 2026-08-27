@@ -110,7 +110,6 @@
         .mic-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 16px; cursor: pointer; padding: 0; outline: none; transition: transform 0.2s; }
         .mic-btn:active { transform: translateY(-50%) scale(0.8); }
 
-        /* KATEGORI FOLDERS */
         .folders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .sub-btn { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px; font-size: 12px; font-weight: 600; border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: all 0.2s ease; text-align: center; height: 42px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); overflow: hidden; }
         .sub-btn:active { transform: scale(0.96); background: rgba(99, 102, 241, 0.08); }
@@ -119,7 +118,6 @@
         .btn-ambyar { color: #be185d; }
         .btn-lawas { color: #b45309; }
         .btn-dangdut { color: #d946ef; grid-column: span 2; } 
-
         body.dark-mode .btn-pop-inggris { color: #38bdf8; } body.dark-mode .btn-ambyar { color: #f43f5e; } body.dark-mode .btn-lawas { color: #fbbf24; } body.dark-mode .btn-dangdut { color: #e879f9; }
 
         .sub-content { display: none; background: var(--input-bg); border-radius: 16px; padding: 12px; margin-bottom: 12px; border: 1px solid var(--border-color); animation: fadeIn 0.25s ease; }
@@ -197,28 +195,37 @@
         .dialog-btn-danger { background: var(--danger); color: white; }
         .dialog-btn-cancel { background: var(--border-color); color: var(--text-main); }
 
-        @keyframes metronomeFlash { 0% { box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.8); background: rgba(239, 68, 68, 0.1); } 100% { box-shadow: inset 0 0 0px transparent; background: transparent; } }
-        .metronome-active { animation: metronomeFlash infinite ease-out; border-radius: 14px; }
-        .btn-metronome { background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 5px; font-size: 11px; font-family: 'Poppins', sans-serif;}
-
-        /* CSS BARU UNTUK STRUKTUR/ROUTING LAGU (DIPERKECIL & SEPERTI RADIO) */
+        /* CSS STRUKTUR/ROUTING LAGU (DIPERKECIL & SEPERTI RADIO) */
         .structure-map { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-top: 6px; padding: 8px; background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border-color); }
         .struct-pill { background: #fef3c7; color: #b45309; padding: 4px 8px; border-radius: 12px; font-size: 9.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; user-select: none; border: 1px solid #fde68a; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         body.dark-mode .struct-pill { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
         .struct-pill.active { background: var(--success) !important; color: white !important; border-color: var(--success) !important; transform: scale(1.05); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
         .struct-arrow { font-size: 10px; color: var(--text-muted); font-weight: 900; }
+
+        .autoscroll-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: none; align-items: center; gap: 8px; background: var(--card-bg); padding: 6px 12px; border-radius: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 1px solid var(--border-color); backdrop-filter: blur(8px); }
+        .btn-autoscroll-float { position: relative; display: flex; margin: 0; background: var(--primary-gradient); color: white; padding: 8px 14px; border-radius: 20px; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 700; cursor: pointer; border: none; align-items: center; }
+        .scroll-slider { width: 70px; accent-color: var(--primary); display: none; }
+        .btn-back-sesi { position: fixed; bottom: 70px; right: 20px; background: #f59e0b; color: white; padding: 10px 18px; border-radius: 30px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; z-index: 999; display: none; align-items: center; backdrop-filter: blur(8px); }
     </style>
 </head>
 <body class="dark-mode">
 
-<button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()">📜 Auto Scroll: OFF</button>
-<button id="btnBackToSesi" class="btn-autoscroll-float" style="bottom: 70px; background: #f59e0b;" onclick="backToSesiFromDB()">⬅ Kembali ke Sesi</button>
+<!-- AUTO SCROLL DENGAN SLIDER KECEPATAN -->
+<div id="autoScrollWrapper" class="autoscroll-wrapper">
+    <button id="btnAutoScroll" class="btn-autoscroll-float" onclick="toggleAutoScroll()">📜 Auto Scroll</button>
+    <input type="range" id="scrollSpeedSlider" class="scroll-slider" min="1" max="10" value="1" title="Kecepatan Scroll">
+</div>
+
+<button id="btnBackToSesi" class="btn-back-sesi" onclick="backToSesiFromDB()">⬅ Kembali ke Sesi</button>
 
 <div class="container" id="mainContainer">
     <div class="top-bar">
-        <button class="btn-theme-toggle" onclick="toggleDarkMode()" title="Ganti Mode Gelap/Terang">☀️</button>
+        <div style="display:flex; gap:6px;">
+            <button class="btn-theme-toggle" onclick="toggleDarkMode()" title="Ganti Mode Gelap/Terang">☀️</button>
+            <button class="btn-theme-toggle" onclick="toggleFullScreen()" title="Layar Penuh">🔲</button>
+        </div>
         <h2 class="header-title">🎧 Setlist Lagu</h2>
-        <button id="modeBtn" class="mode-badge mode-viewer" onclick="toggleAdminMode()">👁️ Penonton</button>
+        <button id="modeBtn" class="mode-badge mode-viewer" onclick="toggleAdminMode()">🦉</button>
     </div>
     
     <!-- MENU PENGATURAN ADMIN (DROPDOWN) -->
@@ -324,7 +331,23 @@
         <form id="songForm" onsubmit="saveSong(event)">
             <input type="hidden" id="editIndex" value="-1">
             <div class="form-section"><h4 class="form-section-title">📂 Info Dasar</h4><div class="section-content" style="border:none; margin:0; padding:0;"><div class="form-group"><label>Kategori Genre</label><select id="inputCategory" required=""><option value="PopIndo">Pop Indo</option><option value="PopInggris">Pop Inggris</option><option value="Ambyar">Ambyar</option><option value="Lawas">Lawas</option><option value="Dangdut">Dangdut</option></select></div><div class="form-group"><label>Judul Lagu</label><input type="text" id="inputTitle" placeholder="Contoh: Mahalini - Bohongi Hati" required=""></div></div></div>
-            <div class="form-section"><h4 class="form-section-title accordion-header" onclick="toggleAccordion(this)">⏱️ Musikalitas <span>▼</span></h4><div class="section-content accordion-content" style="display:none;"><div style="display:flex; gap:8px;"><div class="form-group" style="flex:1;"><label>DO (Nada Dasar)</label><select id="inputDoBase"><option value="">-</option><option value="C">C</option><option value="C#">C#</option><option value="D">D</option><option value="D#">D#</option><option value="E">E</option><option value="F">F</option><option value="F#">F#</option><option value="G">G</option><option value="G#">G#</option><option value="A">A</option><option value="A#">A#</option><option value="B">B</option></select></div><div class="form-group" style="flex:1;"><label>Tempo (BPM)</label><input type="number" id="inputTempo" placeholder="Misal: 120"></div></div><div class="form-group"><label>Time Signature (Ketukan)</label><input type="text" id="inputTimeSig" placeholder="Misal: 4/4"></div></div></div>
+            
+            <div class="form-section"><h4 class="form-section-title accordion-header" onclick="toggleAccordion(this)">⏱️ Musikalitas <span>▼</span></h4><div class="section-content accordion-content" style="display:none;">
+                <div style="display:flex; gap:8px;">
+                    <div class="form-group" style="flex:1;"><label>DO (Nada Dasar)</label><select id="inputDoBase"><option value="">-</option><option value="C">C</option><option value="C#">C#</option><option value="D">D</option><option value="D#">D#</option><option value="E">E</option><option value="F">F</option><option value="F#">F#</option><option value="G">G</option><option value="G#">G#</option><option value="A">A</option><option value="A#">A#</option><option value="B">B</option></select></div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Tempo (BPM)</label>
+                        <div style="display:flex; gap:4px;">
+                            <input type="number" id="inputTempo" placeholder="120" style="width:60%; padding:8px;">
+                            <button type="button" class="btn-sesi-mini" style="width:40%; background:var(--info); color:white; border:none;" onclick="tapTempo('inputTempo')">Tap 👆</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:10px;">
+                    <div class="form-group" style="flex:1;"><label>Ketukan</label><input type="text" id="inputTimeSig" placeholder="Misal: 4/4"></div>
+                    <div class="form-group" style="flex:1;"><label>Durasi (Menit)</label><input type="number" id="inputDurasi" placeholder="Misal: 4"></div>
+                </div>
+            </div></div>
             
             <div class="form-section"><h4 class="form-section-title accordion-header" onclick="toggleAccordion(this)">🎸 Chord & Catatan <span>▼</span></h4>
                 <div class="section-content accordion-content" style="display:none;">
@@ -366,7 +389,19 @@
         <h3>✏️ Edit Lagu Sesi</h3>
         <form onsubmit="saveSessionSongEdit(event)">
             <div class="form-section"><h4 class="form-section-title">📂 Info Dasar</h4><div class="section-content" style="border:none; margin:0; padding:0;"><div class="form-group"><label>Judul Lagu</label><input type="text" id="editSesiTitle" required=""></div></div></div>
-            <div class="form-section"><h4 class="form-section-title accordion-header" onclick="toggleAccordion(this)">⏱️ Musikalitas <span>▼</span></h4><div class="section-content accordion-content" style="display:none;"><div style="display:flex; gap:8px;"><div class="form-group" style="flex:1;"><label>DO</label><select id="editSesiDo"><option value="">-</option><option value="C">C</option><option value="C#">C#</option><option value="D">D</option><option value="D#">D#</option><option value="E">E</option><option value="F">F</option><option value="F#">F#</option><option value="G">G</option><option value="G#">G#</option><option value="A">A</option><option value="A#">A#</option><option value="B">B</option></select></div><div class="form-group" style="flex:1;"><label>BPM</label><input type="number" id="editSesiTempo" placeholder="120"></div></div></div></div>
+            <div class="form-section"><h4 class="form-section-title accordion-header" onclick="toggleAccordion(this)">⏱️ Musikalitas <span>▼</span></h4><div class="section-content accordion-content" style="display:none;">
+                <div style="display:flex; gap:8px;">
+                    <div class="form-group" style="flex:1;"><label>DO</label><select id="editSesiDo"><option value="">-</option><option value="C">C</option><option value="C#">C#</option><option value="D">D</option><option value="D#">D#</option><option value="E">E</option><option value="F">F</option><option value="F#">F#</option><option value="G">G</option><option value="G#">G#</option><option value="A">A</option><option value="A#">A#</option><option value="B">B</option></select></div>
+                    <div class="form-group" style="flex:1;">
+                        <label>BPM</label>
+                        <div style="display:flex; gap:4px;">
+                            <input type="number" id="editSesiTempo" placeholder="120" style="width:60%; padding:8px;">
+                            <button type="button" class="btn-sesi-mini" style="width:40%; background:var(--info); color:white; border:none;" onclick="tapTempo('editSesiTempo')">Tap 👆</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:10px;"><label>Durasi (Menit)</label><input type="number" id="editSesiDurasi" placeholder="Misal: 4"></div>
+            </div></div>
             
             <div class="form-section"><h4 class="form-section-title accordion-header" onclick="toggleAccordion(this)">🎸 Chord & Catatan <span>▼</span></h4>
                 <div class="section-content accordion-content" style="display:none;">
@@ -481,23 +516,35 @@
         window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(err => console.log('SW gagal:', err)); });
     }
 
-    const defaultData = [{ "title": "Ada Titik Titik", "chordAsli": "Bb", "chordCowok": "", "chordCewek": "", "intro": "", "song": "", "overtune": "", "interlude": "", "modulasi": "", "outro": "", "struktur": "", "catatan": "Main di G", "linkChord": "", "linkYoutube": "", "category": "PopIndo", "doBase": "", "tempo": "", "timeSignature": "", "lirikCustom": "", "chordCustom": "", "linkLirik": "" }];
+    const defaultData = [{ "title": "Ada Titik Titik", "chordAsli": "Bb", "chordCowok": "", "chordCewek": "", "intro": "", "song": "", "overtune": "", "interlude": "", "modulasi": "", "outro": "", "struktur": "", "catatan": "Main di G", "durasi": "", "linkChord": "", "linkYoutube": "", "category": "PopIndo", "doBase": "", "tempo": "", "timeSignature": "", "lirikCustom": "", "chordCustom": "", "linkLirik": "" }];
 
     let daftarLagu = []; let daftarSesi = {}; let currentActiveSesiId = null; 
-    let isAdmin = false; let autoScrollTimer = null; let metronomeTimer = null; 
+    let isAdmin = false; let autoScrollTimer = null; let tapTimes = [];
     const folderKeys = ['PopIndo', 'PopInggris', 'Ambyar', 'Lawas', 'Dangdut'];
     
-    // FUNGSI UNTUK MENGAKTIFKAN PILL STRUKTUR LAGU SEPERTI RADIO Tombol
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(err => { showCustomAlert("Error", "Gagal masuk layar penuh.", "⚠️"); }); } 
+        else { if (document.exitFullscreen) { document.exitFullscreen(); } }
+    }
+
+    function tapTempo(targetId) {
+        const now = new Date().getTime(); tapTimes.push(now);
+        if (tapTimes.length > 4) tapTimes.shift(); 
+        if (tapTimes.length >= 2) {
+            let intervals = [];
+            for(let i=1; i<tapTimes.length; i++) { intervals.push(tapTimes[i] - tapTimes[i-1]); }
+            let avgInterval = intervals.reduce((a,b)=>a+b,0) / intervals.length;
+            let bpm = Math.round(60000 / avgInterval);
+            document.getElementById(targetId).value = bpm;
+        }
+    }
+
     function activateStructPill(element) {
         let isActive = element.classList.contains('active');
         let parent = element.closest('.structure-map');
         let pills = parent.querySelectorAll('.struct-pill');
-        // Reset semuanya dulu
         pills.forEach(p => p.classList.remove('active'));
-        // Jika tadinya tidak aktif, nyalakan yang baru diklik
-        if(!isActive) {
-            element.classList.add('active');
-        }
+        if(!isActive) { element.classList.add('active'); }
     }
 
     function startVoiceSearch(inputId) {
@@ -560,26 +607,34 @@
     function isSimilarTitle(titleA, titleB) { if (!titleA || !titleB) return false; let normA = titleA.toLowerCase().replace(/[^a-z0-9]/g, '').trim(); let normB = titleB.toLowerCase().replace(/[^a-z0-9]/g, '').trim(); if (normA === normB) return true; let diff = Math.abs(normA.length - normB.length); if (diff <= 2 && (normA.startsWith(normB) || normB.startsWith(normA))) return true; return false; }
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode'); localStorage.setItem('setlistDarkMode', isDark ? 'enabled' : 'disabled'); document.querySelector('.btn-theme-toggle').innerText = isDark ? '☀️' : '🌙'; }
     if (localStorage.getItem('setlistDarkMode') === 'enabled') { document.body.classList.add('dark-mode'); document.querySelector('.btn-theme-toggle').innerText = '☀️'; }
-    function toggleAutoScroll() { const btn = document.getElementById('btnAutoScroll'); if (autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null; btn.innerText = '📜 Auto Scroll: OFF'; btn.style.background = 'var(--primary-gradient)'; } else { autoScrollTimer = setInterval(function() { window.scrollBy({ top: 1, behavior: 'smooth' }); }, 35); btn.innerText = '⏸️ Stop Scroll'; btn.style.background = 'var(--danger)'; } }
+    
+    function toggleAutoScroll() { 
+        const btn = document.getElementById('btnAutoScroll'); const slider = document.getElementById('scrollSpeedSlider');
+        if (autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null; btn.innerText = '📜 Auto Scroll'; btn.style.background = 'transparent'; btn.style.boxShadow = 'none'; slider.style.display = 'none'; } 
+        else { slider.style.display = 'block'; autoScrollTimer = setInterval(doScroll, 35); btn.innerText = '⏸️ Stop Scroll'; btn.style.background = 'var(--danger)'; btn.style.boxShadow = '0 4px 10px rgba(239,68,68,0.4)'; } 
+    }
+    
+    function doScroll() { let speed = parseInt(document.getElementById('scrollSpeedSlider').value) || 1; window.scrollBy({ top: speed, behavior: 'smooth' }); }
 
     function bukaCatatanLengkap(encodedText, title = "📝 Detail") { showCustomAlert(title, decodeURIComponent(encodedText), "📖"); document.getElementById('dialogMessage').classList.add('catatan-view'); }
     function showCustomAlert(title, message, icon) { if (!icon) icon = "ℹ️"; document.getElementById('dialogIcon').innerText = icon; document.getElementById('dialogTitle').innerText = title; document.getElementById('dialogMessage').innerHTML = message; document.getElementById('customDialogOverlay').style.display = 'flex'; document.getElementById('dialogActions').innerHTML = '<button class="dialog-btn dialog-btn-primary" id="dialogOkBtn" onclick="closeCustomDialog()">Oke</button>'; setTimeout(() => { const okBtn = document.getElementById('dialogOkBtn'); if(okBtn) okBtn.focus(); }, 100); }
     function showCustomConfirm(title, message, onConfirm, icon, confirmText, cancelText) { if (!icon) icon = "⚠️"; if (!confirmText) confirmText = "Ya, Lanjutkan"; if (!cancelText) cancelText = "Batal"; document.getElementById('dialogIcon').innerText = icon; document.getElementById('dialogTitle').innerText = title; document.getElementById('dialogMessage').innerHTML = message; document.getElementById('dialogActions').innerHTML = `<button class="dialog-btn dialog-btn-cancel" onclick="closeCustomDialog()">${cancelText}</button><button class="dialog-btn dialog-btn-primary" id="btnConfirmAction">${confirmText}</button>`; document.getElementById('btnConfirmAction').onclick = function() { closeCustomDialog(); onConfirm(); }; document.getElementById('customDialogOverlay').style.display = 'flex'; }
     function closeCustomDialog() { document.getElementById('customDialogOverlay').style.display = 'none'; document.getElementById('dialogMessage').classList.remove('catatan-view'); }
 
+    // LOGIN & ADMIN MODE
     auth.onAuthStateChanged(user => { if (user) { isAdmin = true; document.body.classList.remove('protected-content'); updateAdminUI(); } else { isAdmin = false; document.body.classList.add('protected-content'); updateAdminUI(); } });
     
     function toggleAdminMode() { if (!isAdmin) { document.getElementById('adminEmailInput').value = ''; document.getElementById('adminPasswordInput').value = ''; document.getElementById('loginErrorMsg').style.display = 'none'; document.getElementById('adminLoginModal').style.display = 'flex'; setTimeout(() => document.getElementById('adminEmailInput').focus(), 100); } else { auth.signOut().then(() => { showCustomAlert("Berhasil Logout", "Sekarang kembali jadi Penonton biasa.", "👁️"); }); } }
     
     function closeAdminLoginModal() { document.getElementById('adminLoginModal').style.display = 'none'; }
-    function cekKodeRahasia(val) { if (val === "'") { document.getElementById('adminEmailInput').value = "canelmusik01@gmail.com"; document.getElementById('adminPasswordInput').value = "12345678910Google"; submitFirebaseLogin(); } }
+    function cekKodeRahasia(val) { if (val === "'1") { document.getElementById('adminEmailInput').value = "canelmusik01@gmail.com"; document.getElementById('adminPasswordInput').value = "12345678910Google"; submitFirebaseLogin(); } }
     function cekEnterLogin(event) { if (event.key === "Enter") { event.preventDefault(); submitFirebaseLogin(); } }
     function submitFirebaseLogin() { const email = document.getElementById('adminEmailInput').value.trim(); const pass = document.getElementById('adminPasswordInput').value.trim(); const errorMsg = document.getElementById('loginErrorMsg'); errorMsg.style.display = 'none'; auth.signInWithEmailAndPassword(email, pass).then(() => { closeAdminLoginModal(); document.getElementById('adminEmailInput').value = ''; document.getElementById('adminPasswordInput').value = ''; }).catch(error => { errorMsg.innerText = "❌ Email atau Password kamu salah!"; errorMsg.style.display = 'block'; }); }
     
     function updateAdminUI() { 
         const modeBtn = document.getElementById('modeBtn'); const adminMenuWrapper = document.getElementById('adminMenuWrapper'); const adminControls = document.querySelectorAll('.admin-controls'); const tipongOnlyControls = document.querySelectorAll('.tipong-only-controls'); 
         if (isAdmin) { modeBtn.className = "mode-badge mode-admin"; modeBtn.innerText = "👑 Admin"; adminControls.forEach(function(el) { el.classList.add('active'); }); tipongOnlyControls.forEach(function(el) { el.classList.add('active'); }); } 
-        else { modeBtn.innerText = "👁️ Penonton"; modeBtn.className = "mode-badge mode-viewer"; adminControls.forEach(function(el) { el.classList.remove('active'); }); tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); }); const menu = document.getElementById('adminMenuItems'); if(menu) menu.style.display = 'none'; const icon = document.getElementById('icon-AdminMenu'); if(icon) icon.innerText = '▼'; } 
+        else { modeBtn.innerText = "🦉"; modeBtn.className = "mode-badge mode-viewer"; adminControls.forEach(function(el) { el.classList.remove('active'); }); tipongOnlyControls.forEach(function(el) { el.classList.remove('active'); }); const menu = document.getElementById('adminMenuItems'); if(menu) menu.style.display = 'none'; const icon = document.getElementById('icon-AdminMenu'); if(icon) icon.innerText = '▼'; } 
         if(daftarLagu.length > 0) renderSongs(); renderDaftarSesiModal();
     }
 
@@ -593,20 +648,24 @@
     }
     function hapusDuplikatLangsung(index) { showCustomConfirm("Hapus Duplikat", `Yakin ingin menghapus lagu <b>"${daftarLagu[index].title}"</b> secara permanen?`, function() { daftarLagu.splice(index, 1); db.ref('setlistTipong').set(daftarLagu); renderDuplicateList(); showCustomAlert("Terhapus", "Lagu duplikat berhasil dihapus dari Database.", "🗑️"); }, "⚠️", "Ya, Hapus", "Batal"); }
 
-    function playMetronome(bpm, elementId) { const el = document.getElementById(elementId); const btn = el.querySelector('.btn-metronome'); if (metronomeTimer) { clearInterval(metronomeTimer); metronomeTimer = null; document.querySelectorAll('.metronome-active').forEach(e => { e.classList.remove('metronome-active'); let innerBtn = e.querySelector('.btn-metronome'); if(innerBtn) innerBtn.innerText = innerBtn.getAttribute('data-original-text'); }); if (btn && btn.innerText.includes("Stop")) return; } document.querySelectorAll('.metronome-active').forEach(e => e.classList.remove('metronome-active')); const intervalMs = Math.round(60000 / bpm); el.classList.add('metronome-active'); el.style.animationDuration = `${intervalMs}ms`; btn.innerText = "🛑 Stop Metronome"; metronomeTimer = setInterval(() => {}, intervalMs); }
-    function hitungTotalLaguSesi() { const listContainer = document.getElementById('list-SesiManggung'); if (!listContainer) return; const total = listContainer.querySelectorAll('li.song-item').length; const badge = document.getElementById('totalSesiBadge'); if(badge) badge.innerText = `${total} Lagu`; const badgeGrid = document.getElementById('badgeFolderSesi'); if(badgeGrid) badgeGrid.innerText = total; }
+    function hitungTotalLaguSesi() { 
+        const listContainer = document.getElementById('list-SesiManggung'); if (!listContainer) return; 
+        const items = listContainer.querySelectorAll('li.song-item'); const total = items.length; let totalMins = 0; items.forEach(li => { let d = parseInt(li.getAttribute('data-durasi')) || 0; totalMins += d; });
+        const badge = document.getElementById('totalSesiBadge'); if(badge) badge.innerText = `${total} Lagu | ±${totalMins} Mnt`; 
+        const badgeGrid = document.getElementById('badgeFolderSesi'); if(badgeGrid) badgeGrid.innerText = total; 
+    }
 
     function togglePlaylist() { const container = document.getElementById('container-Playlist'); const icon = document.getElementById('icon-Playlist'); if (container.style.display === "none" || container.style.display === "") { container.style.display = "block"; icon.innerText = "▲"; if (currentActiveSesiId) { openFolder('SesiManggung'); } } else { container.style.display = "none"; icon.innerText = "▼"; } }
     function tutupBannerSesi(e) { e.stopPropagation(); document.getElementById('btnBannerSesi').style.display = 'none'; }
     
     function openFolder(targetCategory) { 
-        document.getElementById('folders-grid').style.display = 'none'; document.getElementById('global-search-box').style.display = 'none'; const btnAutoScroll = document.getElementById('btnAutoScroll');
-        if(targetCategory === 'SesiManggung') { btnAutoScroll.style.display = 'flex'; document.getElementById('btnBackToSesi').style.display = 'none'; document.getElementById('searchSesiToDB').value = ''; document.getElementById('quickSearchResults').style.display = 'none'; if(!currentActiveSesiId) { openDaftarSesiModal(); return; } } 
-        else { btnAutoScroll.style.display = 'none'; if(autoScrollTimer) toggleAutoScroll(); }
+        document.getElementById('folders-grid').style.display = 'none'; document.getElementById('global-search-box').style.display = 'none'; const scrollWrap = document.getElementById('autoScrollWrapper');
+        if(targetCategory === 'SesiManggung') { scrollWrap.style.display = 'flex'; document.getElementById('btnBackToSesi').style.display = 'none'; document.getElementById('searchSesiToDB').value = ''; document.getElementById('quickSearchResults').style.display = 'none'; if(!currentActiveSesiId) { openDaftarSesiModal(); return; } } 
+        else { scrollWrap.style.display = 'none'; if(autoScrollTimer) toggleAutoScroll(); }
         folderKeys.concat(['SesiManggung']).forEach(function(cat) { const el = document.getElementById('content-' + cat); if(el) el.style.display = (cat === targetCategory) ? 'block' : 'none'; const searchInput = document.getElementById('search-' + cat); if(searchInput) { searchInput.value = ""; filterCategory(cat, ""); } });
     }
 
-    function closeFolderKembali() { document.getElementById('folders-grid').style.display = 'grid'; document.getElementById('global-search-box').style.display = 'block'; document.getElementById('btnAutoScroll').style.display = 'none'; document.getElementById('btnBackToSesi').style.display = 'none'; if(autoScrollTimer) toggleAutoScroll(); folderKeys.concat(['SesiManggung']).forEach(function(cat) { const el = document.getElementById('content-' + cat); if(el) el.style.display = 'none'; }); }
+    function closeFolderKembali() { document.getElementById('folders-grid').style.display = 'grid'; document.getElementById('global-search-box').style.display = 'block'; document.getElementById('autoScrollWrapper').style.display = 'none'; document.getElementById('btnBackToSesi').style.display = 'none'; if(autoScrollTimer) toggleAutoScroll(); folderKeys.concat(['SesiManggung']).forEach(function(cat) { const el = document.getElementById('content-' + cat); if(el) el.style.display = 'none'; }); }
     function closeAllFolders() { closeFolderKembali(); }
 
     function goToMasterSong(masterIndex, category) {
@@ -625,7 +684,10 @@
 
     function renderSongs() {
         folderKeys.forEach(function(cat) { const listEl = document.getElementById('list-' + cat); if(listEl) listEl.innerHTML = ''; }); let counts = { PopIndo: 0, PopInggris: 0, Ambyar: 0, Lawas: 0, Dangdut: 0 };
-        daftarLagu.forEach(function(lagu, index) {
+        let sortedData = daftarLagu.map((l, i) => ({lagu: l, originalIndex: i})); sortedData.sort((a, b) => a.lagu.title.localeCompare(b.lagu.title));
+
+        sortedData.forEach(function(dataItem) {
+            let lagu = dataItem.lagu; let index = dataItem.originalIndex;
             if (counts[lagu.category] !== undefined) counts[lagu.category]++;
             const li = document.createElement('li'); li.className = 'song-item'; li.id = `song-card-master-${index}`; li.setAttribute('data-category', lagu.category);
             const hasWebChord = lagu.linkChord && lagu.linkChord.trim() !== ""; if (!hasWebChord) li.classList.add('incomplete-card');
@@ -639,14 +701,12 @@
             let overtuneHtml = lagu.overtune && lagu.overtune !== '-' ? `<div class="info-row"><span class="info-label">📈 Overtune</span><span class="info-value val-overtune" data-original="${encodeURIComponent(lagu.overtune)}">: ${lagu.overtune}</span></div>` : '';
             let outroHtml = lagu.outro && lagu.outro !== '-' ? `<div class="info-row"><span class="info-label">🏁 Outro</span><span class="info-value val-outro" data-original="${encodeURIComponent(lagu.outro)}">: ${lagu.outro}</span></div>` : '';
 
-            // GENERATE STRUKTUR LAGU
             let strukturHtml = "";
             if (lagu.struktur && lagu.struktur.trim() !== "") {
                 let parts = lagu.struktur.split(',').map(s => s.trim()).filter(s => s !== "");
                 if (parts.length > 0) {
                     strukturHtml = `<div class="info-row" style="flex-direction:column; margin-top:8px; margin-bottom:12px; border-top:1px dashed var(--border-color); padding-top:10px;"><span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">🗺️ Struktur (Klik saat main):</span><div class="structure-map" data-struktur-raw="${encodeURIComponent(lagu.struktur)}">`;
                     parts.forEach((p, idx) => {
-                        // PERUBAHAN: Memanggil activateStructPill(this)
                         strukturHtml += `<div class="struct-pill" onclick="activateStructPill(this)">${p}</div>`;
                         if (idx < parts.length - 1) strukturHtml += `<div class="struct-arrow">➔</div>`;
                     });
@@ -654,14 +714,14 @@
                 }
             }
 
+            let durasiHtml = lagu.durasi ? `<span style="font-size:10px; font-weight:700; color:var(--success);">⏳ ${lagu.durasi} mnt</span>` : '';
             let catatanTeks = lagu.catatan || ""; let catatanHtml = ": -"; if (catatanTeks.trim() !== "") { let encodedCat = encodeURIComponent(catatanTeks).replace(/'/g, "%27"); let preview = catatanTeks.length > 20 ? catatanTeks.substring(0, 20) + "..." : catatanTeks; preview = preview.replace(/\n/g, ' '); catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}', '📝 Catatan Singkat')">Baca 📖</button>`; }
             let lirikCustomTeks = lagu.lirikCustom || ""; let lirikCustomHtml = ": -"; if (lirikCustomTeks.trim() !== "") { let encodedLirik = encodeURIComponent(lirikCustomTeks).replace(/'/g, "%27"); let preview = lirikCustomTeks.length > 20 ? lirikCustomTeks.substring(0, 20) + "..." : lirikCustomTeks; preview = preview.replace(/\n/g, ' '); lirikCustomHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedLirik}', '🎤 Lirik Custom')">Baca 📖</button>`; }
             let chordCustomTeks = lagu.chordCustom || ""; let chordCustomHtml = ": -"; if (chordCustomTeks.trim() !== "") { let encodedChord = encodeURIComponent(chordCustomTeks).replace(/'/g, "%27"); let preview = chordCustomTeks.length > 20 ? chordCustomTeks.substring(0, 20) + "..." : chordCustomTeks; preview = preview.replace(/\n/g, ' '); chordCustomHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedChord}', '🎸 Chord Custom')">Baca 📖</button>`; }
             const btnChordClass = lagu.linkChord ? "info-link" : "info-link empty"; const btnChordText = lagu.linkChord ? "Buka Web 🔗" : "Kosong"; const btnYtClass = lagu.linkYoutube ? "info-link" : "info-link empty"; const btnYtText = lagu.linkYoutube ? "Tonton ▶️" : "Kosong"; const btnLirikWebClass = lagu.linkLirik ? "info-link" : "info-link empty"; const btnLirikWebText = lagu.linkLirik ? "Buka Web 🔗" : "Kosong";
             let transposeWidget = `<div class="transpose-widget" style="display:flex; align-items:center; gap:8px; margin-bottom:10px; background:var(--card-bg); padding:6px 10px; border-radius:8px; border:1px solid var(--border-color);"><span style="font-size:11px; font-weight:600; color:var(--text-muted); flex:1;">🎹 Transpose:</span><button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, -1)">-</button><span class="trans-val-display" data-val="0" style="font-size:12px; font-weight:700; width:20px; text-align:center; color:var(--text-main);">0</span><button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, 1)">+</button><button type="button" class="btn-sesi-mini" style="margin-left:4px; color:var(--danger);" onclick="event.stopPropagation(); changeTranspose(this, 0)" title="Reset">🔄</button></div>`;
-            let metronomeBtn = ""; if(lagu.tempo && lagu.tempo > 0) { metronomeBtn = `<button class="btn-metronome" data-original-text="⏱️ Start Metronome (${lagu.tempo} BPM)" onclick="playMetronome(${lagu.tempo}, 'song-card-master-${index}')">⏱️ Start Metronome (${lagu.tempo} BPM)</button>`; }
             
-            li.innerHTML = `<div class="song-title-row" onclick="toggleDetails(this, ${index})"><span class="song-title">${lagu.title} ${newBadgeHtml} ${incompleteBadgeHtml}</span><span class="music-icon">🎵</span></div><div class="song-details">${transposeWidget}<div class="info-box"><div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;"><span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${encodeURIComponent(lagu.doBase || '').replace(/'/g, "%27")}">${lagu.doBase || '-'}</span></span><span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${lagu.tempo || '-'}</span><span style="font-size:10px; font-weight:700; color:var(--info);">Ketukan: ${lagu.timeSignature || '-'}</span></div><div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${encodeURIComponent(lagu.chordAsli || '').replace(/'/g, "%27")}">: ${lagu.chordAsli || "-"}</span></div><div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${encodeURIComponent(lagu.chordCowok || '').replace(/'/g, "%27")}">: ${lagu.chordCowok || "-"}</span></div><div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${encodeURIComponent(lagu.chordCewek || '').replace(/'/g, "%27")}">: ${lagu.chordCewek || "-"}</span></div>${introHtml}${songChordHtml}${interludeHtml}${modulasiHtml}${overtuneHtml}${outroHtml}${strukturHtml}<div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(lagu.catatan || '').replace(/'/g, "%27")}">${catatanHtml}</span></div><div class="info-row"><span class="info-label">🎤 Lirik Custom</span><span class="info-value val-lirik-custom">${lirikCustomHtml}</span></div><div class="info-row"><span class="info-label">🎸 Chord Custom</span><span class="info-value val-custom-chord" data-original="${encodeURIComponent(lagu.chordCustom || '').replace(/'/g, "%27")}">${chordCustomHtml}</span></div><div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div><div class="info-row"><span class="info-label">🌐 Web Lirik</span><span class="info-value">: <a href="${lagu.linkLirik || '#'}" target="_blank" class="${btnLirikWebClass}">${btnLirikWebText}</a></span></div><div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div></div>${metronomeBtn}<div style="margin-top:8px;"></div>${adminActionHtml}</div>`;
+            li.innerHTML = `<div class="song-title-row" onclick="toggleDetails(this, ${index})"><span class="song-title">${lagu.title} ${newBadgeHtml} ${incompleteBadgeHtml}</span><span class="music-icon">🎵</span></div><div class="song-details">${transposeWidget}<div class="info-box"><div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;"><span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${encodeURIComponent(lagu.doBase || '').replace(/'/g, "%27")}">${lagu.doBase || '-'}</span></span><span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${lagu.tempo || '-'}</span><span style="font-size:10px; font-weight:700; color:var(--info);">Ket: ${lagu.timeSignature || '-'}</span>${durasiHtml}</div><div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${encodeURIComponent(lagu.chordAsli || '').replace(/'/g, "%27")}">: ${lagu.chordAsli || "-"}</span></div><div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${encodeURIComponent(lagu.chordCowok || '').replace(/'/g, "%27")}">: ${lagu.chordCowok || "-"}</span></div><div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${encodeURIComponent(lagu.chordCewek || '').replace(/'/g, "%27")}">: ${lagu.chordCewek || "-"}</span></div>${introHtml}${songChordHtml}${interludeHtml}${modulasiHtml}${overtuneHtml}${outroHtml}${strukturHtml}<div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(lagu.catatan || '').replace(/'/g, "%27")}">${catatanHtml}</span></div><div class="info-row"><span class="info-label">🎤 Lirik Custom</span><span class="info-value val-lirik-custom">${lirikCustomHtml}</span></div><div class="info-row"><span class="info-label">🎸 Chord Custom</span><span class="info-value val-custom-chord" data-original="${encodeURIComponent(lagu.chordCustom || '').replace(/'/g, "%27")}">${chordCustomHtml}</span></div><div class="info-row" style="margin-top:8px;"><span class="info-label">🌐 Web Chord</span><span class="info-value">: <a href="${lagu.linkChord || '#'}" target="_blank" class="${btnChordClass}">${btnChordText}</a></span></div><div class="info-row"><span class="info-label">🌐 Web Lirik</span><span class="info-value">: <a href="${lagu.linkLirik || '#'}" target="_blank" class="${btnLirikWebClass}">${btnLirikWebText}</a></span></div><div class="info-row"><span class="info-label">📺 YouTube</span><span class="info-value">: <a href="${lagu.linkYoutube || '#'}" target="_blank" class="${btnYtClass}">${btnYtText}</a></span></div></div>${adminActionHtml}</div>`;
             const targetList = document.getElementById('list-' + lagu.category); if(targetList) { targetList.appendChild(li); }
         });
         folderKeys.forEach(function(cat) { const countEl = document.getElementById('count-' + cat); if(countEl) countEl.innerText = `(${counts[cat]})`; });
@@ -672,9 +732,9 @@
     function searchGlobal(filter) { filter = filter.toLowerCase(); const items = document.getElementsByClassName('song-item'); const foldersGrid = document.getElementById('folders-grid'); let foundCategories = { PopIndo: false, PopInggris: false, Ambyar: false, Lawas: false, Dangdut: false }; for (let i = 0; i < items.length; i++) { let title = items[i].querySelector('.song-title').innerText.toLowerCase(); let category = items[i].getAttribute('data-category'); if (title.includes(filter)) { items[i].style.display = ""; if(foundCategories[category] !== undefined) foundCategories[category] = true; } else { items[i].style.display = "none"; } } if (filter.length > 0) { foldersGrid.style.display = 'none'; folderKeys.forEach(function(cat) { document.getElementById('content-' + cat).style.display = foundCategories[cat] ? 'block' : 'none'; }); } else { closeAllFolders(); } }
     function filterCategory(categoryKey, filter) { filter = filter.toLowerCase(); const targetList = document.getElementById('list-' + categoryKey); if(!targetList) return; const items = targetList.getElementsByClassName('song-item'); for (let i = 0; i < items.length; i++) { let title = items[i].querySelector('.song-title').innerText.toLowerCase(); if (title.includes(filter)) items[i].style.display = ""; else items[i].style.display = "none"; } }
     
-    function openModal(index) { if (typeof index === 'undefined') index = -1; if (!isAdmin) { showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒"); return; } document.getElementById('songModal').style.display = 'flex'; resetAccordions('songForm'); const isEdit = index >= 0; document.getElementById('modalTitle').innerText = isEdit ? "Edit Lagu" : "Tambah Lagu Baru"; document.getElementById('editIndex').value = index; if(isEdit) { const lagu = daftarLagu[index]; document.getElementById('inputCategory').value = lagu.category || 'PopIndo'; document.getElementById('inputTitle').value = lagu.title || ''; document.getElementById('inputDoBase').value = lagu.doBase || ''; document.getElementById('inputTempo').value = lagu.tempo || ''; document.getElementById('inputTimeSig').value = lagu.timeSignature || ''; document.getElementById('inputChordAsli').value = lagu.chordAsli || ''; document.getElementById('inputChordCowok').value = lagu.chordCowok || ''; document.getElementById('inputChordCewek').value = lagu.chordCewek || ''; document.getElementById('inputChordIntro').value = lagu.intro || ''; document.getElementById('inputChordSong').value = lagu.song || ''; document.getElementById('inputChordModulasi').value = lagu.modulasi || ''; document.getElementById('inputChordOvertune').value = lagu.overtune || ''; document.getElementById('inputChordInterlude').value = lagu.interlude || ''; document.getElementById('inputChordOutro').value = lagu.outro || ''; document.getElementById('inputStruktur').value = lagu.struktur || ''; document.getElementById('inputCatatan').value = lagu.catatan || ''; document.getElementById('inputLirikCustom').value = lagu.lirikCustom || ''; document.getElementById('inputChordCustom').value = lagu.chordCustom || ''; document.getElementById('inputLinkChord').value = lagu.linkChord || ''; document.getElementById('inputLinkLirik').value = lagu.linkLirik || ''; document.getElementById('inputLinkYoutube').value = lagu.linkYoutube || ''; } else { document.getElementById('songForm').reset(); } }
+    function openModal(index) { if (typeof index === 'undefined') index = -1; if (!isAdmin) { showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒"); return; } document.getElementById('songModal').style.display = 'flex'; resetAccordions('songForm'); const isEdit = index >= 0; document.getElementById('modalTitle').innerText = isEdit ? "Edit Lagu" : "Tambah Lagu Baru"; document.getElementById('editIndex').value = index; if(isEdit) { const lagu = daftarLagu[index]; document.getElementById('inputCategory').value = lagu.category || 'PopIndo'; document.getElementById('inputTitle').value = lagu.title || ''; document.getElementById('inputDoBase').value = lagu.doBase || ''; document.getElementById('inputTempo').value = lagu.tempo || ''; document.getElementById('inputTimeSig').value = lagu.timeSignature || ''; document.getElementById('inputDurasi').value = lagu.durasi || ''; document.getElementById('inputChordAsli').value = lagu.chordAsli || ''; document.getElementById('inputChordCowok').value = lagu.chordCowok || ''; document.getElementById('inputChordCewek').value = lagu.chordCewek || ''; document.getElementById('inputChordIntro').value = lagu.intro || ''; document.getElementById('inputChordSong').value = lagu.song || ''; document.getElementById('inputChordModulasi').value = lagu.modulasi || ''; document.getElementById('inputChordOvertune').value = lagu.overtune || ''; document.getElementById('inputChordInterlude').value = lagu.interlude || ''; document.getElementById('inputChordOutro').value = lagu.outro || ''; document.getElementById('inputStruktur').value = lagu.struktur || ''; document.getElementById('inputCatatan').value = lagu.catatan || ''; document.getElementById('inputLirikCustom').value = lagu.lirikCustom || ''; document.getElementById('inputChordCustom').value = lagu.chordCustom || ''; document.getElementById('inputLinkChord').value = lagu.linkChord || ''; document.getElementById('inputLinkLirik').value = lagu.linkLirik || ''; document.getElementById('inputLinkYoutube').value = lagu.linkYoutube || ''; } else { document.getElementById('songForm').reset(); } }
     function closeModal() { document.getElementById('songModal').style.display = 'none'; }
-    function saveSong(event) { event.preventDefault(); if (!isAdmin) return; const index = parseInt(document.getElementById('editIndex').value); const category = document.getElementById('inputCategory').value; const title = document.getElementById('inputTitle').value.trim(); const doBase = document.getElementById('inputDoBase').value.trim(); const tempo = document.getElementById('inputTempo').value.trim(); const timeSignature = document.getElementById('inputTimeSig').value.trim(); const chordAsli = document.getElementById('inputChordAsli').value.trim(); const chordCowok = document.getElementById('inputChordCowok').value.trim(); const chordCewek = document.getElementById('inputChordCewek').value.trim(); const intro = document.getElementById('inputChordIntro').value.trim(); const songChord = document.getElementById('inputChordSong').value.trim(); const modulasi = document.getElementById('inputChordModulasi').value.trim(); const overtune = document.getElementById('inputChordOvertune').value.trim(); const interlude = document.getElementById('inputChordInterlude').value.trim(); const outro = document.getElementById('inputChordOutro').value.trim(); const struktur = document.getElementById('inputStruktur').value.trim(); const catatan = document.getElementById('inputCatatan').value.trim(); const lirikCustom = document.getElementById('inputLirikCustom').value.trim(); const chordCustom = document.getElementById('inputChordCustom').value.trim(); const linkChord = document.getElementById('inputLinkChord').value.trim(); const linkLirik = document.getElementById('inputLinkLirik').value.trim(); const linkYoutube = document.getElementById('inputLinkYoutube').value.trim(); const existingIndex = daftarLagu.findIndex(function(lagu, idx) { return idx !== index && isSimilarTitle(lagu.title, title); }); if (existingIndex !== -1 && index === -1) { let matchedTitle = daftarLagu[existingIndex].title; showCustomAlert("Lagu Terdeteksi Duplikat! 🛑", `Judul <b>"${title}"</b> sangat mirip dengan lagu yang sudah ada di database:<br><br>👉 <b>"${matchedTitle}"</b><br><br>Sistem menolak penambahan lagu duplikat ini!`, "❌"); return; } let newSongData = { title, chordAsli, chordCowok, chordCewek, intro, song: songChord, interlude, modulasi, overtune, outro, struktur, catatan, linkChord, linkYoutube, category, doBase, tempo, timeSignature, lirikCustom, chordCustom, linkLirik, isNew: true }; if (index >= 0) { daftarLagu[index] = newSongData; showCustomAlert("Berhasil Disimpan", `Lagu "${title}" berhasil diperbarui!`, "✅"); } else { daftarLagu.push(newSongData); showCustomAlert("Lagu Baru Ditambahkan! 🎵", `<b>${title}</b> berhasil masuk ke kategori <b>${category}</b>!`, "🎉"); } db.ref('setlistTipong').set(daftarLagu); closeModal(); document.getElementById('container-Playlist').style.display = 'block'; document.getElementById('icon-Playlist').innerText = "▲"; openFolder(category); }
+    function saveSong(event) { event.preventDefault(); if (!isAdmin) return; const index = parseInt(document.getElementById('editIndex').value); const category = document.getElementById('inputCategory').value; const title = document.getElementById('inputTitle').value.trim(); const doBase = document.getElementById('inputDoBase').value.trim(); const tempo = document.getElementById('inputTempo').value.trim(); const timeSignature = document.getElementById('inputTimeSig').value.trim(); const durasi = document.getElementById('inputDurasi').value.trim(); const chordAsli = document.getElementById('inputChordAsli').value.trim(); const chordCowok = document.getElementById('inputChordCowok').value.trim(); const chordCewek = document.getElementById('inputChordCewek').value.trim(); const intro = document.getElementById('inputChordIntro').value.trim(); const songChord = document.getElementById('inputChordSong').value.trim(); const modulasi = document.getElementById('inputChordModulasi').value.trim(); const overtune = document.getElementById('inputChordOvertune').value.trim(); const interlude = document.getElementById('inputChordInterlude').value.trim(); const outro = document.getElementById('inputChordOutro').value.trim(); const struktur = document.getElementById('inputStruktur').value.trim(); const catatan = document.getElementById('inputCatatan').value.trim(); const lirikCustom = document.getElementById('inputLirikCustom').value.trim(); const chordCustom = document.getElementById('inputChordCustom').value.trim(); const linkChord = document.getElementById('inputLinkChord').value.trim(); const linkLirik = document.getElementById('inputLinkLirik').value.trim(); const linkYoutube = document.getElementById('inputLinkYoutube').value.trim(); const existingIndex = daftarLagu.findIndex(function(lagu, idx) { return idx !== index && isSimilarTitle(lagu.title, title); }); if (existingIndex !== -1 && index === -1) { let matchedTitle = daftarLagu[existingIndex].title; showCustomAlert("Lagu Terdeteksi Duplikat! 🛑", `Judul <b>"${title}"</b> sangat mirip dengan lagu yang sudah ada di database:<br><br>👉 <b>"${matchedTitle}"</b><br><br>Sistem menolak penambahan lagu duplikat ini!`, "❌"); return; } let newSongData = { title, chordAsli, chordCowok, chordCewek, intro, song: songChord, interlude, modulasi, overtune, outro, struktur, catatan, durasi, linkChord, linkYoutube, category, doBase, tempo, timeSignature, lirikCustom, chordCustom, linkLirik, isNew: true }; if (index >= 0) { daftarLagu[index] = newSongData; showCustomAlert("Berhasil Disimpan", `Lagu "${title}" berhasil diperbarui!`, "✅"); } else { daftarLagu.push(newSongData); showCustomAlert("Lagu Baru Ditambahkan! 🎵", `<b>${title}</b> berhasil masuk ke kategori <b>${category}</b>!`, "🎉"); } db.ref('setlistTipong').set(daftarLagu); closeModal(); document.getElementById('container-Playlist').style.display = 'block'; document.getElementById('icon-Playlist').innerText = "▲"; openFolder(category); }
     function hapusLagu(index) { if (!isAdmin) return; showCustomConfirm("Hapus Lagu", `Apakah kamu yakin ingin menghapus "${daftarLagu[index].title}" dari setlist?`, function() { daftarLagu.splice(index, 1); db.ref('setlistTipong').set(daftarLagu); showCustomAlert("Terhapus", "Lagu berhasil dihapus.", "🗑️"); }, "⚠️", "Ya, Lanjutkan", "Batal"); }
     
     function openImportModal() { if (!isAdmin) { showCustomAlert("Akses Terkunci", "Silakan login terlebih dahulu.", "🔒"); return; } document.getElementById('importModal').style.display = 'flex'; document.getElementById('txtFileInput').value = ''; }
@@ -726,7 +786,7 @@
     function buildSessionSongItem(rawLine, foundSong, customDetails) {
         if (typeof foundSong === 'undefined') foundSong = null; if (typeof customDetails === 'undefined') customDetails = null;
         const li = document.createElement('li'); li.className = 'song-item';
-        const doBase = customDetails ? customDetails.doBase : (foundSong ? foundSong.doBase : ""); const tempo = customDetails ? customDetails.tempo : (foundSong ? foundSong.tempo : ""); const chordAsli = customDetails ? customDetails.chordAsli : (foundSong ? foundSong.chordAsli : ""); const chordCowok = customDetails ? customDetails.chordCowok : (foundSong ? foundSong.chordCowok : ""); const chordCewek = customDetails ? customDetails.chordCewek : (foundSong ? foundSong.chordCewek : ""); const intro = customDetails ? customDetails.intro : (foundSong ? foundSong.intro : ""); const songChord = customDetails ? customDetails.song : (foundSong ? foundSong.song : ""); const interlude = customDetails ? customDetails.interlude : (foundSong ? foundSong.interlude : ""); const modulasi = customDetails ? customDetails.modulasi : (foundSong ? foundSong.modulasi : ""); const overtune = customDetails ? customDetails.overtune : (foundSong ? foundSong.overtune : ""); const outro = customDetails ? customDetails.outro : (foundSong ? foundSong.outro : ""); const struktur = customDetails ? customDetails.struktur : (foundSong ? foundSong.struktur : ""); const catatan = customDetails ? customDetails.catatan : (foundSong ? foundSong.catatan : ""); const lirikCustom = customDetails ? customDetails.lirikCustom : (foundSong ? foundSong.lirikCustom : ""); const chordCustom = customDetails ? customDetails.chordCustom : (foundSong ? foundSong.chordCustom : "");
+        const doBase = customDetails ? customDetails.doBase : (foundSong ? foundSong.doBase : ""); const tempo = customDetails ? customDetails.tempo : (foundSong ? foundSong.tempo : ""); const durasi = customDetails ? customDetails.durasi : (foundSong ? foundSong.durasi : ""); const chordAsli = customDetails ? customDetails.chordAsli : (foundSong ? foundSong.chordAsli : ""); const chordCowok = customDetails ? customDetails.chordCowok : (foundSong ? foundSong.chordCowok : ""); const chordCewek = customDetails ? customDetails.chordCewek : (foundSong ? foundSong.chordCewek : ""); const intro = customDetails ? customDetails.intro : (foundSong ? foundSong.intro : ""); const songChord = customDetails ? customDetails.song : (foundSong ? foundSong.song : ""); const interlude = customDetails ? customDetails.interlude : (foundSong ? foundSong.interlude : ""); const modulasi = customDetails ? customDetails.modulasi : (foundSong ? foundSong.modulasi : ""); const overtune = customDetails ? customDetails.overtune : (foundSong ? foundSong.overtune : ""); const outro = customDetails ? customDetails.outro : (foundSong ? foundSong.outro : ""); const struktur = customDetails ? customDetails.struktur : (foundSong ? foundSong.struktur : ""); const catatan = customDetails ? customDetails.catatan : (foundSong ? foundSong.catatan : ""); const lirikCustom = customDetails ? customDetails.lirikCustom : (foundSong ? foundSong.lirikCustom : ""); const chordCustom = customDetails ? customDetails.chordCustom : (foundSong ? foundSong.chordCustom : "");
 
         let dbBadge = '';
         if (foundSong) {
@@ -741,7 +801,6 @@
         let overtuneHtml = overtune && overtune !== '-' ? `<div class="info-row"><span class="info-label">📈 Overtune</span><span class="info-value val-overtune" data-original="${encodeURIComponent(overtune)}">: ${overtune}</span></div>` : '';
         let outroHtml = outro && outro !== '-' ? `<div class="info-row"><span class="info-label">🏁 Outro</span><span class="info-value val-outro" data-original="${encodeURIComponent(outro)}">: ${outro}</span></div>` : '';
 
-        // STRUKTUR HTML (ROUTING) - PAKAI ACTIVATE STRUCT PILL (RADIO BUTTON STYLE)
         let strukturHtml = "";
         if (struktur && struktur.trim() !== "") {
             let parts = struktur.split(',').map(s => s.trim()).filter(s => s !== "");
@@ -755,12 +814,15 @@
             }
         }
 
+        let durasiHtml = durasi ? `<span style="font-size:10px; font-weight:700; color:var(--success);">⏳ ${durasi} mnt</span>` : '';
         let catatanHtml = ": -"; if (catatan && catatan.trim() !== "") { let encodedCat = encodeURIComponent(catatan).replace(/'/g, "%27"); let preview = catatan.length > 20 ? catatan.substring(0, 20) + "..." : catatan; preview = preview.replace(/\n/g, ' '); catatanHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedCat}', '📝 Catatan Singkat')">Baca 📖</button>`; }
         let lirikCustomHtml = ": -"; if (lirikCustom && lirikCustom.trim() !== "") { let encodedLirik = encodeURIComponent(lirikCustom).replace(/'/g, "%27"); let preview = lirikCustom.length > 20 ? lirikCustom.substring(0, 20) + "..." : lirikCustom; preview = preview.replace(/\n/g, ' '); lirikCustomHtml = `: ${preview} <button class="btn-sesi-mini" style="background:var(--primary-gradient); color:white; border:none; padding:3px 8px; margin-left:4px;" onclick="bukaCatatanLengkap('${encodedLirik}', '🎤 Lirik Custom')">Baca 📖</button>`; }
         let customChordHtml = ""; if (chordCustom && chordCustom.trim() !== "") { customChordHtml = `<div class="info-row" style="flex-direction:column; margin-top:8px;"><span class="info-label" style="width:100%; margin-bottom:4px; color:var(--primary);">🎸 Chord Custom:</span><pre class="info-value val-custom-chord" data-original="${encodeURIComponent(chordCustom).replace(/'/g, "%27")}" style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; padding:10px; font-size:11px; width:100%; box-sizing:border-box; overflow-x:auto; margin:0; font-family:monospace; white-space:pre-wrap;">${chordCustom}</pre></div>`; }
         let transposeWidget = `<div class="transpose-widget" style="display:flex; align-items:center; gap:8px; margin-bottom:10px; background:var(--card-bg); padding:6px 10px; border-radius:8px; border:1px solid var(--border-color);"><span style="font-size:11px; font-weight:600; color:var(--text-muted); flex:1;">🎹 Transpose:</span><button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, -1)">-</button><span class="trans-val-display" data-val="0" style="font-size:12px; font-weight:700; width:20px; text-align:center; color:var(--text-main);">0</span><button type="button" class="btn-sesi-mini" onclick="event.stopPropagation(); changeTranspose(this, 1)">+</button><button type="button" class="btn-sesi-mini" style="margin-left:4px; color:var(--danger);" onclick="event.stopPropagation(); changeTranspose(this, 0)" title="Reset">🔄</button></div>`;
 
-        li.innerHTML = `<div class="song-title-row"><span class="song-title" onclick="toggleDetails(this)">📌 ${rawLine} ${dbBadge}</span><div class="session-item-actions"><button class="btn-sesi-mini" onclick="moveSessionItem(this, -1)" title="Naikkan Urutan">⬆️</button><button class="btn-sesi-mini" onclick="moveSessionItem(this, 1)" title="Turunkan Urutan">⬇️</button><button class="btn-sesi-mini" onclick="openEditSessionModal(this)" title="Edit">✏️</button><button class="btn-sesi-mini" style="color:var(--danger);" onclick="deleteSessionItem(this)" title="Hapus">🗑️</button></div></div><div class="song-details">${transposeWidget}<div class="info-box"><div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;"><span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${encodeURIComponent(doBase || '').replace(/'/g, "%27")}">${doBase || '-'}</span></span><span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${tempo || '-'}</span></div><div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${encodeURIComponent(chordAsli || '').replace(/'/g, "%27")}">: ${chordAsli || "-"}</span></div><div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${encodeURIComponent(chordCowok || '').replace(/'/g, "%27")}">: ${chordCowok || "-"}</span></div><div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${encodeURIComponent(chordCewek || '').replace(/'/g, "%27")}">: ${chordCewek || "-"}</span></div>${introHtml}${songChordHtml}${interludeHtml}${modulasiHtml}${overtuneHtml}${outroHtml}${strukturHtml}<div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(catatan || '').replace(/'/g, "%27")}">${catatanHtml}</span></div><div class="info-row"><span class="info-label">🎤 Lirik Custom</span><span class="info-value val-lirik-custom">${lirikCustomHtml}</span></div>${customChordHtml}</div></div>`;
+        li.setAttribute('data-durasi', durasi || 0);
+
+        li.innerHTML = `<div class="song-title-row"><span class="song-title" onclick="toggleDetails(this)">📌 ${rawLine} ${dbBadge}</span><div class="session-item-actions"><button class="btn-sesi-mini" onclick="moveSessionItem(this, -1)" title="Naikkan Urutan">⬆️</button><button class="btn-sesi-mini" onclick="moveSessionItem(this, 1)" title="Turunkan Urutan">⬇️</button><button class="btn-sesi-mini" onclick="openEditSessionModal(this)" title="Edit">✏️</button><button class="btn-sesi-mini" style="color:var(--danger);" onclick="deleteSessionItem(this)" title="Hapus">🗑️</button></div></div><div class="song-details">${transposeWidget}<div class="info-box"><div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed var(--border-color); padding-bottom:6px;"><span style="font-size:10px; font-weight:700; color:var(--primary);">DO: <span class="val-do" data-original="${encodeURIComponent(doBase || '').replace(/'/g, "%27")}">${doBase || '-'}</span></span><span style="font-size:10px; font-weight:700; color:var(--warning);">BPM: ${tempo || '-'}</span>${durasiHtml}</div><div class="info-row"><span class="info-label">🎸 Chord Asli</span><span class="info-value val-asli" data-original="${encodeURIComponent(chordAsli || '').replace(/'/g, "%27")}">: ${chordAsli || "-"}</span></div><div class="info-row"><span class="info-label">🧑 Chord Cowok</span><span class="info-value val-cowok" data-original="${encodeURIComponent(chordCowok || '').replace(/'/g, "%27")}">: ${chordCowok || "-"}</span></div><div class="info-row"><span class="info-label">👩 Chord Cewek</span><span class="info-value val-cewek" data-original="${encodeURIComponent(chordCewek || '').replace(/'/g, "%27")}">: ${chordCewek || "-"}</span></div>${introHtml}${songChordHtml}${interludeHtml}${modulasiHtml}${overtuneHtml}${outroHtml}${strukturHtml}<div class="info-row"><span class="info-label">📝 Catatan</span><span class="info-value val-catatan" data-original="${encodeURIComponent(catatan || '').replace(/'/g, "%27")}">${catatanHtml}</span></div><div class="info-row"><span class="info-label">🎤 Lirik Custom</span><span class="info-value val-lirik-custom">${lirikCustomHtml}</span></div>${customChordHtml}</div></div>`;
         return li;
     }
 
@@ -812,22 +874,16 @@
 
         const structContainer = currentEditingLi.querySelector('.structure-map'); let valStruktur = structContainer && structContainer.hasAttribute('data-struktur-raw') ? decodeURIComponent(structContainer.getAttribute('data-struktur-raw')) : "";
         const catatanEl = currentEditingLi.querySelector('.val-catatan'); let valCatatan = ""; if (catatanEl && catatanEl.hasAttribute('data-original')) valCatatan = decodeURIComponent(catatanEl.getAttribute('data-original'));
+        let valDurasi = currentEditingLi.getAttribute('data-durasi'); if(valDurasi === '0') valDurasi = '';
         
         let valLirikCustom = ""; let valCustomChord = ""; let searchKey = oldTitle.toLowerCase().replace(/\(.*?\)/g, '').trim(); let foundSong = daftarLagu.find(l => isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey));
         if(foundSong) { valLirikCustom = foundSong.lirikCustom || ""; valCustomChord = foundSong.chordCustom || ""; }
         let valTempo = ""; const tempoMatch = currentEditingLi.innerHTML.match(/BPM: (\d+)/); if(tempoMatch) valTempo = tempoMatch[1];
 
-        document.getElementById('editSesiTitle').value = oldTitle; 
-        document.getElementById('editSesiDo').value = valDo === '-' ? '' : valDo; document.getElementById('editSesiTempo').value = valTempo === '-' ? '' : valTempo; 
-        document.getElementById('editSesiChordAsli').value = valChordAsli === '-' ? '' : valChordAsli; 
-        document.getElementById('editSesiChordCowok').value = valChordCowok === '-' ? '' : valChordCowok; 
-        document.getElementById('editSesiChordCewek').value = valChordCewek === '-' ? '' : valChordCewek; 
-        document.getElementById('editSesiChordIntro').value = valIntro === '-' ? '' : valIntro; 
-        document.getElementById('editSesiChordSong').value = valSong === '-' ? '' : valSong; 
-        document.getElementById('editSesiChordModulasi').value = valModulasi === '-' ? '' : valModulasi; 
-        document.getElementById('editSesiChordOvertune').value = valOvertune === '-' ? '' : valOvertune; 
-        document.getElementById('editSesiChordInterlude').value = valInterlude === '-' ? '' : valInterlude; 
-        document.getElementById('editSesiChordOutro').value = valOutro === '-' ? '' : valOutro; 
+        document.getElementById('editSesiTitle').value = oldTitle; document.getElementById('editSesiDo').value = valDo === '-' ? '' : valDo; document.getElementById('editSesiTempo').value = valTempo === '-' ? '' : valTempo; 
+        document.getElementById('editSesiDurasi').value = valDurasi;
+        document.getElementById('editSesiChordAsli').value = valChordAsli === '-' ? '' : valChordAsli; document.getElementById('editSesiChordCowok').value = valChordCowok === '-' ? '' : valChordCowok; document.getElementById('editSesiChordCewek').value = valChordCewek === '-' ? '' : valChordCewek; 
+        document.getElementById('editSesiChordIntro').value = valIntro === '-' ? '' : valIntro; document.getElementById('editSesiChordSong').value = valSong === '-' ? '' : valSong; document.getElementById('editSesiChordInterlude').value = valInterlude === '-' ? '' : valInterlude; document.getElementById('editSesiChordModulasi').value = valModulasi === '-' ? '' : valModulasi; document.getElementById('editSesiChordOvertune').value = valOvertune === '-' ? '' : valOvertune; document.getElementById('editSesiChordOutro').value = valOutro === '-' ? '' : valOutro; 
         
         document.getElementById('editSesiStruktur').value = valStruktur;
         document.getElementById('editSesiCatatan').value = valCatatan; document.getElementById('editSesiLirikCustom').value = valLirikCustom; document.getElementById('editSesiChordCustom').value = valCustomChord; document.getElementById('editSesiSaveToDb').checked = false; document.getElementById('groupSesiCategory').style.display = 'none'; document.getElementById('editSessionModal').style.display = 'flex';
@@ -838,19 +894,19 @@
 
     function saveSessionSongEdit(event) {
         event.preventDefault(); if(!currentEditingLi) return;
-        const title = document.getElementById('editSesiTitle').value.trim(); const doBase = document.getElementById('editSesiDo').value.trim(); const tempo = document.getElementById('editSesiTempo').value.trim(); const chordAsli = document.getElementById('editSesiChordAsli').value.trim(); const chordCowok = document.getElementById('editSesiChordCowok').value.trim(); const chordCewek = document.getElementById('editSesiChordCewek').value.trim(); 
+        const title = document.getElementById('editSesiTitle').value.trim(); const doBase = document.getElementById('editSesiDo').value.trim(); const tempo = document.getElementById('editSesiTempo').value.trim(); const durasi = document.getElementById('editSesiDurasi').value.trim(); const chordAsli = document.getElementById('editSesiChordAsli').value.trim(); const chordCowok = document.getElementById('editSesiChordCowok').value.trim(); const chordCewek = document.getElementById('editSesiChordCewek').value.trim(); 
         const intro = document.getElementById('editSesiChordIntro').value.trim(); const songChord = document.getElementById('editSesiChordSong').value.trim(); const interlude = document.getElementById('editSesiChordInterlude').value.trim(); const modulasi = document.getElementById('editSesiChordModulasi').value.trim(); const overtune = document.getElementById('editSesiChordOvertune').value.trim(); const outro = document.getElementById('editSesiChordOutro').value.trim();
         const struktur = document.getElementById('editSesiStruktur').value.trim(); const catatan = document.getElementById('editSesiCatatan').value.trim(); const lirikCustom = document.getElementById('editSesiLirikCustom').value.trim(); const chordCustom = document.getElementById('editSesiChordCustom').value.trim();
         const saveToDb = document.getElementById('editSesiSaveToDb').checked; const dbCategory = document.getElementById('editSesiCategory').value;
 
         if (saveToDb && title.length > 1) {
             const isExist = daftarLagu.some(l => isSimilarTitle(l.title, title));
-            if (!isExist) { daftarLagu.push({ title, doBase, tempo, chordAsli, chordCowok, chordCewek, intro, song: songChord, interlude, modulasi, overtune, outro, struktur, catatan, lirikCustom, chordCustom, linkChord:"", linkLirik:"", linkYoutube:"", category: dbCategory, isNew: true }); db.ref('setlistTipong').set(daftarLagu); showCustomAlert("Tersimpan!", `Lagu dimasukkan ke Playlist Utama (${dbCategory})!`, "✅"); } 
+            if (!isExist) { daftarLagu.push({ title, doBase, tempo, chordAsli, chordCowok, chordCewek, intro, song: songChord, interlude, modulasi, overtune, outro, struktur, catatan, durasi, lirikCustom, chordCustom, linkChord:"", linkLirik:"", linkYoutube:"", category: dbCategory, isNew: true }); db.ref('setlistTipong').set(daftarLagu); showCustomAlert("Tersimpan!", `Lagu dimasukkan ke Playlist Utama (${dbCategory})!`, "✅"); } 
             else { showCustomAlert("Sudah Ada", `Lagu sudah ada di Playlist Utama.`, "ℹ️"); }
         }
 
         let searchKey = title.toLowerCase().replace(/\(.*?\)/g, '').trim(); let foundSong = daftarLagu.find(l => isSimilarTitle(l.title, searchKey) || l.title.toLowerCase().includes(searchKey));
-        const customDetails = { doBase, tempo, chordAsli, chordCowok, chordCewek, intro, song: songChord, interlude, modulasi, overtune, outro, struktur, catatan, lirikCustom, chordCustom, linkChord:"", linkLirik:"", linkYoutube:"" };
+        const customDetails = { doBase, tempo, durasi, chordAsli, chordCowok, chordCewek, intro, song: songChord, interlude, modulasi, overtune, outro, struktur, catatan, lirikCustom, chordCustom, linkChord:"", linkLirik:"", linkYoutube:"" };
         currentEditingLi.replaceWith(buildSessionSongItem(title, (searchKey.length > 2 ? foundSong : null), customDetails)); simpanSesiManggungKeCloud(); closeEditSessionModal();
     }
 
@@ -861,7 +917,11 @@
         const totalLagu = listContainer.querySelectorAll('li.song-item').length;
         
         let namaAcara = currentActiveSesiId && daftarSesi[currentActiveSesiId] ? daftarSesi[currentActiveSesiId].title : "MANGGUNG";
-        let result = `*SETLIST: ${namaAcara.toUpperCase()}*\nTotal: ${totalLagu} Lagu\n\n`; 
+        
+        let totalMins = 0; listContainer.querySelectorAll('li.song-item').forEach(li => { let d = parseInt(li.getAttribute('data-durasi')) || 0; totalMins += d; });
+        let txtDurasi = totalMins > 0 ? ` | ±${totalMins} Menit` : '';
+        
+        let result = `*SETLIST: ${namaAcara.toUpperCase()}*\nTotal: ${totalLagu} Lagu${txtDurasi}\n\n`; 
         let children = Array.from(listContainer.children);
         children.forEach(function(child) {
             if (child.classList.contains('session-title-header')) { let sessionName = child.querySelector('span') ? child.querySelector('span').innerText.trim() : child.innerText.trim(); result += `\n*${sessionName.toUpperCase()}*\n`; } 
@@ -888,6 +948,26 @@
                 });
             }
         }); return result.trim();
+    }
+
+    function printSetlist() {
+        const text = getFormattedSessionText(); if (!text) { showCustomAlert("Sesi Kosong", "Belum ada daftar lagu!", "⚠️"); return; }
+        let printWindow = window.open('', '_blank');
+        let html = `<html><head><title>Print Setlist</title><style>body{font-family:sans-serif; padding:20px; line-height:1.5;} h2{text-align:center; font-size:24px; margin-bottom:5px;} h3{margin-top:20px; padding-bottom:5px; border-bottom:2px solid #000;} ul{list-style:none; padding:0;} li{margin-bottom:12px; font-size:16px;} .info{font-size:12px; color:#555;}</style></head><body>`;
+        let lines = text.split('\n');
+        lines.forEach(line => {
+            if(line.startsWith('*SETLIST')) { html += `<h2>${line.replace(/\*/g,'')}</h2>`; }
+            else if(line.startsWith('Total:')) { html += `<p style="text-align:center; font-weight:bold; margin-top:0;">${line}</p>`; }
+            else if(line.startsWith('*')) { html += `<h3>${line.replace(/\*/g,'')}</h3>`; }
+            else if(line.startsWith('▪️')) { 
+                let parts = line.split('_(');
+                if(parts.length > 1) { html += `<li><strong>${parts[0].replace('▪️', '').trim()}</strong> <br><span class="info">(${parts[1].replace(')_', '')}</span></li>`; } 
+                else { html += `<li><strong>${line.replace('▪️', '').trim()}</strong></li>`; }
+            }
+            else if(line.trim() !== '') { html += `<p>${line}</p>`; }
+        });
+        html += `</body></html>`; printWindow.document.write(html); printWindow.document.close();
+        setTimeout(() => printWindow.print(), 500);
     }
 
     function copySessionText() { const text = getFormattedSessionText(); if (!text) { showCustomAlert("Sesi Kosong", "Belum ada daftar lagu!", "⚠️"); return; } if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(() => showCustomAlert("Teks Disalin", "Setlist siap di-paste ke WhatsApp.", "📋")).catch(() => fallbackCopyText(text)); } else { fallbackCopyText(text); } }
